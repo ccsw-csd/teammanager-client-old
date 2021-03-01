@@ -1,0 +1,16 @@
+<div class="private-layout">
+    <app-header (navOpenEvent)="sidenav.toggle()">
+    </app-header>
+  
+    <mat-sidenav-container class="container">
+  
+      <mat-sidenav #sidenav opened mode="side">
+        <app-nav></app-nav>
+      </mat-sidenav>
+  
+      <mat-sidenav-content class="content">
+        <router-outlet></router-outlet>
+      </mat-sidenav-content>
+  
+    </mat-sidenav-container>
+  </div>

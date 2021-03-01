@@ -1,0 +1,35 @@
+@import "./src/assets/scss/master";
+@import '../../../../styles';
+nav {
+  background-color: $secondary;
+  height: 100%;
+  a {
+    span {
+      font-size: 16px;
+      padding: 0 20px 0 14px;
+      color: $white;
+      white-space: nowrap;
+    }
+  }
+}
+
+.item-active {
+  span {
+    font-weight: bolder;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: inherit;
+    border-left: 6px solid $white;
+    box-sizing: border-box;
+  }
+}
+
+:host::ng-deep {
+  .mat-list-item {
+    height: 40px !important;
+  }
+}

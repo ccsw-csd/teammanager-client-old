@@ -1,0 +1,33 @@
+<div id="container">
+    <div id="login-left">
+        <div><img src="assets/images/Capgemini_Logo_White.png" alt="" /></div>
+    </div>
+
+    <div id="login-right">        
+        <div id="card" style="display:flex;flex-direction: column;">
+            <div style="flex:1"></div>
+            <div style="height:50px" id="header">
+                Logo - TeamManager                
+            </div>
+
+            <div style="height:200px;width:300px;" id="login-card">
+                <mat-form-field appearance="standard">
+                    <mat-label>Usuario</mat-label>
+                    <input matInput name="user" [(ngModel)]="user" required matInput placeholder="Usuario" />
+                    <mat-error>Campo usuario vacío</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="standard">
+                    <mat-label>Contraseña</mat-label>
+                    <input matInput name="password" [(ngModel)]="password" required matInput type="password" placeholder="Contraseña" />
+                    <mat-error>Campo contraseña vacío</mat-error>
+                </mat-form-field>                
+                <button mat-button primary [disabled]="user == '' || password == ''" (click)="login()">Entrar</button>
+            </div>
+            <div style="flex:1"></div>
+        </div>
+    </div>
+</div>
+
+<div class="loadWrapper" *ngIf="isloading">
+    <mat-spinner></mat-spinner>
+  </div>

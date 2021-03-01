@@ -1,0 +1,303 @@
+body {
+  font-family: 'Roboto', 'Helvetica-Neue', sans-serif;
+  margin: 0;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 500 !important;
+}
+
+h1 {
+  color: $dark;
+  font-weight: 500 !important;
+  /*font-size: 40px;
+  margin-top: -1px;*/
+}
+
+.mat-h1 {
+  font-weight: 500 !important;
+}
+
+button:active {
+  border: 0;
+}
+
+.title-firstcolor {
+  color: $garnet;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+.title-secondcolor {
+  color: $active-salmon;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+.spinner-container {
+  height: 100%;
+  position: absolute;
+  background-color: rgba(133, 133, 133, 0.4);
+  width: 100%;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  mat-spinner {
+    position: absolute;
+    top: 45%;
+    left: 47.5%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+a[href] {
+  cursor: pointer;
+}
+
+
+.button-bar {
+  text-align: right;
+}
+
+.space-right {
+  margin-right: 15px;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.read-only {
+  color: #aaaaaa;
+}
+
+.float-left {
+  margin-left: auto;
+}
+
+button {
+  font-size: 16px;
+  min-width: 100px;
+  min-height: 40px;
+  max-height: 40px;
+  border: none;
+}
+
+button:focus {
+  outline: none;
+}
+
+button[mat-icon-button] {
+  min-width: 15px;
+}
+
+button[primary] {
+  background-color: $button-color-primary;
+  color: $button-font-color-primary;
+  border-color: $button-border-color-primary;
+  border-style: solid;
+  border-width: 1px;
+}
+
+button[secondary] {
+  background-color: $button-color-secondary;
+  color: $button-font-color-secondary;
+  border-color: $button-border-color-secondary;
+  border-style: solid;
+  border-width: 1px;
+}
+
+button[primary-link] {
+  background-color: inherit;
+  color: $primary-link;
+  border-color: inherit;
+  border-style: none;
+  border-width: 0px;
+}
+
+button[secondary-link] {
+  background-color: inherit;
+  color: $secondary-link;
+  border-color: inherit;
+  border-style: none;
+  border-width: 0px;
+}
+
+button:not(disabled) {
+  cursor: pointer;
+}
+button[primary] {
+  &:disabled,
+  &[disabled] {
+    background: $button-disabled !important;
+    border-color: $button-disabled;
+  }
+}
+
+button[secondary] {
+  &:disabled,
+  &[disabled] {
+    background: $button-disabled !important;
+    border-color: $button-disabled;
+    color: $button-font-color-primary;
+  }
+}
+
+.cdk-global-scrollblock {
+  overflow-y: auto;
+}
+
+.ck-rounded-corners .ck.ck-editor__top .ck-sticky-panel .ck-toolbar {
+  background-color: rgba($secondary, 0.25);
+}
+
+.snackbar-green {
+  background: #00c853;
+  color: $white;
+}
+.snackbar-red {
+  background: #d50000;
+  color: $white;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+/** Para quitar el focus de los botones al volver a la pantalla **/
+button.cdk-program-focused {
+  background-color: inherit;
+
+  div {
+    background-color: inherit;
+  }
+}
+
+/** Estilos para el texto de compilación **/
+span.text_grey {
+  color: darkgrey;
+}
+
+span.text_green {
+  color: green;
+}
+
+span.text_red {
+  color: red;
+  font-weight: bold;
+}
+
+/* ESTILOS PARA LAS PANTALLAS */
+.screen-container {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 1em 2em 2em 2em;
+  background: white;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  
+  .container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    .header {
+      display: flex;
+      align-items: baseline;
+      .title {
+        h1 {
+          margin-bottom: 0;
+          color: black;
+        }
+      }
+      .button {
+        text-align: right;
+      }
+    }
+  }
+}
+
+/* TARJETAS DASHBOARD */
+.cards {
+  .card {
+    padding: 1em;
+    background-color: white;
+    flex-basis: calc(50% - 4em);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    div:first-child {
+      display: flex;
+      justify-content: space-between;
+      .heading1 {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      img {
+        width: 5vw;
+        height: auto;
+      }
+    }
+    h1,
+    h2 {
+      margin: 0;
+      color: black;
+      margin-bottom: 1em;
+    }
+
+    h1 {
+      font-size: 2vw;
+    }
+    h2 {
+      font-size: 1.2vw;
+    }
+
+    .heading2 {
+      color: grey;
+      font-size: 1.3vw;
+      height: 100%;
+      p {
+        margin: 0;
+      }
+    }
+  }
+}
+
+::ng-deep {
+  // cambia el color del indicador de la pestaña
+  .mat-ink-bar {
+    background-color: $primary !important;
+  }
+  // cambia el color del texto de la lista desplegable
+  .mat-option-text {
+    color: $secondary !important;
+  }
+
+  /* cambia el texto si hay, como el login */
+  .mat-form-field.mat-focused .mat-form-field-label {
+    color: $primary !important;
+  }
+
+  /* cambia la linea de abajo input*/
+  .mat-focused .mat-form-field-underline .mat-form-field-ripple {
+    background-color: $primary !important;
+  }
+  /* cambia el borde input*/
+  .mat-form-field-appearance-outline .mat-form-field-outline-thick {
+    color: $primary !important;
+  }
+}

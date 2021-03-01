@@ -3,14 +3,22 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CoreModule } from './core/core.module';
+import { LoginModule } from './login/login.module';
+import { PersonalCalendarModule } from './personal-calendar/personal-calendar.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    CoreModule,
+    LoginModule,
+    PersonalCalendarModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

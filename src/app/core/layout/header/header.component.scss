@@ -1,0 +1,42 @@
+@import './src/assets/scss/master';
+
+.container {
+  background-color: $dark;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  max-height: 56px;
+  min-height: 56px;
+}  
+
+.header-menu {
+  width: fit-content;
+  button {
+    color: white;
+  }
+}
+
+.menu-button {
+  color: white;
+
+  a {
+    vertical-align: super;
+  }
+}
+
+button {
+  background-color: transparent;
+}
+
+button:focus {
+  border: none;
+  outline: none;
+}
+
+.header-submenu {
+  display: flex;
+  justify-content: flex-end;
+
+}
+

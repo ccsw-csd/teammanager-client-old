@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  server: 'http://localhost:8080',
+  securityServer: 'http://devon.es.capgemini.com/sso',
 };
 
 /*

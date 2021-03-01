@@ -1,0 +1,13 @@
+<nav>
+  <mat-nav-list>
+    <a mat-list-item routerLinkActive="item-active" routerLink="/main">
+      <span>Home</span>
+    </a>
+    <a *ngIf="authService.isGestor()" mat-list-item routerLinkActive="item-active" routerLink="/grupos">
+      <span>Mis grupos</span>
+    </a>
+    <a *ngIf="authService.isGestor() == false" mat-list-item routerLinkActive="item-active" (click)="gruposAlert()">
+      <span>Mis grupos</span>
+    </a>
+  </mat-nav-list>
+</nav>

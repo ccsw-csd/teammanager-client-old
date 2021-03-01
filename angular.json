@@ -31,6 +31,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -94,6 +95,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -127,5 +129,8 @@
       }
     }
   },
-  "defaultProject": "teamManager"
+  "defaultProject": "teamManager",
+  "cli": {
+    "analytics": "73f1f86e-02cd-4062-9a49-1b334345d99d"
+  }
 }
