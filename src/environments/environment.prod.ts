@@ -1,3 +1,5 @@
 export const environment = {
-  production: true
+  production: true,
+  server: '.',
+  securityServer: 'http://devon.es.capgemini.com/sso',
 };
