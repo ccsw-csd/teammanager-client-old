@@ -1,8 +1,38 @@
-body {
-  font-family: 'Roboto', 'Helvetica-Neue', sans-serif;
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700&display=swap");
+@import '~@angular/material/theming';
+
+@import "./color";
+
+* {
+  box-sizing: border-box;
+  font-family: "Source Sans Pro", sans-serif !important;
+  &::-webkit-scrollbar-track {
+    background-color: none;
+  }
+  &::-webkit-scrollbar {
+    width: 7px;
+    background-color: none;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: $scrollbar;
+  }
+}
+html,
+body,
+header,
+nav,
+main {
+  position: relative;
+  width: 100%;
+  height: 100%;
   margin: 0;
-  overflow-x: hidden;
-  overflow-y: hidden;
+  padding: 0;
+  color: $body;
+}
+
+body {
+  background-color: $background;
 }
 
 h1,
@@ -10,12 +40,35 @@ h2,
 h3 {
   font-weight: 500 !important;
 }
-
+.material-icons {
+  font-family: "Material Icons" !important;
+  color: $foreground;
+}
 h1 {
-  color: $dark;
-  font-weight: 500 !important;
-  /*font-size: 40px;
-  margin-top: -1px;*/
+  color: $title;
+  font-size: 20px;
+  font-weight: 700;
+}
+h2 {
+  color: $title;
+  font-size: 20px;
+  font-weight: 400;
+}
+mat-tab-group {
+  height: 100%;
+  mat-tab-header {
+    width: fit-content;
+  }
+  .mat-tab-label {
+    font-size: 18px !important;
+    font-weight: 600 !important;
+  }
+  mat-tab-body {
+    padding: 1em 0 0 0;
+  }
+  .mat-tab-body-wrapper {
+    height: 100%;
+  }
 }
 
 .mat-h1 {
@@ -32,7 +85,7 @@ button:active {
 }
 
 .title-secondcolor {
-  color: $active-salmon;
+  color: $selected;
   font-family: 'Source Sans Pro', sans-serif;
 }
 
@@ -169,12 +222,6 @@ button[secondary] {
   color: $white;
 }
 
-html,
-body {
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-}
 
 /** Para quitar el focus de los botones al volver a la pantalla **/
 button.cdk-program-focused {
