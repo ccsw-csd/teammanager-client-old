@@ -35,12 +35,7 @@ export class LoginComponent implements OnInit {
       (res: ResponseCredentials) => {
 
         this.loginService.putCredentials(res);
-
-        this.loginService.getUserInfo().subscribe();
-
         this.router.navigate(['main']);
-        
-        this.isloading = false;
       },
       () => {
 
