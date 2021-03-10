@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Pageable } from '../page/Pageable';
+import { ListadoGruposService } from '../services/listado-grupos.service';
+import { ListadoGruposDialogComponent } from './listado-grupos-dialog/listado-grupos-dialog.component';
 
 @Component({
   selector: 'app-listado-grupos',
@@ -16,7 +19,11 @@ export class ListadoGruposComponent implements OnInit {
 
   dataSource = new MatTableDataSource<ListadoGruposComponent>();
   displayedColumns: string[] = ['id', 'nombre', 'gestores', 'numPersonas', 'numSubGrupos', 'actions'];
-  constructor() { }
+
+  constructor(
+    private listadoGruposService: ListadoGruposService,
+    public dialog: MatDialog,
+  ) { }
   ngOnInit(): void {
   }
 
@@ -36,7 +43,22 @@ export class ListadoGruposComponent implements OnInit {
       pageable.pageNumber = event.pageIndex;
     }
 
-
+    this.listadoGruposService.getGrupos(pageable).subscribe(data => {
+      this.dataSource.data = data.content;
+      this.pageNumber = data.pageable.pageNumber;
+      this.pageSize = data.pageable.pageSize;
+      this.totalElements = data.totalElements;
+    });
   }
 
+  // tslint:disable-next-line: typedef
+  createGroup() {
+    const dialogRef = this.dialog.open(ListadoGruposDialogComponent, {
+      data: {}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.ngOnInit();
+    });
+  }
 }
