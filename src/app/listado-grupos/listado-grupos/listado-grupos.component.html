@@ -1,0 +1,37 @@
+<div class="container">
+  <h1> Listado de Grupos</h1>
+
+  <mat-table [dataSource]="dataSource">
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef> Identificador </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.nombre}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef> Gestores </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.gestores}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef> Numero de personas </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.numPersonas}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef> Numero de subgrupos </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.numSubGrupos}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="action">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let element">
+          <button mat-icon-button color="primary">
+              <mat-icon>Editar</mat-icon>
+          </button>
+          <button mat-icon-button color="accent">
+              <mat-icon>Borrar</mat-icon>
+          </button>
+      </mat-cell>
+  </ng-container>
+  </mat-table>
+</div>
