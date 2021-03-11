@@ -1,0 +1,66 @@
+  <div class="row">
+    <div class="column f-2">
+        <mat-form-field class="example-full-width">
+            <mat-label>Username</mat-label>
+            <input matInput readonly
+            class="input" [(ngModel)]="username"/>
+        </mat-form-field>
+    </div>
+    <div class="column f-2">
+        <mat-form-field class="example-full-width">
+            <mat-label>SAGA</mat-label>
+            <input matInput
+            class="input" [(ngModel)]="saga"/>
+        </mat-form-field>
+    </div>
+  </div>
+  <div class="row">
+    <div class="column f-2">
+        <mat-form-field class="example-full-width">
+            <mat-label>Name</mat-label>
+            <input matInput
+            class="input" [(ngModel)]="name" required/>
+            <mat-error>Campo Nombre vacío</mat-error>
+        </mat-form-field>
+    </div>
+    <div class="column f-2">
+        <mat-form-field class="example-full-width">
+            <mat-label>Last Name</mat-label>
+            <input matInput
+            class="input" [(ngModel)]="lastname" required/>
+            <mat-error>Campo Apellidos vacío</mat-error>
+        </mat-form-field>
+    </div>
+  </div>
+  <div class="row">
+    <div class="column f-2">
+        <mat-form-field class="example-full-width">
+            <mat-label>Email</mat-label>
+            <input matInput type="email" required
+            class="input" [(ngModel)]="email"/>
+            <mat-error>Campo email vacío</mat-error>
+        </mat-form-field>
+    </div>
+    <div class="column f-2">
+        <mat-form-field appearance="fill">
+            <mat-label>Choose Center</mat-label>
+            <mat-select [(value)]="selectedCenter">
+              <mat-option
+              *ngFor="let option of centers"
+                [value]="option">
+                {{ option.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+    </div>
+  </div>
+  <div class="buttons">
+    <button class="button" (click)="buttonSelect('update')">
+      Create
+    </button> 
+  </div>
+  <div class="loadWrapper" *ngIf="isloading">
+    <mat-spinner></mat-spinner>
+  </div>
+  
+
