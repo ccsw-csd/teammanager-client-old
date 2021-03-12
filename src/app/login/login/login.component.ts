@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
   user: string = "";
   password: string = "";
   isloading : boolean = false;
-  personTemp: PersonDto = new PersonDto();
+  person: PersonDto = new PersonDto();
 
   constructor(
     private loginService: LoginService,
@@ -42,16 +42,14 @@ export class LoginComponent implements OnInit {
         this.loginService.putCredentials(res);
 
         this.loginService.personExists(this.user).subscribe((res: PersonDto) => {
-          this.personTemp = res;
-          if(this.personTemp.username == null){
-            console.log("no existe en person");
+          this.person = res;
+          if(this.person.username == null){
             this.dialog
               .open(ModifyPersonComponent, {
                 width: '700px',
                 height: '350px',
                 data: {
-                  user: this.user,
-                  personDto: new PersonDto(),
+                  user: this.user
                 },
               }).afterClosed()
               .subscribe((result) => {
@@ -61,7 +59,6 @@ export class LoginComponent implements OnInit {
             this.isloading = false;
           }
           else{
-            console.log("si existe en person");
             this.router.navigate(['main']);
             this.isloading = false;
           }

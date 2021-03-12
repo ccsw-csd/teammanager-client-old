@@ -3,14 +3,14 @@
         <mat-form-field class="example-full-width">
             <mat-label>Username</mat-label>
             <input matInput readonly
-            class="input" [(ngModel)]="username"/>
+            class="input" [(ngModel)]="person.username"/>
         </mat-form-field>
     </div>
     <div class="column f-2">
         <mat-form-field class="example-full-width">
             <mat-label>SAGA</mat-label>
             <input matInput
-            class="input" [(ngModel)]="saga"/>
+            class="input" [(ngModel)]="person.saga"/>
         </mat-form-field>
     </div>
   </div>
@@ -19,7 +19,7 @@
         <mat-form-field class="example-full-width">
             <mat-label>Name</mat-label>
             <input matInput
-            class="input" [(ngModel)]="name" required/>
+            class="input" [(ngModel)]="person.name" required/>
             <mat-error>Campo Nombre vacío</mat-error>
         </mat-form-field>
     </div>
@@ -27,7 +27,7 @@
         <mat-form-field class="example-full-width">
             <mat-label>Last Name</mat-label>
             <input matInput
-            class="input" [(ngModel)]="lastname" required/>
+            class="input" [(ngModel)]="person.lastname" required/>
             <mat-error>Campo Apellidos vacío</mat-error>
         </mat-form-field>
     </div>
@@ -37,7 +37,7 @@
         <mat-form-field class="example-full-width">
             <mat-label>Email</mat-label>
             <input matInput type="email" required
-            class="input" [(ngModel)]="email"/>
+            class="input" [(ngModel)]="person.email"/>
             <mat-error>Campo email vacío</mat-error>
         </mat-form-field>
     </div>

@@ -32,11 +32,11 @@ export class LoginService {
   }  
 
   personExists(username: String): Observable<PersonDto> {
-    return this.http.get<PersonDto>(environment.server + '/person/personExists/' + username );   
+    return this.http.get<PersonDto>(environment.server + '/person/' + username );   
   }  
 
   createPerson(person: PersonDto): Observable<boolean>{
-    return this.http.post<boolean>(environment.server + '/person/create/', person);
+    return this.http.put<boolean>(environment.server + '/person/create/', person);
   }
 
   putCredentials(res: ResponseCredentials) {

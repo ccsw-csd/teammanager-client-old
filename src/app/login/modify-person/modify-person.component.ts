@@ -15,12 +15,8 @@ export class ModifyPersonComponent implements OnInit {
 
   centers: CenterDto[]|undefined;
   selectedCenter: CenterDto|undefined;
-  username: String|undefined;
-  name: String|undefined;
-  lastname: String|undefined;
-  saga: String|undefined;
-  email: String|undefined;
   isloading = false;
+  person: PersonDto = new PersonDto();
 
   constructor(
     public dialogRef: MatDialogRef<ModifyPersonComponent>, 
@@ -32,19 +28,19 @@ export class ModifyPersonComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.username = this.data.user;
+    this.person.username = this.data.user;
     this.getCenters();
   }
 
   buttonSelect(option: String): void {
     switch (option) {
       case 'update':
-        if ((this.lastname == "") 
-           || (this.email == "") 
-           || (this.name == "")
-           || (this.email == null) 
-           || (this.name == null)
-           || (this.lastname == null) )  {
+        if ((this.person.lastname == "") 
+           || (this.person.email == "") 
+           || (this.person.name == "")
+           || (this.person.email == null) 
+           || (this.person.name == null)
+           || (this.person.lastname == null) )  {
             this.snackService.showMessage('Faltan campos por rellenar');
            }
         else
@@ -62,11 +58,11 @@ export class ModifyPersonComponent implements OnInit {
   createInDb(): void {
     const newPerson = new PersonDto();
     newPerson.id = undefined;
-    newPerson.username = this.username;
-    newPerson.lastname = this.lastname;
-    newPerson.name = this.name;
-    newPerson.email = this.email;
-    newPerson.saga = this.saga;
+    newPerson.username = this.person.username;
+    newPerson.lastname = this.person.lastname;
+    newPerson.name = this.person.name;
+    newPerson.email = this.person.email;
+    newPerson.saga = this.person.saga;
     newPerson.center_id = this.selectedCenter?.id;
     this.isloading = true;
     this.loginService.createPerson(newPerson).subscribe((result) => {
