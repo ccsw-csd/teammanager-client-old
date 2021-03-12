@@ -13,8 +13,10 @@ const routes: Routes = [
     component: LoginComponent,
   },
   {
-    path: 'listadoGrupos',
-    component: ListadoGruposComponent
+    path: 'listado-grupos',
+    component: ListadoGruposComponent,
+    canActivate: [AuthGuard],
+    resolve: {user: UserResolverService},
   },
   {
     path: '',
