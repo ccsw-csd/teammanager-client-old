@@ -71,7 +71,7 @@ export class ModifyPersonComponent implements OnInit {
         this.dialogRef.close(true);
       }
       else{
-        this.snackService.showMessage('El código SAGA está duplicado en BBDD. Por favor reviselo o pongase en contacto con el administrador');
+        this.snackService.showMessage('El código SAGA está duplicado en BBDD. Por favor revíselo o póngase en contacto con el administrador.');
         this.dialogRef.close(false);
       }
       this.isloading = false;
