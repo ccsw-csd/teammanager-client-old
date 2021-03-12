@@ -12,6 +12,6 @@ export class CenterService {
   constructor(private http: HttpClient) { }
 
   getAllCenters(): Observable<CenterDto[]> {
-    return this.http.post<CenterDto[]>(environment.server+ '/center/getAll/',{});
+    return this.http.post<CenterDto[]>(environment.server+ '/center/',{});
   }
 }

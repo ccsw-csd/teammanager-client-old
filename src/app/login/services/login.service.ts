@@ -36,7 +36,7 @@ export class LoginService {
   }  
 
   createPerson(person: PersonDto): Observable<boolean>{
-    return this.http.put<boolean>(environment.server + '/person/create/', person);
+    return this.http.put<boolean>(environment.server + '/person/', person);
   }
 
   putCredentials(res: ResponseCredentials) {
