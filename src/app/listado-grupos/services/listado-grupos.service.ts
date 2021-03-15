@@ -11,7 +11,7 @@ import { HttpClient } from '@angular/common/http';
 export class ListadoGruposService {
 
   getGrupos(pageable: Pageable): Observable<ListadoGruposPage> {
-    return this.http.post<ListadoGruposPage>('http://localhost:8080/author/v1/', {pageable});
+    return this.http.post<ListadoGruposPage>('http://localhost:8080/groupList/', {pageable});
   }
 
   constructor(

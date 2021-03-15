@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ListadoGrupos } from '../../model/ListadoGrupos';
+import { ListadoGruposService } from '../../services/listado-grupos.service';
 
 @Component({
   selector: 'app-listado-grupos-dialog',
@@ -7,7 +10,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListadoGruposDialogComponent implements OnInit {
 
-  constructor() { }
+  group: ListadoGrupos = new ListadoGrupos;
+
+  constructor(
+    public dialogRef: MatDialogRef<ListadoGruposDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private listadoGruposService: ListadoGruposService
+  ) { }
 
   ngOnInit(): void {
   }

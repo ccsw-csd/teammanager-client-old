@@ -26,6 +26,7 @@ export class ListadoGruposComponent implements OnInit {
     public dialog: MatDialog,
   ) { }
   ngOnInit(): void {
+    this.loadPage();
   }
 
   // tslint:disable-next-line: typedef
@@ -70,4 +71,15 @@ export class ListadoGruposComponent implements OnInit {
       this.ngOnInit();
     });
   }
+
+  editGroup(group: ListadoGrupos) {
+    const dialogRef = this.dialog.open(ListadoGruposDialogComponent, {
+        data: { group }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+        this.ngOnInit();
+    });
+  }
+
 }
