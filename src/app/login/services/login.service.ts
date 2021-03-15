@@ -31,7 +31,7 @@ export class LoginService {
     );
   }  
 
-  personExists(username: String): Observable<PersonDto> {
+  personExists(username: String|undefined): Observable<PersonDto> {
     return this.http.get<PersonDto>(environment.server + '/person/' + username );   
   }  
 

@@ -1,5 +1,10 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { ModifyPersonComponent } from 'src/app/login/modify-person/modify-person.component';
+import { LoginService } from 'src/app/login/services/login.service';
+import { PersonDto } from '../../person/personDto';
 import { AuthService } from '../../services/auth.service';
+import { SnackbarService } from '../../services/snackbar.service';
 import { User } from '../../to/User';
 
 @Component({
@@ -11,10 +16,15 @@ export class HeaderComponent implements OnInit {
 
   user : User | null = null;
   navOpen = true;
+  isloading : boolean = false;
+  person: PersonDto = new PersonDto();
   @Output() navOpenEvent = new EventEmitter();
 
   constructor(
     public authService: AuthService,
+    private loginService: LoginService,
+    private snackbarService: SnackbarService,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -37,4 +47,26 @@ export class HeaderComponent implements OnInit {
   logout() {
     this.authService.logout();
   }
+
+  
+  update() {
+    this.loginService.personExists(this.user?.username).subscribe((res: PersonDto) => {
+      this.person = res;
+        this.dialog
+          .open(ModifyPersonComponent, {
+            width: '700px',
+            height: '350px',
+            data: {
+              user: this.user?.username,
+              create: false,
+              person: this.person
+            },
+          }).afterClosed()
+          .subscribe((result) => {
+            this.person = result;
+          })
+        this.isloading = false;
+      
+    },);
+  } 
 }

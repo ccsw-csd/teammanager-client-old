@@ -6,13 +6,22 @@
             class="input" [(ngModel)]="person.username"/>
         </mat-form-field>
     </div>
-    <div class="column f-2">
+    <div class="column f-2" *ngIf="data.create; else sagaRead">
         <mat-form-field class="example-full-width">
             <mat-label>SAGA</mat-label>
             <input matInput
             class="input" [(ngModel)]="person.saga"/>
         </mat-form-field>
     </div>
+    <ng-template  #sagaRead>
+      <div class="column f-2">
+        <mat-form-field class="example-full-width">
+            <mat-label>SAGA</mat-label>
+            <input matInput
+            class="input" [(ngModel)]="person.saga" readonly/>
+        </mat-form-field>
+      </div>
+    </ng-template>  
   </div>
   <div class="row">
     <div class="column f-2">
@@ -54,9 +63,14 @@
           </mat-form-field>
     </div>
   </div>
-  <div class="buttons">
-    <button class="button" (click)="buttonSelect('update')">
+  <div class="buttons" *ngIf="data.create">
+    <button class="button" (click)="buttonSelect('create')">
       Create
+    </button> 
+  </div>
+  <div class="buttons" *ngIf="!data.create">
+    <button class="button" (click)="buttonSelect('update')">
+      Update
     </button> 
   </div>
   <div class="loadWrapper" *ngIf="isloading">

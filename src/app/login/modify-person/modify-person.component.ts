@@ -28,13 +28,17 @@ export class ModifyPersonComponent implements OnInit {
 
 
   ngOnInit(): void {
+
+    if(!this.data.create){
+      this.person = this.data.person;
+    }
     this.person.username = this.data.user;
-    this.getCenters();
+    this.getCenters()
   }
 
   buttonSelect(option: String): void {
     switch (option) {
-      case 'update':
+      case 'create':
         if ((this.person.lastname == "") 
            || (this.person.email == "") 
            || (this.person.name == "")
@@ -46,12 +50,32 @@ export class ModifyPersonComponent implements OnInit {
         else
           this.createInDb();
         break;
+      case 'update':
+        if ((this.person.lastname == "") 
+        || (this.person.email == "") 
+        || (this.person.name == "")
+        || (this.person.email == null) 
+        || (this.person.name == null)
+        || (this.person.lastname == null) )  {
+         this.snackService.showMessage('Faltan campos por rellenar');
+        }
+        else{
+          this.updateInDb(this.data.person)
+        break;
+        }
     }
+
   }
   getCenters(): void{
     this.centerService.getAllCenters().subscribe(result => {
       this.centers = result;
-      this.selectedCenter = this.centers[0];
+      if(this.data.create){
+        this.selectedCenter = this.centers[0];
+      }
+      else{
+        this.selectedCenter =  this.centers.find( center => center.id === this.person.centerId?.toString() );
+      }
+      
     });
   }
 
@@ -63,7 +87,7 @@ export class ModifyPersonComponent implements OnInit {
     newPerson.name = this.person.name;
     newPerson.email = this.person.email;
     newPerson.saga = this.person.saga;
-    newPerson.center_id = this.selectedCenter?.id;
+    newPerson.centerId = this.selectedCenter?.id;
     this.isloading = true;
     this.loginService.createPerson(newPerson).subscribe((result) => {
       if(result)
@@ -77,5 +101,14 @@ export class ModifyPersonComponent implements OnInit {
       this.isloading = false;
     });
 
+  }
+
+  updateInDb(updatedPerson: PersonDto): void{
+    this.isloading = true;
+    updatedPerson.centerId = this.selectedCenter?.id;
+    this.loginService.createPerson(updatedPerson).subscribe((result) => {
+        this.dialogRef.close(true);
+      this.isloading = false;
+    });
   }
 }
