@@ -5,7 +5,7 @@ export class PersonDto {
     name: String|undefined;
     email: String|undefined;  
     lastname: String|undefined; 
-    center_id: number|undefined; 
+    centerId: number|undefined; 
     constructor() {}
 }
   

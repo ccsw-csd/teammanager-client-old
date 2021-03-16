@@ -9,8 +9,10 @@
     <div class="column f-2">
         <mat-form-field class="example-full-width">
             <mat-label>SAGA</mat-label>
+            <input matInput 
+            class="input" [(ngModel)]="person.saga" *ngIf="data.create"/>
             <input matInput
-            class="input" [(ngModel)]="person.saga"/>
+            class="input" [(ngModel)]="person.saga" *ngIf="!data.create" readonly/>
         </mat-form-field>
     </div>
   </div>
@@ -55,9 +57,12 @@
     </div>
   </div>
   <div class="buttons">
-    <button class="button" (click)="buttonSelect('update')">
+    <button class="button" (click)="buttonSelect('create')"  *ngIf="data.create">
       Create
     </button> 
+    <button class="button" (click)="buttonSelect('update')"  *ngIf="!data.create">
+      Update
+    </button>
   </div>
   <div class="loadWrapper" *ngIf="isloading">
     <mat-spinner></mat-spinner>

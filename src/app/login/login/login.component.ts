@@ -49,7 +49,8 @@ export class LoginComponent implements OnInit {
                 width: '700px',
                 height: '350px',
                 data: {
-                  user: this.user
+                  user: this.user,
+                  create: true
                 },
               }).afterClosed()
               .subscribe((result) => {
