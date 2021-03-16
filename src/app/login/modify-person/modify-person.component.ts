@@ -37,9 +37,7 @@ export class ModifyPersonComponent implements OnInit {
   }
 
   buttonSelect(option: String): void {
-    switch (option) {
-      case 'create':
-        if ((this.person.lastname == "") 
+    if ((this.person.lastname == "") 
            || (this.person.email == "") 
            || (this.person.name == "")
            || (this.person.email == null) 
@@ -47,24 +45,17 @@ export class ModifyPersonComponent implements OnInit {
            || (this.person.lastname == null) )  {
             this.snackService.showMessage('Faltan campos por rellenar');
            }
-        else
+    else{
+      switch (option) {
+        case 'create':
           this.createInDb();
-        break;
-      case 'update':
-        if ((this.person.lastname == "") 
-        || (this.person.email == "") 
-        || (this.person.name == "")
-        || (this.person.email == null) 
-        || (this.person.name == null)
-        || (this.person.lastname == null) )  {
-         this.snackService.showMessage('Faltan campos por rellenar');
-        }
-        else{
+          break;
+        case 'update':
           this.updateInDb(this.data.person)
-        break;
-        }
+          break;
+          
+      }
     }
-
   }
   getCenters(): void{
     this.centerService.getAllCenters().subscribe(result => {
@@ -73,7 +64,7 @@ export class ModifyPersonComponent implements OnInit {
         this.selectedCenter = this.centers[0];
       }
       else{
-        this.selectedCenter =  this.centers.find( center => center.id === this.person.centerId?.toString() );
+        this.selectedCenter =  this.centers.find( center => center.id === this.person.centerId );
       }
       
     });

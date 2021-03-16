@@ -6,22 +6,15 @@
             class="input" [(ngModel)]="person.username"/>
         </mat-form-field>
     </div>
-    <div class="column f-2" *ngIf="data.create; else sagaRead">
+    <div class="column f-2">
         <mat-form-field class="example-full-width">
             <mat-label>SAGA</mat-label>
+            <input matInput 
+            class="input" [(ngModel)]="person.saga" *ngIf="data.create"/>
             <input matInput
-            class="input" [(ngModel)]="person.saga"/>
+            class="input" [(ngModel)]="person.saga" *ngIf="!data.create" readonly/>
         </mat-form-field>
     </div>
-    <ng-template  #sagaRead>
-      <div class="column f-2">
-        <mat-form-field class="example-full-width">
-            <mat-label>SAGA</mat-label>
-            <input matInput
-            class="input" [(ngModel)]="person.saga" readonly/>
-        </mat-form-field>
-      </div>
-    </ng-template>  
   </div>
   <div class="row">
     <div class="column f-2">
@@ -63,15 +56,13 @@
           </mat-form-field>
     </div>
   </div>
-  <div class="buttons" *ngIf="data.create">
-    <button class="button" (click)="buttonSelect('create')">
+  <div class="buttons">
+    <button class="button" (click)="buttonSelect('create')"  *ngIf="data.create">
       Create
     </button> 
-  </div>
-  <div class="buttons" *ngIf="!data.create">
-    <button class="button" (click)="buttonSelect('update')">
+    <button class="button" (click)="buttonSelect('update')"  *ngIf="!data.create">
       Update
-    </button> 
+    </button>
   </div>
   <div class="loadWrapper" *ngIf="isloading">
     <mat-spinner></mat-spinner>
