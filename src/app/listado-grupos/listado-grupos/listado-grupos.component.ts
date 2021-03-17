@@ -19,7 +19,7 @@ export class ListadoGruposComponent implements OnInit {
   totalElements = 0;
 
   dataSource = new MatTableDataSource<ListadoGrupos>();
-  displayedColumns: string[] = ['id', 'nombre', 'gestores', 'numPersonas', 'numSubGrupos', 'actions'];
+  displayedColumns: string[] = ['id', 'name', 'manager', 'members', 'subgroups', 'actions'];
 
   constructor(
     private listadoGruposService: ListadoGruposService,
@@ -47,15 +47,19 @@ export class ListadoGruposComponent implements OnInit {
 
     this.listadoGruposService.getGrupos(pageable).subscribe(data => {
       if (data.content != null) {
+        console.log(data.content);
         this.dataSource.data = data.content;
       }
       if (data.pageable?.pageNumber != null) {
+        console.log(data.pageable);
         this.pageNumber = data.pageable.pageNumber;
       }
       if (data.pageable?.pageSize != null) {
+        console.log(data.pageable.pageSize);
         this.pageSize = data.pageable.pageSize;
       }
       if (data.totalElements != null) {
+        console.log(data.totalElements);
         this.totalElements = data.totalElements;
       }
     });
@@ -63,23 +67,11 @@ export class ListadoGruposComponent implements OnInit {
 
   // tslint:disable-next-line: typedef
   createGroup() {
-    const dialogRef = this.dialog.open(ListadoGruposDialogComponent, {
-      data: {}
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      this.ngOnInit();
-    });
+    const dialogRef = alert('To Do');
   }
 
   editGroup(group: ListadoGrupos) {
-    const dialogRef = this.dialog.open(ListadoGruposDialogComponent, {
-        data: { group }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-        this.ngOnInit();
-    });
+    const dialogRef = alert('To Do');
   }
 
 }

@@ -1,7 +1,7 @@
 export class ListadoGrupos {
   id?: number;
-  nombre?: string;
-  gestores?: string;
-  numPersonasGrupo?: number;
-  numSubGrps?: number;
+  name?: string;
+  manager?: string;
+  members?: number;
+  subgroups?: number;
 }

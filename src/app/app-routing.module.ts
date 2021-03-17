@@ -13,16 +13,14 @@ const routes: Routes = [
     component: LoginComponent,
   },
   {
-    path: 'listado-grupos',
-    component: ListadoGruposComponent,
-  },
-  {
     path: '',
     component: LayoutComponent,
     canActivate: [AuthGuard],
     resolve: {user: UserResolverService},
     children: [
       { path: 'main', component: PersonalCalendarComponent,},
+      { path: 'listado-grupos', component: ListadoGruposComponent,
+      },
     ]
   },
   { path: '**', redirectTo: 'login', pathMatch: 'full' },
