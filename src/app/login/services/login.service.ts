@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { PersonDto } from 'src/app/core/person/personDto';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { ResponseCredentials } from 'src/app/core/to/ResponseCredentials';
 import { User } from 'src/app/core/to/User';
@@ -29,6 +30,14 @@ export class LoginService {
       environment.server + '/user/'
     );
   }  
+
+  personExists(username: String|undefined): Observable<PersonDto> {
+    return this.http.get<PersonDto>(environment.server + '/person/' + username );   
+  }  
+
+  createPerson(person: PersonDto): Observable<boolean>{
+    return this.http.put<boolean>(environment.server + '/person/', person);
+  }
 
   putCredentials(res: ResponseCredentials) {
     this.authService.putTokenCredentials(res);
