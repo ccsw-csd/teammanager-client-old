@@ -1,0 +1,21 @@
+@import "./src/assets/scss/master";
+
+#zona-titulo{
+  width: 100%;
+}
+div{
+  margin: 1em;
+}
+#zona-configuracion-izq{
+  float:left;
+  box-shadow: 1px;
+  width: 45%;
+}
+#zona-configuracion-der{
+  float:right;
+  box-shadow: 1px;
+  width: 45%;
+}
+#zona-gestores{
+  
+}

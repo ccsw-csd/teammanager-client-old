@@ -3,14 +3,22 @@
   <h1 *ngIf="group.id != null"> Modificar grupo</h1>
 
   <form class="example-form">
-    <mat-form-field class="example-full-width">
-      <mat-label>Favorite food</mat-label>
+    <mat-form-field class="zona-titulo">
+      <mat-label>Nombre del grupo</mat-label>
       <input matInput placeholder="Ex. Pizza" value="Sushi">
     </mat-form-field>
-
-    <mat-form-field class="example-full-width">
-      <mat-label>Leave a comment</mat-label>
-      <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
-    </mat-form-field>
+    <div id="zona-configuracion">
+      <div id="zona-configuracion-izq">
+        <mat-label>Personas del grupo</mat-label>
+      </div>
+      <div id="zona-configuracion-der">
+        <div id="zona-gestores">
+          <mat-label>Gestores del grupo</mat-label>
+        </div>
+        <div id="zona-subgrupos">
+          <mat-label>Subgrupo del grupo</mat-label>
+        </div>
+      </div>
+    </div>
   </form>
 </div>
