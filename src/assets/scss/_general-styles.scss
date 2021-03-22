@@ -30,9 +30,10 @@ main {
   padding: 0;
   color: $body;
 }
-mat-body, .mat-body-1, .mat-typography {
+.mat-cell {
   font-family: "Source Sans Pro", sans-serif !important;
   letter-spacing: normal;
+  font-size: 16px !important;
 }
 
 body {
