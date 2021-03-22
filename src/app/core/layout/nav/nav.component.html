@@ -9,5 +9,8 @@
     <a *ngIf="authService.isGestor() == false" mat-list-item routerLinkActive="item-active" (click)="gruposAlert()">
       <span>Mis grupos</span>
     </a>
+    <a  mat-list-item routerLinkActive="item-active" routerLink="/forecast">
+      <span>Listado de forecast</span>
+    </a>
   </mat-nav-list>
 </nav>

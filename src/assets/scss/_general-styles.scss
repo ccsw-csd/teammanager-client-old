@@ -30,19 +30,21 @@ main {
   padding: 0;
   color: $body;
 }
+mat-body, .mat-body-1, .mat-typography {
+  font-family: "Source Sans Pro", sans-serif !important;
+  letter-spacing: normal;
+}
 
 body {
   background-color: $background;
 }
 
-h1,
-h2,
-h3 {
-  font-weight: 500 !important;
+nav > * ~ * {
+  color: $foreground;
 }
 .material-icons {
   font-family: "Material Icons" !important;
-  color: $foreground;
+  color: white;
 }
 h1 {
   color: $title;
@@ -70,6 +72,7 @@ mat-tab-group {
     height: 100%;
   }
 }
+
 
 .mat-h1 {
   font-weight: 500 !important;
@@ -267,7 +270,9 @@ span.text_red {
       .title {
         h1 {
           margin-bottom: 0;
-          color: black;
+          color: $title;
+          font-size: 20px;
+          font-weight: 700;
         }
       }
       .button {
@@ -299,15 +304,10 @@ span.text_red {
         height: auto;
       }
     }
-    h1,
-    h2 {
-      margin: 0;
-      color: black;
-      margin-bottom: 1em;
-    }
-
     h1 {
-      font-size: 2vw;
+      color: $title;
+      font-size: 20px;
+      font-weight: 700;
     }
     h2 {
       font-size: 1.2vw;
@@ -321,6 +321,69 @@ span.text_red {
         margin: 0;
       }
     }
+  }
+}
+
+table:not(.mat-calendar-table) {
+  width: 100%;
+  box-shadow: none !important;
+
+  th {
+    // padding-left: 1em;
+    // padding-right: 1em;
+    background-color: $table-header;
+    font-size: 16px !important;
+    font-weight: 700;
+    border-bottom-color: #36b8e0;
+  }
+
+  td {
+    // padding-left: 1em;
+    // padding-right: 1em;
+    background-color: $table-header;
+    border-bottom-color: #36b8e0 !important;
+    height: 3.5em;
+  }
+
+  input {
+    background: none;
+    height: auto;
+    outline: none;
+    border: none;
+    padding: 0;
+    &::placeholder {
+      opacity: 0.5;
+    }
+  }
+
+  input[type="number"] {
+    -moz-appearance: textfield;
+
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }
+
+  .mat-footer-row > * {
+    background-color: $table-result;
+    font-weight: 700;
+    border-bottom-color: white !important;
+  }
+
+  .mat-cell,
+  .mat-footer-cell {
+    font-size: unset;
+  }
+
+  // Optional classes for special table styles
+  .center {
+    text-align: center !important;
+  }
+  .editable {
+    background-color: $table-editable-field;
+    border-bottom-color: white;
   }
 }
 
