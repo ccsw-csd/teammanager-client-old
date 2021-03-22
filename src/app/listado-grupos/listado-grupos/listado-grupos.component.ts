@@ -1,3 +1,4 @@
+import { group } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
@@ -67,11 +68,14 @@ export class ListadoGruposComponent implements OnInit {
 
   // tslint:disable-next-line: typedef
   createGroup() {
-    const dialogRef = alert('To Do');
+    const dialogRef = this.dialog.open(ListadoGruposDialogComponent, {
+      data: {}
+  });
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.ngOnInit();
+  });
   }
 
-  editGroup(group: ListadoGrupos) {
-    const dialogRef = alert('To Do');
-  }
 
 }
