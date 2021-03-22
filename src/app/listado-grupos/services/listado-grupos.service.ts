@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { ListadoGruposPage } from '../model/ListadoGruposPage';
 import { Pageable } from '../page/Pageable';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({
@@ -11,7 +12,7 @@ import { HttpClient } from '@angular/common/http';
 export class ListadoGruposService {
 
   getGrupos(pageable: Pageable): Observable<ListadoGruposPage> {
-    return this.http.post<ListadoGruposPage>('http://localhost:8080/grouplist/', {pageable});
+    return this.http.post<ListadoGruposPage>(environment.server + '/grouplist/', {pageable});
   }
 
   constructor(
