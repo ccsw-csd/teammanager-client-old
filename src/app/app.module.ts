@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule } from './core/core.module';
 import { LoginModule } from './login/login.module';
 import { PersonalCalendarModule } from './personal-calendar/personal-calendar.module';
+import { ListadoGruposModule } from './listado-grupos/listado-grupos.module';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { PersonalCalendarModule } from './personal-calendar/personal-calendar.mo
     CoreModule,
     LoginModule,
     PersonalCalendarModule,
+    ListadoGruposModule
   ],
   providers: [],
   bootstrap: [AppComponent]
