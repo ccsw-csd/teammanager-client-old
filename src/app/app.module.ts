@@ -8,10 +8,12 @@ import { CoreModule } from './core/core.module';
 import { LoginModule } from './login/login.module';
 import { PersonalCalendarModule } from './personal-calendar/personal-calendar.module';
 import { ListadoGruposModule } from './listado-grupos/listado-grupos.module';
+import { ForecastListComponent } from './forecast-list/forecast-list/forecast-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    ForecastListComponent,
   ],
   imports: [
     BrowserModule,
