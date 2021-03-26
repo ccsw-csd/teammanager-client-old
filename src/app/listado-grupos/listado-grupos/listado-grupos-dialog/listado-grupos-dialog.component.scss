@@ -6,19 +6,29 @@
 div{
   margin: 1em;
 }
+#zona-configuracion{
+  align-items: baseline;
+}
 #zona-configuracion-izq{
   float:left;
   box-shadow: 1px;
   width: 45%;
+  background-color: rgb(185, 219, 248);
 }
 #zona-configuracion-der{
   float:right;
   box-shadow: 1px;
   width: 45%;
+  background-color: rgb(185, 225, 255);
+
 }
 #zona-gestores{
   height: 50%;
+  background-color: rgb(195, 220, 230);
+
 }
 #zona-subgrupos{
   height: 50%;
+  background-color: rgb(210, 200, 230);
+
 }

@@ -1,24 +1,58 @@
 <div class="container">
-  <h1 *ngIf="group.id == null"> Crear grupo </h1>
-  <h1 *ngIf="group.id != null"> Modificar grupo</h1>
-
-  <form class="example-form">
-    <mat-form-field class="zona-titulo">
-      <mat-label>Nombre del grupo</mat-label>
-      <input matInput placeholder="Ex. Pizza" value="Sushi">
-    </mat-form-field>
-    <div id="zona-configuracion">
-      <div id="zona-configuracion-izq">
-        <mat-label>Personas del grupo</mat-label>
+  <div id="zona-titulo">
+    <input matInput placeholder="Titulo" aria-label="State" [matAutocomplete]="auto">
+  </div>
+  <div id="zona-config">
+    <div id="zona-config-izq">
+      <mat-form-field>
+        <input matInput placeholder="Buscar managers" aria-label="State" [matAutocomplete]="auto" [formControl]="searchManagersCtrl">
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngIf="isLoading" class="is-loading">Loading...</mat-option>
+          <ng-container *ngIf="!isLoading">
+            <mat-option *ngFor="let manager of managers" [value]="manager.name">
+              <span><b>{{manager.id}}</b> ({{manager.name}})</span>
+            </mat-option>
+          </ng-container>
+        </mat-autocomplete>
+      </mat-form-field>
+    </div>
+    <div id="zona-config-der">
+      <div id="zona-members">
+        <mat-form-field>
+          <input matInput placeholder="Buscar miembros" aria-label="State" [matAutocomplete]="auto" [formControl]="searchMembersCtrl">
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngIf="isLoading" class="is-loading">Loading...</mat-option>
+            <ng-container *ngIf="!isLoading">
+              <mat-option *ngFor="let member of members" [value]="member.name">
+                <span><b>{{member.id}}</b> ({{member.name}})</span>
+              </mat-option>
+            </ng-container>
+          </mat-autocomplete>
+        </mat-form-field>
       </div>
-      <div id="zona-configuracion-der">
-        <div id="zona-gestores">
-          <mat-label>Gestores del grupo</mat-label>
-        </div>
-        <div id="zona-subgrupos">
-          <mat-label>Subgrupo del grupo</mat-label>
-        </div>
+      <div id="zona-subgroups">
+        <mat-form-field>
+          <input matInput placeholder="Buscar subgrupos" aria-label="State" [matAutocomplete]="auto" [formControl]="searchSubgroupsCtrl">
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngIf="isLoading" class="is-loading">Loading...</mat-option>
+            <ng-container *ngIf="!isLoading">
+              <mat-option *ngFor="let subgroup of subgroups" [value]="subgroup.name">
+                <span><b>{{subgroup.id}}</b> ({{subgroup.name}})</span>
+              </mat-option>
+            </ng-container>
+          </mat-autocomplete>
+        </mat-form-field>
       </div>
     </div>
-  </form>
+  </div>
+
+
+<br>
+
+<ng-container *ngIf="errorMsg; else elseTemplate">
+  {{errorMsg}}
+</ng-container>
+<ng-template #elseTemplate>
+  <h5>Selected Value: {{searchManagersCtrl.value}}</h5>
+</ng-template>
 </div>

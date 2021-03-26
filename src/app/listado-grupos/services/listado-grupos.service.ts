@@ -4,6 +4,8 @@ import { ListadoGruposPage } from '../model/ListadoGruposPage';
 import { Pageable } from '../page/Pageable';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { Group } from '../model/Group';
+import { Person } from '../model/Person';
 
 
 @Injectable({
@@ -15,7 +17,15 @@ export class ListadoGruposService {
     return this.http.post<ListadoGruposPage>(environment.server + '/grouplist/', {pageable});
   }
 
+  getPersons(prefix: string): Observable<Person[]> {
+    return this.http.post<Person[]>(environment.server + '/grouplist/persons/', prefix);
+  }
+
+  getSubgroups(prefix: string): Observable<Group[]> {
+    return this.http.post<Group[]>(environment.server + '/grouplist/subgroups/', prefix);
+  }
+
   constructor(
     private http: HttpClient
-) { }
+  ) { }
 }
