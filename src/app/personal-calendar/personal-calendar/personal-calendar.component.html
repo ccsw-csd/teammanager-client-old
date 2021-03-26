@@ -1,1 +1,23 @@
-<p>personal-calendar works!</p>
+<div>
+	<div>
+		<mat-form-field>
+			<mat-label>Selecciona año</mat-label>
+			<mat-select [(ngModel)]=year>
+				<mat-option value=2020>2020</mat-option>
+				<mat-option value=2021 selected>2021</mat-option>
+				<mat-option value=2022>2022</mat-option>
+			</mat-select>
+		</mat-form-field>
+	</div> 
+	<div class= "calendar">
+        <div class="row" *ngFor= "let rowData of months">
+            <div class="column" *ngFor= "let month of rowData">
+                <app-month-calendar 
+                    [year]= year
+                    [month]= month
+                >
+                </app-month-calendar>
+            </div>
+        </div>
+	</div>
+</div>
