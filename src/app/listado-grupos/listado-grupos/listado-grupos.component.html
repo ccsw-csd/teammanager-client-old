@@ -1,0 +1,46 @@
+<div class="container">
+  <h1> Listado de Grupos</h1>
+  <div class="buttons" id="nuevoGrp">
+    <button mat-flat-button color="primary" (click)="createGroup()">Nuevo grupo</button>
+  </div>
+
+  <mat-table [dataSource]="dataSource">
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef> Identificador </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="manager">
+      <mat-header-cell *matHeaderCellDef> Gestores </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.manager}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="members">
+      <mat-header-cell *matHeaderCellDef> Numero de personas </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.members}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="subgroups">
+      <mat-header-cell *matHeaderCellDef> Numero de subgrupos </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.subgroups}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let element">
+      </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+  <mat-paginator (page)="loadPage($event)" [pageSizeOptions]="[5, 10, 20]" [pageIndex]="pageNumber" [pageSize]="pageSize" [length]="totalElements" showFirstLastButtons></mat-paginator>
+
+
+</div>

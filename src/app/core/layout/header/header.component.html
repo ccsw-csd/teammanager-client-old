@@ -7,13 +7,17 @@
     </mat-toolbar-row>
   
     <mat-toolbar-row routerLink="/main">
-      Logo - TeamManager
+      <img src="assets/images/logo.png" height="40px" alt="" />
     </mat-toolbar-row>
   
     <mat-toolbar-row class="header-submenu">
       <mat-menu #menu="matMenu" xPosition="before" yPosition="below">
         <mat-divider class="divider">
         </mat-divider>
+        <button mat-menu-item (click)="update()">
+          <mat-icon>input</mat-icon>
+          <span>Editar Perfil</span>
+        </button>
         <button mat-menu-item (click)="logout()">
           <mat-icon>input</mat-icon>
           <span>Cerrar sesión</span>

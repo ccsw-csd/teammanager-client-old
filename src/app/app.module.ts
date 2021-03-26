@@ -11,11 +11,14 @@ import { MonthCalendarModule } from './month-calendar/month-calendar.module';
 import { MatDatepickerModule} from '@angular/material/datepicker';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatSelectModule } from '@angular/material/select';
+import { ListadoGruposModule } from './listado-grupos/listado-grupos.module';
+import { ForecastListComponent } from './forecast-list/forecast-list/forecast-list.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    ForecastListComponent,
   ],
   imports: [
     BrowserModule,
@@ -28,7 +31,9 @@ import { MatSelectModule } from '@angular/material/select';
     MatDatepickerModule,
     MatGridListModule,
     FormsModule,
-    MatSelectModule
+    MatSelectModule,
+    ListadoGruposModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
