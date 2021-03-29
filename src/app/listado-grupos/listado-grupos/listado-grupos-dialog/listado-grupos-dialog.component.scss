@@ -1,34 +1,33 @@
 @import "./src/assets/scss/master";
 
+.container{
+  width: 80em;
+}
+
 #zona-titulo{
   width: 100%;
 }
-div{
-  margin: 1em;
+#zona-config{
+  display: flex;
+  flex-flow: row wrap;
 }
-#zona-configuracion{
-  align-items: baseline;
-}
-#zona-configuracion-izq{
-  float:left;
+#zona-config-izq{
+  display: felx;
+  flex-flow: column;
+  float: left;
   box-shadow: 1px;
   width: 45%;
-  background-color: rgb(185, 219, 248);
 }
-#zona-configuracion-der{
-  float:right;
-  box-shadow: 1px;
+#zona-config-der{
+  float: right;
+  display: felx;
+  flex-flow: column;
   width: 45%;
-  background-color: rgb(185, 225, 255);
-
+  height: 30em;
 }
-#zona-gestores{
+#zona-members{
   height: 50%;
-  background-color: rgb(195, 220, 230);
-
 }
-#zona-subgrupos{
+#zona-subgroups{
   height: 50%;
-  background-color: rgb(210, 200, 230);
-
 }

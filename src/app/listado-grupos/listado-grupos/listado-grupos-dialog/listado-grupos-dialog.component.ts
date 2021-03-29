@@ -18,10 +18,10 @@ export class ListadoGruposDialogComponent implements OnInit {
   searchSubgroupsCtrl = new FormControl();
   searchMembersCtrl = new FormControl();
 
-  persons: Person[] = [];
   groups: Group[] = [];
+  persons: Person[] = [];
   subgroups: Group[] = [];
-  managers: any;
+  managers: Person[] = [];
   members: Person[] = [];
   errorMsg?: string;
   isLoading = false;
@@ -40,7 +40,7 @@ export class ListadoGruposDialogComponent implements OnInit {
         debounceTime(500),
         tap(() => {
           this.errorMsg = '';
-          this.managers = [];
+          this.persons = [];
           this.isLoading = true;
         }),
         switchMap(value => this.listadoGruposService.getPersons(value)
@@ -51,7 +51,8 @@ export class ListadoGruposDialogComponent implements OnInit {
         )
       )
       .subscribe(data => {
-          this.managers = data;
+          this.persons = data;
+          console.log(this.managers);
         }
     );
     this.searchSubgroupsCtrl.valueChanges
@@ -59,7 +60,7 @@ export class ListadoGruposDialogComponent implements OnInit {
       debounceTime(500),
       tap(() => {
         this.errorMsg = '';
-        this.subgroups = [];
+        this.groups = [];
         this.isLoading = true;
       }),
       switchMap(value => this.listadoGruposService.getSubgroups(value)
@@ -70,7 +71,8 @@ export class ListadoGruposDialogComponent implements OnInit {
       )
     )
     .subscribe(data => {
-        this.subgroups = data;
+        this.groups = data;
+        console.log(this.groups);
       }
   );
     this.searchMembersCtrl.valueChanges
@@ -78,7 +80,7 @@ export class ListadoGruposDialogComponent implements OnInit {
     debounceTime(500),
     tap(() => {
       this.errorMsg = '';
-      this.managers = [];
+      this.persons = [];
       this.isLoading = true;
     }),
     switchMap(value => this.listadoGruposService.getPersons(value)
@@ -89,9 +91,27 @@ export class ListadoGruposDialogComponent implements OnInit {
     )
   )
   .subscribe(data => {
-      this.members = data;
+      this.persons = data;
+      console.log(this.persons);
     }
 );
   }
-
+  addMember(member: Person){
+    this.members.push(member);
+  }
+  addManager(manager: Person){
+    this.managers.push(manager);
+  }
+  addSubgroup(group: Group){
+    this.subgroups.push(group)
+  }
+  deleteMember(member: Person){
+    this.members.push(member);
+  }
+  deleteManager(manager: Person){
+    this.managers.push(manager);
+  }
+  deleteSubgroup(group: Group){
+    this.subgroups.push(group)
+  }
 }

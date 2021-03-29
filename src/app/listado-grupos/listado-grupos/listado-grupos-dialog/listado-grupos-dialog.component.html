@@ -1,6 +1,6 @@
 <div class="container">
   <div id="zona-titulo">
-    <input matInput placeholder="Titulo" aria-label="State" [matAutocomplete]="auto">
+    <h2><input matInput placeholder="Titulo" aria-label="State" [matAutocomplete]="auto"></h2>
   </div>
   <div id="zona-config">
     <div id="zona-config-izq">
@@ -9,12 +9,26 @@
         <mat-autocomplete #auto="matAutocomplete">
           <mat-option *ngIf="isLoading" class="is-loading">Loading...</mat-option>
           <ng-container *ngIf="!isLoading">
-            <mat-option *ngFor="let manager of managers" [value]="manager.name">
-              <span><b>{{manager.id}}</b> ({{manager.name}})</span>
+            <mat-option *ngFor="let manager of persons" [value]="manager.name" (click)="addManager(manager)">
+              <span><b>{{manager.username}}</b> ({{manager.name}} {{manager.lastname}})</span>
             </mat-option>
           </ng-container>
         </mat-autocomplete>
       </mat-form-field>
+      <br>
+      <ng-container *ngIf="errorMsg; else elseTemplate">
+        {{errorMsg}}
+      </ng-container>
+      <ng-template #elseTemplate>
+        <mat-nav-list>
+          <mat-list-item *ngFor="let manager of managers">
+             <a matLine href="...">{{ manager }}</a>
+             <button mat-icon-button (click)="deleteManager(manager)">
+                <mat-icon>info</mat-icon>
+             </button>
+          </mat-list-item>
+        </mat-nav-list>
+      </ng-template>
     </div>
     <div id="zona-config-der">
       <div id="zona-members">
@@ -23,8 +37,8 @@
           <mat-autocomplete #auto="matAutocomplete">
             <mat-option *ngIf="isLoading" class="is-loading">Loading...</mat-option>
             <ng-container *ngIf="!isLoading">
-              <mat-option *ngFor="let member of members" [value]="member.name">
-                <span><b>{{member.id}}</b> ({{member.name}})</span>
+              <mat-option *ngFor="let member of persons" [value]="member.name" (click)="addMember(member)">
+                <span><b>{{member.id}}</b> ({{member.name}} {{member.lastname}}) (click)="deleteMember(member)" </span>
               </mat-option>
             </ng-container>
           </mat-autocomplete>
@@ -36,8 +50,8 @@
           <mat-autocomplete #auto="matAutocomplete">
             <mat-option *ngIf="isLoading" class="is-loading">Loading...</mat-option>
             <ng-container *ngIf="!isLoading">
-              <mat-option *ngFor="let subgroup of subgroups" [value]="subgroup.name">
-                <span><b>{{subgroup.id}}</b> ({{subgroup.name}})</span>
+              <mat-option *ngFor="let subgroup of groups" [value]="subgroup.name" (click)="addSubgroup(subgroup)">
+                <span><b>{{subgroup.name}}</b></span>
               </mat-option>
             </ng-container>
           </mat-autocomplete>
@@ -45,14 +59,4 @@
       </div>
     </div>
   </div>
-
-
-<br>
-
-<ng-container *ngIf="errorMsg; else elseTemplate">
-  {{errorMsg}}
-</ng-container>
-<ng-template #elseTemplate>
-  <h5>Selected Value: {{searchManagersCtrl.value}}</h5>
-</ng-template>
 </div>
