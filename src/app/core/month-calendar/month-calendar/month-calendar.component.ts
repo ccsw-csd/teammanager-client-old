@@ -11,7 +11,7 @@ export class MonthCalendarComponent implements OnInit, OnChanges {
   @Input() month !: any;
   @Input() year !: any;
   
-  week: any = [
+  week: string[] = [
     "Lunes",
     "Martes",
     "Miercoles",
@@ -19,6 +19,21 @@ export class MonthCalendarComponent implements OnInit, OnChanges {
     "Viernes",
     "Sabado",
     "Domingo"
+  ];
+
+  monthName: string[] = [
+    "Enero",
+    "Febrero",
+    "Marzo", 
+    "Abril",
+    "Mayo", 
+    "Junio", 
+    "Julio", 
+    "Agosto",
+    "Septiembre",
+    "Octubre",
+    "Noviembre",
+    "Diciembre"
   ];
 
 
@@ -34,13 +49,13 @@ export class MonthCalendarComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-      this.getDaysFromDate(this.month.number, this.year)
+      this.getDaysFromDate(this.month, this.year)
   }
   
   getDaysFromDate(month: number, year: number) {
     //Fecha inicio y fecha fin
-    const startDate = moment.utc(`${year}/${month}/01`)
-    const endDate = startDate.clone().endOf('month')
+    const startDate = moment(`${year}-${month}-01`, "YYYY-M-DD");
+    const endDate = startDate.clone().endOf('month');
     this.dateSelect = startDate;
     //Dias de diferencia entre la fecha inicio y fecha fin
     const diffDays = endDate.diff(startDate, 'days', true)
@@ -48,7 +63,7 @@ export class MonthCalendarComponent implements OnInit, OnChanges {
     
     const arrayDays = Object.keys([...Array(numberDays)]).map((a: any) => {
       a = parseInt(a) + 1; //El mes empieza en 1
-      const dayObject = moment(`${year}-${month}-${a}`);
+      const dayObject = moment(`${year}-${month}-${a}`, "YYYY-M-D");
       return {
         name: dayObject.format("dddd"),
         value: a,
@@ -59,7 +74,7 @@ export class MonthCalendarComponent implements OnInit, OnChanges {
     this.monthSelect = arrayDays;
   }
   ngOnChanges(changes: SimpleChanges) {
-    this.getDaysFromDate(this.month.number, this.year)
+    this.getDaysFromDate(this.month, this.year)
   }
   
 }

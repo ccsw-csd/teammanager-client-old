@@ -7,7 +7,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule } from './core/core.module';
 import { LoginModule } from './login/login.module';
 import { PersonalCalendarModule } from './personal-calendar/personal-calendar.module';
-import { MonthCalendarModule } from './month-calendar/month-calendar.module';
 import { MatDatepickerModule} from '@angular/material/datepicker';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatSelectModule } from '@angular/material/select';
@@ -27,7 +26,6 @@ import { ForecastListComponent } from './forecast-list/forecast-list/forecast-li
     CoreModule,
     LoginModule,
     PersonalCalendarModule,
-    MonthCalendarModule,
     MatDatepickerModule,
     MatGridListModule,
     FormsModule,

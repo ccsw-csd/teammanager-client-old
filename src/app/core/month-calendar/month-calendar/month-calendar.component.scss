@@ -1,0 +1,47 @@
+@import "./src/assets/scss/master";
+  
+.calendar-wrapper{
+  flex: 1;
+  margin: 20px 0px 0px 0px;
+  padding: 0.5rem;
+  border: solid 1px #f7f7f7;
+  box-shadow: 0 0 10px #e4e4e4;
+  width: 290px;
+  height: 200px;
+  background-color: #ffffff
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+
+  h1 {
+    font-weight: bold;  
+    width: 100%;
+    font-size: 15px;
+    margin: 0px;
+  }
+}
+
+.calendar-data {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin: 0;
+  padding: 0;
+}
+     
+.day-name {
+  background: #eee;
+  font-weight: bold;
+  font-size: 12px;
+  margin-bottom: 2px;
+  padding: 0px;
+  text-align: center;
+}
+    
+    
+    
+  

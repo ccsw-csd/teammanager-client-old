@@ -1,23 +1,26 @@
 <div>
-	<div>
+	<div class="center">
 		<mat-form-field>
 			<mat-label>Selecciona año</mat-label>
 			<mat-select [(ngModel)]=year>
-				<mat-option value=2020>2020</mat-option>
-				<mat-option value=2021 selected>2021</mat-option>
-				<mat-option value=2022>2022</mat-option>
+				<mat-option [value]="actualYear-1">{{actualYear-1}}</mat-option>
+				<mat-option [value]="actualYear" selected>{{actualYear}}</mat-option>
+				<mat-option [value]="actualYear+1">{{actualYear+1}}</mat-option>
 			</mat-select>
 		</mat-form-field>
 	</div> 
 	<div class= "calendar">
-        <div class="row" *ngFor= "let rowData of months">
-            <div class="column" *ngFor= "let month of rowData">
-                <app-month-calendar 
-                    [year]= year
-                    [month]= month
-                >
-                </app-month-calendar>
-            </div>
-        </div>
+		<app-month-calendar [year]=year month=1></app-month-calendar>
+		<app-month-calendar [year]=year month=2></app-month-calendar>
+		<app-month-calendar [year]=year month=3></app-month-calendar>
+    	<app-month-calendar [year]=year [month]=4></app-month-calendar>
+		<app-month-calendar [year]=year [month]=5></app-month-calendar>
+		<app-month-calendar [year]=year [month]=6></app-month-calendar>
+		<app-month-calendar [year]=year [month]=7></app-month-calendar>
+		<app-month-calendar [year]=year [month]=8></app-month-calendar>
+		<app-month-calendar [year]=year [month]=9></app-month-calendar>
+		<app-month-calendar [year]=year [month]=10></app-month-calendar>
+		<app-month-calendar [year]=year [month]=11></app-month-calendar>
+		<app-month-calendar [year]=year [month]=12></app-month-calendar>
 	</div>
 </div>
