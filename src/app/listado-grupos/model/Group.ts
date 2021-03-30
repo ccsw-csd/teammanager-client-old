@@ -1,7 +1,8 @@
+import { Person } from './Person';
+
 export class Group {
-  id?: number;
   name?: string;
-  manager?: string;
-  members?: number;
-  subgroups?: number;
+  members?: Person[];
+  managers?: Person[];
+  subgroups?: Group[];
 }

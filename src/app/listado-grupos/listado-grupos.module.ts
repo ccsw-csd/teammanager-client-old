@@ -4,6 +4,8 @@ import { CoreModule } from '../core/core.module';
 import { ListadoGruposComponent } from './listado-grupos/listado-grupos.component';
 import { ListadoGruposDialogComponent } from './listado-grupos/listado-grupos-dialog/listado-grupos-dialog.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import {MatButtonModule} from '@angular/material/button';
+
 
 @NgModule({
   declarations: [ListadoGruposComponent, ListadoGruposDialogComponent],
@@ -11,6 +13,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     CommonModule,
     CoreModule,
     MatAutocompleteModule,
+    MatButtonModule,
   ]
 })
 export class ListadoGruposModule { }

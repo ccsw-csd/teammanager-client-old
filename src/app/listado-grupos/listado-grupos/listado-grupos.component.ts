@@ -1,4 +1,4 @@
-import { group } from '@angular/animations';
+import { group, style } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
@@ -65,6 +65,7 @@ export class ListadoGruposComponent implements OnInit {
   createGroup() {
     const dialogRef = this.dialog.open(ListadoGruposDialogComponent, {
       data: {}
+
   });
 
     dialogRef.afterClosed().subscribe(() => {

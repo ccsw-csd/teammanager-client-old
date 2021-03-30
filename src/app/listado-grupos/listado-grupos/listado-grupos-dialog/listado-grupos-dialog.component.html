@@ -1,62 +1,65 @@
 <div class="container">
   <div id="zona-titulo">
-    <h2><input matInput placeholder="Titulo" aria-label="State" [matAutocomplete]="auto"></h2>
+    <h2><input matInput placeholder="Titulo" aria-label="State" [(ngModel)]="this.titulo"></h2>
   </div>
   <div id="zona-config">
     <div id="zona-config-izq">
-      <mat-form-field>
-        <input matInput placeholder="Buscar managers" aria-label="State" [matAutocomplete]="auto" [formControl]="searchManagersCtrl">
-        <mat-autocomplete #auto="matAutocomplete">
+      <mat-form-field class="formManagers">
+        <input matInput placeholder="Buscar managers" aria-label="State" [matAutocomplete]="autocompleteManagers" [formControl]="searchManagersCtrl">
+        <mat-autocomplete #autocompleteManagers="matAutocomplete">
           <mat-option *ngIf="isLoading" class="is-loading">Loading...</mat-option>
           <ng-container *ngIf="!isLoading">
-            <mat-option *ngFor="let manager of persons" [value]="manager.name" (click)="addManager(manager)">
+            <mat-option *ngFor="let manager of persons" [value]="manager.username" (click)="addManager(manager)">
               <span><b>{{manager.username}}</b> ({{manager.name}} {{manager.lastname}})</span>
             </mat-option>
           </ng-container>
         </mat-autocomplete>
       </mat-form-field>
-      <br>
-      <ng-container *ngIf="errorMsg; else elseTemplate">
-        {{errorMsg}}
-      </ng-container>
-      <ng-template #elseTemplate>
-        <mat-nav-list>
-          <mat-list-item *ngFor="let manager of managers">
-             <a matLine href="...">{{ manager }}</a>
-             <button mat-icon-button (click)="deleteManager(manager)">
-                <mat-icon>info</mat-icon>
-             </button>
-          </mat-list-item>
-        </mat-nav-list>
-      </ng-template>
+      <mat-list>
+        <mat-list-item *ngFor="let manager of managers">
+          <mat-icon mat-list-icon (click)="deleteManager(this.manager)"></mat-icon>
+          <span>{{manager.name}} {{manager.lastname}}</span>
+        </mat-list-item>
+      </mat-list>
     </div>
     <div id="zona-config-der">
       <div id="zona-members">
-        <mat-form-field>
-          <input matInput placeholder="Buscar miembros" aria-label="State" [matAutocomplete]="auto" [formControl]="searchMembersCtrl">
-          <mat-autocomplete #auto="matAutocomplete">
+        <mat-form-field class="formMembers">
+          <input matInput placeholder="Buscar miembros" aria-label="State" [matAutocomplete]="autocompleteMembers" [formControl]="searchMembersCtrl">
+          <mat-autocomplete #autocompleteMembers="matAutocomplete">
             <mat-option *ngIf="isLoading" class="is-loading">Loading...</mat-option>
             <ng-container *ngIf="!isLoading">
-              <mat-option *ngFor="let member of persons" [value]="member.name" (click)="addMember(member)">
-                <span><b>{{member.id}}</b> ({{member.name}} {{member.lastname}}) (click)="deleteMember(member)" </span>
+              <mat-option *ngFor="let member of persons" [value]="member.username" (click)="addMember(member)">
+                <span><b>{{member.username}}</b> {{member.name}} {{member.lastname}}</span>
               </mat-option>
             </ng-container>
           </mat-autocomplete>
         </mat-form-field>
+        <mat-list>
+          <mat-list-item *ngFor="let member of members">
+            <mat-icon mat-list-icon (click)="deleteManager(this.member)"></mat-icon>
+            <span>{{member.name}} {{member.lastname}}</span>
+          </mat-list-item>
+        </mat-list>
       </div>
       <div id="zona-subgroups">
-        <mat-form-field>
-          <input matInput placeholder="Buscar subgrupos" aria-label="State" [matAutocomplete]="auto" [formControl]="searchSubgroupsCtrl">
-          <mat-autocomplete #auto="matAutocomplete">
-            <mat-option *ngIf="isLoading" class="is-loading">Loading...</mat-option>
-            <ng-container *ngIf="!isLoading">
+        <mat-form-field class="formSubgroups">
+          <input matInput placeholder="Buscar subgrupos" aria-label="State" [matAutocomplete]="subgrupos" [formControl]="searchSubgroupsCtrl">
+          <mat-autocomplete #subgrupos="matAutocomplete">
               <mat-option *ngFor="let subgroup of groups" [value]="subgroup.name" (click)="addSubgroup(subgroup)">
                 <span><b>{{subgroup.name}}</b></span>
               </mat-option>
-            </ng-container>
           </mat-autocomplete>
         </mat-form-field>
+        <mat-list>
+          <mat-list-item *ngFor="let subgroup of subgroups">
+            <mat-icon mat-list-icon (click)="deleteSubgroup(this.subgroup)"></mat-icon>
+            <span>{{subgroup.name}}</span>
+          </mat-list-item>
+        </mat-list>
       </div>
     </div>
   </div>
+  <button mat-raised-button color="primary" (click)="onSave()">Guardar</button>
+  <button mat-raised-button color="primary" (click)="cerrar()">Cancelar</button>
 </div>

@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { iif } from 'rxjs';
 import { debounceTime, finalize, switchMap, tap } from 'rxjs/operators';
 import { Group } from '../../model/Group';
 import { Person } from '../../model/Person';
@@ -17,13 +18,16 @@ export class ListadoGruposDialogComponent implements OnInit {
   searchManagersCtrl = new FormControl();
   searchSubgroupsCtrl = new FormControl();
   searchMembersCtrl = new FormControl();
+  formTitulo = new FormControl();
 
   groups: Group[] = [];
   persons: Person[] = [];
   subgroups: Group[] = [];
   managers: Person[] = [];
   members: Person[] = [];
+  titulo = 'Titulo';
   errorMsg?: string;
+  newGroup: Group = new Group();
   isLoading = false;
 
 
@@ -32,86 +36,109 @@ export class ListadoGruposDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private listadoGruposService: ListadoGruposService,
     @Inject (MatAutocompleteModule) public auto: string,
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.searchManagersCtrl.valueChanges
       .pipe(
-        debounceTime(500),
+        debounceTime(100),
         tap(() => {
           this.errorMsg = '';
           this.persons = [];
           this.isLoading = true;
         }),
-        switchMap(value => this.listadoGruposService.getPersons(value)
+        switchMap(value =>
+          iif(() => value.length > 2,
+          this.listadoGruposService.getPersons(value))
           .pipe(
-            finalize(() => { this.isLoading = false;
-            }),
+            finalize(() => { this.isLoading = false; }),
+          )
+        )
+      )
+      .subscribe((data: any) => {
+          this.persons = data;
+      }
+    );
+
+    this.searchMembersCtrl.valueChanges
+      .pipe(
+        debounceTime(200),
+        tap(() => {
+          this.errorMsg = '';
+          this.persons = [];
+          this.isLoading = true;
+        }),
+        switchMap(value =>
+          iif(() => value.length > 2,
+            this.listadoGruposService.getPersons(value))
+          .pipe(
+            finalize(() => { this.isLoading = false; }),
           )
         )
       )
       .subscribe(data => {
           this.persons = data;
-          console.log(this.managers);
-        }
+
+      }
     );
+
     this.searchSubgroupsCtrl.valueChanges
-    .pipe(
-      debounceTime(500),
-      tap(() => {
-        this.errorMsg = '';
-        this.groups = [];
-        this.isLoading = true;
-      }),
-      switchMap(value => this.listadoGruposService.getSubgroups(value)
-        .pipe(
-          finalize(() => { this.isLoading = false;
-          }),
+      .pipe(
+        debounceTime(200),
+        tap(() => {
+          this.errorMsg = '';
+          this.groups = [];
+          this.isLoading = true;
+        }),
+        switchMap(value =>
+          iif(() => value.length > 2,
+          this.listadoGruposService.getSubgroups(value))
+          .pipe(
+            finalize(() => { this.isLoading = false; }),
+          )
         )
       )
-    )
-    .subscribe(data => {
-        this.groups = data;
-        console.log(this.groups);
+      .subscribe(data => {
+          this.groups = data;
       }
-  );
-    this.searchMembersCtrl.valueChanges
-  .pipe(
-    debounceTime(500),
-    tap(() => {
-      this.errorMsg = '';
-      this.persons = [];
-      this.isLoading = true;
-    }),
-    switchMap(value => this.listadoGruposService.getPersons(value)
-      .pipe(
-        finalize(() => { this.isLoading = false;
-        }),
-      )
-    )
-  )
-  .subscribe(data => {
-      this.persons = data;
-      console.log(this.persons);
-    }
-);
+    );
   }
   addMember(member: Person){
     this.members.push(member);
+
   }
   addManager(manager: Person){
     this.managers.push(manager);
+
   }
   addSubgroup(group: Group){
-    this.subgroups.push(group)
+    this.subgroups.push(group);
   }
+
   deleteMember(member: Person){
-    this.members.push(member);
+    if (this.members.indexOf(member) !== -1){
+      this.members.splice(this.members.indexOf(member), 1);
+    }
   }
   deleteManager(manager: Person){
-    this.managers.push(manager);
-  }
+    if (this.managers.indexOf(manager) !== -1){
+      this.managers.splice(this.managers.indexOf(manager), 1);
+    }
+   }
   deleteSubgroup(group: Group){
-    this.subgroups.push(group)
+    if (this.subgroups.indexOf(group) !== -1){
+      this.subgroups.splice(this.subgroups.indexOf(group), 1);
+    }
+  }
+  onSave(){
+    this.newGroup.name = this.titulo;
+    this.newGroup.managers = this.managers;
+    this.newGroup.members = this.members;
+    this.newGroup.subgroups = this.subgroups;
+    this.listadoGruposService.saveGroup(this.newGroup).subscribe(data => {});
+    this.cerrar();
+  }
+  cerrar(){
+    this.dialogRef.close();
   }
 }
