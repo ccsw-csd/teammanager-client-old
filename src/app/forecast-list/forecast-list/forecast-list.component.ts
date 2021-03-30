@@ -1,11 +1,10 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { ListadoGrupos } from 'src/app/listado-grupos/model/ListadoGrupos';
-import { Pageable } from 'src/app/listado-grupos/page/Pageable';
+import { Pageable } from 'src/app/core/to/Pageable';
 import { ListadoGruposService } from 'src/app/listado-grupos/services/listado-grupos.service';
 
 @Component({
@@ -15,17 +14,14 @@ import { ListadoGruposService } from 'src/app/listado-grupos/services/listado-gr
 })
 export class ForecastListComponent implements OnInit {
 
-  constructor(
-    public authService: AuthService,
-    private listadoGruposService: ListadoGruposService,) { }
-    public form: FormGroup | undefined;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator | undefined;
+  @ViewChild(MatSort, { static: true }) sort: MatSort | undefined;
 
   pageNumber = 0;
   pageSize = 20;
   totalElements = 0;
-
-  dataSource = new MatTableDataSource<ListadoGrupos>();
-
+  
+  dataSource = new MatTableDataSource<ListadoGrupos>();  
   displayedColumns: string[] = [
     'name',
     'manager',
@@ -34,9 +30,11 @@ export class ForecastListComponent implements OnInit {
     'buttons'
   ];
 
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator | undefined;
-  @ViewChild(MatSort, { static: true }) sort: MatSort | undefined;
+  
+  constructor(public authService: AuthService,
+    private listadoGruposService: ListadoGruposService,) {
 
+  }
 
   ngOnInit(): void {
     this.loadPage();
