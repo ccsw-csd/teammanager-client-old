@@ -90,6 +90,14 @@
                   "maximumError": "10kb"
                 }
               ]
+            },
+            "local": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.dev.ts"
+                }
+              ]
             }
           }
         },
@@ -104,6 +112,9 @@
             },
             "dev": {
               "browserTarget": "teamManager:build:dev"
+            },
+            "local": {
+              "browserTarget": "teamManager:build:local"
             }
           }
         },

@@ -6,10 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./personal-calendar.component.scss']
 })
 export class PersonalCalendarComponent implements OnInit {
+  actualYear : number = new Date().getFullYear();
+  year : number = this.actualYear;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
+  
 
 }

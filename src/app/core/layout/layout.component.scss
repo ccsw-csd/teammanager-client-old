@@ -11,16 +11,19 @@
   }
 
   .content {
-    padding: 20px;
+    padding: 1em 3em;
     box-sizing: border-box;
+    background-color: white; 
+    height: calc(100vh - 106px);
+    margin: 25px;
+  }
+
+  .content-opennav {
+    margin-left: 225px !important;
   }
 }
 
 ::ng-deep .mat-sidenav{
   max-width: 200px;
   width: 200px;
-}
-
-::ng-deep .mat-drawer-inner-container{
-  overflow: hidden !important;
 }
