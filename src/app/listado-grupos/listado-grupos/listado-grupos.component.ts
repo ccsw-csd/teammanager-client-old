@@ -1,10 +1,10 @@
-import { group } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { PageEvent } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ListadoGrupos } from '../model/ListadoGrupos';
-import { Pageable } from '../page/Pageable';
+import { Pageable } from '../../core/to/Pageable';
 import { ListadoGruposService } from '../services/listado-grupos.service';
 import { ListadoGruposDialogComponent } from './listado-grupos-dialog/listado-grupos-dialog.component';
 
@@ -15,17 +15,27 @@ import { ListadoGruposDialogComponent } from './listado-grupos-dialog/listado-gr
 })
 export class ListadoGruposComponent implements OnInit {
 
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator | undefined;
+  @ViewChild(MatSort, { static: true }) sort: MatSort | undefined;
+
   pageNumber = 0;
   pageSize = 20;
   totalElements = 0;
 
   dataSource = new MatTableDataSource<ListadoGrupos>();
-  displayedColumns: string[] = ['id', 'name', 'manager', 'members', 'subgroups', 'actions'];
-
+  displayedColumns: string[] = [
+    'name',
+    'manager',
+    'members',
+    'subgroups',
+    'buttons'
+  ];
   constructor(
     private listadoGruposService: ListadoGruposService,
     public dialog: MatDialog,
   ) { }
+
+
   ngOnInit(): void {
     this.loadPage();
   }
@@ -62,15 +72,14 @@ export class ListadoGruposComponent implements OnInit {
     });
   }
 
-  // tslint:disable-next-line: typedef
-  createGroup() {
+  createGroup() : void {
     const dialogRef = this.dialog.open(ListadoGruposDialogComponent, {
       data: {}
-  });
+    });
 
     dialogRef.afterClosed().subscribe(() => {
-      this.ngOnInit();
-  });
+      this.loadPage();
+    });
   }
 
 
