@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ListadoGruposPage } from '../model/ListadoGruposPage';
-import { Pageable } from '../page/Pageable';
+import { Pageable } from '../../core/to/Pageable';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 

@@ -1,169 +1,65 @@
-@import './../../../assets/scss/color';
 @import './../../../assets/scss/master';
-.estimates {
+
+.content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  background-color: white;
+
+  .title-block {
     width: 100%;
-  
-    //TO DO FLEX TABLE
-    &--table {
-      flex: 1;
-      width: 100%;
-  
-      &__customer {
-        width: 15%;
-        text-align: center;
-        //padding-left: 0px !important;
-      }
-  
-      &__project {
-        width: 15%;
-      }
-  
-      &__thDate {
-        justify-content: left;
-        ::ng-deep.mat-sort-header-container {
-          justify-content: left;
-        }
-      }
-  
-      &__date {
-        width: 40%;
-      }
-  
-      &__thVersions {
-        text-align: center;
-        justify-content: center;
-        ::ng-deep.mat-sort-header-container {
-          justify-content: center;
-        }
-      }
-  
-      &__versions {
-        text-align: center;
-      }
-  
-      &__thDays {
-        text-align: center;
-        justify-content: center;
-        ::ng-deep.mat-sort-header-container {
-          justify-content: center;
-        }
-      }
-  
-      &__thProject {
-        justify-content: left;
-        ::ng-deep.mat-sort-header-container {
-          justify-content: left;
-        }
-      }
-  
-      &__thCustomer {
-        justify-content: center;
-        text-align: center;
-        ::ng-deep.mat-sort-header-container {
-          justify-content: center;
-        }
-      }
-  
-      &__days {
-        text-align: center;
-      }
-  
-      &__thCost {
-        text-align: center;
-        justify-content: center;
-        ::ng-deep.mat-sort-header-container {
-          justify-content: center;
-        }
-      }
-  
-      &__cost {
-        text-align: center;
-      }
-  
-      &__actions {
-        width: 10%;
-        text-align: center;
-        padding-right: 0px;
-      }
-  
-      &__buttonblock {
-        display: flex;
-        height: 4em;
-        padding-right: 0px;
-      }
-  
-      &__button {
-        padding: 10px;
-        flex: auto;
-        margin: auto;
-        margin-right: 3px;
-        background-color: $foreground;
-        .material-icons {
-          font-family: "Material Icons" !important;
-          color: $icon;
-        }
-      }
-  
-      th {
-        z-index: 1 !important;
-      }
-    }
-    table:not(.mat-calendar-table) th {
-        background-color: #f5f5f5;
-        font-size: 16px !important;
-        font-weight: 700;
-        border-bottom-color: #36b8e0;
-    }
-  
-    &--options {
-      width: 100%;
-      flex: 1;
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      align-items: center;
-      align-content: space-between;
-      justify-content: space-between;
-      padding: 0;
-      margin: 0;
-      list-style: none;
-  
-      &__input {
-        flex: 0 0 auto;
-      }
-    }
-  
-    &--buttoncreate {
-      flex: 1;
-      width: auto;
-      align-self: flex-end;
-    }
-  }
-  
-  .matFormDateSize {
-    width: calc(20% - 100px);
-  }
-  .estimates-list {
-    width: 100%;
-    height: 100%;
+    height: 70px;
     display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    background-color: white;
-    app-button {
+    flex-direction: row;
+    align-items: baseline;
+
+    button {
       width: 150px;
-      margin-right: 8px;
+    }
+    
+    h1 {
+      color: #838383;
+      font-size: 20px;
+      font-weight: 700;
+      margin-right: 25px;
     }
   }
-  h1 {
-    color: $title;
-    font-size: 20px;
-    font-weight: 700;
+
+  .containerTableList {
+    flex: 1;
+    height: calc(100vh - 195px);
+    
+    .tableList {
+      width: 100%;
+      overflow: scroll;
+    }
+  }
+
+
+  .cell-left {
+    text-align: cleft;
+  }
+
+  .cell-center {
+    text-align: center;
   }
   
-  .create-button {
-    margin-left: 1%;
+  .cell-actions {
+    width: 90px;
+    text-align: center;
+    padding-right: 0px;
+  }
+  
+  .cell-button {
+    background-color: $foreground;
+    width: 35px;
+    min-width: 35px;
+    
+    .material-icons {
+      color: $icon;
+    }
   }
   
   td {
@@ -174,43 +70,6 @@
     background-color: $table-header;
   }
   
-  .tableList {
-    width: 99.97%;
-    max-height: 530px;
-    overflow: scroll;
-  }
-  .inputStyleNormal {
-    flex: 2;
-    width: 100%;
-    margin-right: 30px;
-  }
-  .inputStyleSmall {
-    flex: 0.3;
-    width: 100%;
-    margin-right: 30px;
-  }
-  .inputStyleCorner {
-    flex: 0.3;
-    width: 100%;
-    margin-right: 10px;
-  }
-  .containerTableList {
-    width: 99.6%;
-  }
+}
 
-  @media screen and (max-width: 1340px) {
-    //   .inputStyleNormal {
-    //   flex: ;
-    //   //width: 80%;
-    //   margin-right: 2px;
-    // }
-    .inputStyleSmall {
-      width: 150px;
-      margin-right: 30px;
-    }
-    .inputStyleCorner {
-      width: 150px;
-      margin-right: 5px;
-    }
-  }
-  
+
