@@ -1,125 +1,62 @@
-<div class="estimates-list">
-    <div>
-      <div>
-        <h1 class="title">
-          Listado de Forecast
-        </h1>
-      </div>
-
-      <div class="containerTableList">
-        <div class="tableList">
-          <table
-            mat-table
-            [dataSource]="dataSource"
-            class="estimates--table"
-            matSort
-          >  
-            <ng-container matColumnDef="name">
-              <th
-                class="estimates--table__thProject"
-                mat-header-cell
-                *matHeaderCellDef
-                mat-sort-header="name"
-              >
-                Nombre
-              </th>
-              <td
-                mat-cell
-                *matCellDef="let group"
-                class="estimates--table__project"
-              >
-              {{group.name}}
-              </td>
-            </ng-container>
-  
-            <ng-container matColumnDef="manager">
-              <th
-                class="estimates--table__thDate"
-                mat-header-cell
-                *matHeaderCellDef
-                mat-sort-header="date"
-              >
-                Gestores
-              </th>
-              <td
-                mat-cell
-                *matCellDef="let group"
-                class="estimates--table__date"
-              >
-              {{group.manager}}
-              </td>
-            </ng-container>
-  
-            <ng-container matColumnDef="members">
-              <th
-                class="estimates--table__thVersions"
-                mat-header-cell
-                *matHeaderCellDef
-                mat-sort-header="versions"
-              >
-                Miembros
-              </th>
-              <td
-                mat-cell
-                *matCellDef="let group"
-                class="estimates--table__versions"
-              >
-              {{group.members}}
-              </td>
-            </ng-container>
-  
-            <ng-container matColumnDef="subgroups">
-              <th
-                class="estimates--table__thDays"
-                mat-header-cell
-                *matHeaderCellDef
-                mat-sort-header="days"
-              >
-                Subgrupos
-              </th>
-              <td
-                mat-cell
-                *matCellDef="let group"
-                class="estimates--table__days"
-              >
-              {{group.subgroups}}
-              </td>
-            </ng-container>
-            <ng-container matColumnDef="buttons">
-              <th
-                mat-header-cell
-                *matHeaderCellDef
-                class="estimates--table__actions"
-              >
-                Actions
-              </th>
-              <td
-                mat-cell
-                *matCellDef="let group"
-                class="estimates--table__buttonblock"
-                layout="row"
-                style="padding-right:0px;"
-              >
-                <button
-                  mat-button
-                  layout="column"
-                  class="estimates--table__button"
-                  [matTooltip]="'Visualizar'"
-                  (click)="detailForecast(group)"
-                >
-                  <mat-icon>pageview</mat-icon>
-                </button>
-              </td>
-            </ng-container>
-            <tr
-              mat-header-row
-              *matHeaderRowDef="displayedColumns; sticky: true"
-            ></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-          </table>
-        </div>
-        <mat-paginator (page)="loadPage($event)" [pageSizeOptions]="[5, 10, 20]" [pageIndex]="pageNumber" [pageSize]="pageSize" [length]="totalElements" showFirstLastButtons></mat-paginator>
-      </div>
-    </div>
+<div class="content">
+  <div class="title-block">
+    <h1>Forecast</h1>
   </div>
-  
+
+  <div class="containerTableList">
+    <div class="tableList">
+      <table mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="name">
+          <th class="cell-left" mat-header-cell *matHeaderCellDef mat-sort-header="name">
+            Nombre
+          </th>
+          <td mat-cell *matCellDef="let group" class="cell-left">
+            {{group.name}}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="manager">
+          <th class="cell-left" mat-header-cell *matHeaderCellDef mat-sort-header="date">
+            Gestores
+          </th>
+          <td mat-cell *matCellDef="let group" class="cell-left">
+            {{group.manager}}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="members">
+          <th class="cell-center" mat-header-cell *matHeaderCellDef mat-sort-header="versions">
+            Miembros
+          </th>
+          <td mat-cell *matCellDef="let group" class="cell-center">
+            {{group.members}}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="subgroups">
+          <th class="cell-center" mat-header-cell *matHeaderCellDef mat-sort-header="days">
+            Subgrupos
+          </th>
+          <td mat-cell *matCellDef="let group" class="cell-center">
+            {{group.subgroups}}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="buttons">
+          <th mat-header-cell *matHeaderCellDef class="cell-actions">
+            Actions
+          </th>
+          <td mat-cell *matCellDef="let estimate" class="cell-actions" layout="row"
+            style="padding-right:0px;">
+            <button mat-button layout="column" class="cell-button" [matTooltip]="'Visualizar'">
+              <mat-icon>pageview</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </div>
+    <mat-paginator (page)="loadPage($event)" [pageSizeOptions]="[5, 10, 20]" [pageIndex]="pageNumber"
+      [pageSize]="pageSize" [length]="totalElements" showFirstLastButtons></mat-paginator>
+  </div>
+</div>

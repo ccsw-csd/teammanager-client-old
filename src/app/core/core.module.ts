@@ -24,6 +24,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatCardModule} from '@angular/material/card';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { MonthCalendarModule } from './month-calendar/month-calendar.module';
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatPaginatorModule,
     MatCardModule,
     MatChipsModule,
-    MatTooltipModule,    
+    MatTooltipModule,
+    MonthCalendarModule,
   ],
   providers: [
     HttpClientModule,
@@ -79,6 +81,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatCardModule,
     MatChipsModule,
     MatTooltipModule,
+    MonthCalendarModule,
   ],
 })
 export class CoreModule { }
