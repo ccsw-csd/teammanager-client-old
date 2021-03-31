@@ -95,7 +95,7 @@
               </th>
               <td
                 mat-cell
-                *matCellDef="let estimate"
+                *matCellDef="let group"
                 class="estimates--table__buttonblock"
                 layout="row"
                 style="padding-right:0px;"
@@ -105,6 +105,7 @@
                   layout="column"
                   class="estimates--table__button"
                   [matTooltip]="'Visualizar'"
+                  (click)="detailForecast(group)"
                 >
                   <mat-icon>pageview</mat-icon>
                 </button>

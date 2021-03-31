@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { ListadoGrupos } from 'src/app/listado-grupos/model/ListadoGrupos';
 import { Pageable } from 'src/app/listado-grupos/page/Pageable';
@@ -17,7 +18,7 @@ export class ForecastListComponent implements OnInit {
 
   constructor(
     public authService: AuthService,
-    private listadoGruposService: ListadoGruposService,) { }
+    private listadoGruposService: ListadoGruposService,private router: Router,) { }
     public form: FormGroup | undefined;
 
   pageNumber = 0;
@@ -45,6 +46,9 @@ export class ForecastListComponent implements OnInit {
   ngAfterViewInit() {
   }
 
+  detailForecast(row: any): void{
+    this.router.navigate(['forecast-detail'], { queryParams: { id: row.id } });
+  }
   loadPage(event?: PageEvent){
     const pageable: Pageable = {
       pageNumber: this.pageNumber,

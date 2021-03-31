@@ -9,11 +9,17 @@ import { LoginModule } from './login/login.module';
 import { PersonalCalendarModule } from './personal-calendar/personal-calendar.module';
 import { ListadoGruposModule } from './listado-grupos/listado-grupos.module';
 import { ForecastListComponent } from './forecast-list/forecast-list/forecast-list.component';
+import { ForecastDetailComponent } from './forecast-list/forecast-detail/forecast-detail.component';
+import { MatNativeDateModule } from '@angular/material/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
     AppComponent,
     ForecastListComponent,
+    ForecastDetailComponent,
   ],
   imports: [
     BrowserModule,
@@ -22,7 +28,12 @@ import { ForecastListComponent } from './forecast-list/forecast-list/forecast-li
     CoreModule,
     LoginModule,
     PersonalCalendarModule,
-    ListadoGruposModule
+    ListadoGruposModule,
+    MatNativeDateModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatDatepickerModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]
