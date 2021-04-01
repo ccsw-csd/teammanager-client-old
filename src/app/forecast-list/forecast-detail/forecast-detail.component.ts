@@ -337,17 +337,25 @@ export class ForecastDetailComponent implements OnInit {
 
   typeOfDay(day: number, month: number, absences: any): string{
     var date = new Date(2021, month-1, day);
+
+    if((date.getDay() === 6) || (date.getDay() === 0))
+      return "day Weekend";
+
+    var isFestive = false;
+    var isAbsence = false;
+
     for(var i = 0; i < absences.length; i++){
-      if((date.toISOString().substring(0, 10).localeCompare(absences[i].date)) == 0)
-      {
+      if((date.toISOString().substring(0, 10).localeCompare(absences[i].date)) == 0) {
         if(absences[i].type == "A" || absences[i].type == "P")
-          return "Ausencia";
-        return "Festivo"
+          isAbsence = true
+        else 
+          isFestive = true;
       }  
     }
-    if((date.getDay() === 6) || (date.getDay() === 0))
-      return "Weekend";
-    else
-      return "Laboral";
+    
+
+    if (isFestive) return "day Festivo";
+    if (isAbsence) return "day Ausencia";
+    return "day Laboral";
   }
 }
