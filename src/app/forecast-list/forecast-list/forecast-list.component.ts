@@ -6,6 +6,8 @@ import { AuthService } from 'src/app/core/services/auth.service';
 import { ListadoGrupos } from 'src/app/listado-grupos/model/ListadoGrupos';
 import { Pageable } from 'src/app/core/to/Pageable';
 import { ListadoGruposService } from 'src/app/listado-grupos/services/listado-grupos.service';
+import { ThrowStmt } from '@angular/compiler';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-forecast-list',
@@ -32,7 +34,8 @@ export class ForecastListComponent implements OnInit {
 
   
   constructor(public authService: AuthService,
-    private listadoGruposService: ListadoGruposService,) {
+    private listadoGruposService: ListadoGruposService,
+    private router: Router) {
 
   }
 
@@ -41,6 +44,10 @@ export class ForecastListComponent implements OnInit {
   }
 
   ngAfterViewInit() {
+  }
+  
+  detailForecast(row: any): void{
+    this.router.navigate(['forecast-detail'], { queryParams: {id: row.id } });
   }
 
   loadPage(event?: PageEvent){
