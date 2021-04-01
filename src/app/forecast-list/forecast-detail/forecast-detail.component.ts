@@ -94,6 +94,7 @@ export class ForecastDetailComponent implements OnInit {
     "Septiembre",
     "Octubre",
     "Noviembre",
+    "Diciembre",
     
   ];
 
@@ -129,8 +130,6 @@ export class ForecastDetailComponent implements OnInit {
         if (event.start && event.end) {
             this.rangeInitDate= event.start;
             this.rangeEndDate = event.end;
-            this.rangeInitDate.setDate(this.rangeInitDate.getDate() + 1 );
-            this.rangeEndDate.setDate(this.rangeEndDate.getDate() + 1 );
             if(this.months.length == 12)
               this.months.push(
                 {name:this.rangeInitDate.toISOString().split('T')[0] + " / " + this.rangeEndDate.toISOString().split('T')[0], num: 12}
@@ -142,13 +141,13 @@ export class ForecastDetailComponent implements OnInit {
                 )
             }
             if(this.selectedMonth == 12)
-              this.getAbsences
+              this.getAbsences();
         }
     });
 }
 
   ngOnChanges() {
-    this.getAbsences;
+    this.getAbsences();
   }
 
   getAbsences(): void
@@ -156,7 +155,7 @@ export class ForecastDetailComponent implements OnInit {
     if(this.selectedMonth != 12){
       var lastDays = this.getDaysInMonth(new Date().getFullYear(), this.selectedMonth+1);
       this.initDate = new Date(new Date().getFullYear(), this.selectedMonth);
-      this.endDate = new Date(new Date().getFullYear(), this.selectedMonth, lastDays);
+      this.endDate = new Date(new Date().getFullYear(), this.selectedMonth, lastDays, 5);
     }
     else{
       this.initDate = this.rangeInitDate;
@@ -166,36 +165,42 @@ export class ForecastDetailComponent implements OnInit {
     var countF;
     var countLabor;
 
-
-    this.formatMonths();
     this.isloading = true;
     this.forecastService.getAbsences(Number(this.id), this.initDate, this.endDate).subscribe(data => {
       var sourceArray: any[] = [];
+      this.formatMonths();
       for (var i in data){  
         countA = this.countDays(data[i], "A");
         countF = this.countDays(data[i], "F");
         countLabor = (this.countLaborDays(this.initDate, this.endDate) - (countA + countF));
         var source = {
-          name: i,
-          countLab:countLabor,
-          countF: countF,
-          countA: countA
+          name: {value: i, class: "name"},
+          countLab: {value: countLabor, class: "count"},
+          countF: {value: countF, class: "count"},
+          countA: {value: countA, class: "count"}
         }
 
         source = this.formatDatasource(data[i], source);
         sourceArray.push(source);
       }
-      console.log(data);
       this.dataSource.data = sourceArray;
       this.isloading = false;
     });
 
   }
+
+  isSticky(object: any): boolean{
+    if(object == "Info" || object == "Nombre" || object == "Laborales"||object == "Ausencias"||object == "Festivos")
+      return true;
+    return false;  
+  }
+
   formatMonths(): void
   {
     this.transcode = {};
     this.monthsDays = [];
     this.columns = [];
+    this.monthsHeader = ['Info',];
 
     this.transcode["name"] = "Nombre";
     this.transcode["countLab"] = "Laborales";
@@ -207,41 +212,81 @@ export class ForecastDetailComponent implements OnInit {
     this.columns.push('countF');
     this.columns.push('countA');
 
-    if(this.initDate.getMonth()+1 == this.endDate.getMonth()+1)
-      this.monthsDays.push({month: this.initDate.getMonth()+1, number: this.endDate.getDate() - this.initDate.getDate(), init: this.initDate.getDate(), end:  this.endDate.getDate()}); 
-    else{
-      for(var i = this.initDate.getMonth()+1; i <= this.endDate.getMonth()+1; i++){
-        if(i == this.initDate.getMonth()+1){
-          this.monthsDays.push({month: i, number: new Date(2021, i, 0).getDate() - (this.initDate.getDate()-1), init: this.initDate.getDate()-1, end:  new Date(2021, i, 0).getDate()}); 
-        }
-        else if(i == this.endDate.getMonth()+1){
-          this.monthsDays.push({month: i, number: this.endDate.getDate()-1, init: 1, end:  this.endDate.getDate()-1}); 
-        }
-        else
-          this.monthsDays.push({month: i, number: new Date(2021, i, 0).getDate(), init: 1, end: new Date(2021, i, 0).getDate()});  
-      }
-    }
+    this.calculateMonths();
+
     for(var l = 0; l < this.monthsDays.length; l++)
     {
       for(var o = this.monthsDays[l].init; o <= this.monthsDays[l].end; o++){
-        this.columns.push(this.monthsDays[l].month + "/" + o);
-        this.transcode[this.monthsDays[l].month + "/" + o] = o;
-
+        this.columns.push(this.monthsDays[l].year + "/" +this.monthsDays[l].month + "/" + o);
+        this.transcode[this.monthsDays[l].year + "/" +this.monthsDays[l].month + "/" + o] = o;
       }
     this.monthsHeader.push(this.monthsHeaderCopy[this.monthsDays[l].month -1]);
     this.monthsHeaderExtraInfo[this.monthsDays[l].month].num = this.monthsDays[l].number+1;
-    console.log(this.monthsHeaderExtraInfo[this.monthsDays[l].month]);
     
     }
   }
+
+  calculateMonths(): void{
+    if(this.initDate.getFullYear() == this.endDate.getFullYear()){
+      if(this.initDate.getMonth()+1 == this.endDate.getMonth()+1)
+        this.monthsDays.push({year: this.initDate.getFullYear(), month: this.initDate.getMonth()+1, number: this.endDate.getDate() - this.initDate.getDate(), init: this.initDate.getDate(), end:  this.endDate.getDate()}); 
+      else{
+        for(var i = this.initDate.getMonth()+1; i <= this.endDate.getMonth()+1; i++){
+          if(i == this.initDate.getMonth()+1){
+            this.monthsDays.push({year: this.initDate.getFullYear(), month: i, number: new Date(this.initDate.getFullYear(), i, 0).getDate() - (this.initDate.getDate()), init: this.initDate.getDate(), end:  new Date(this.initDate.getFullYear(), i, 0).getDate()}); 
+          }
+          else if(i == this.endDate.getMonth()+1){
+            this.monthsDays.push({year: this.initDate.getFullYear(), month: i, number: this.endDate.getDate(), init: 1, end:  this.endDate.getDate()}); 
+          }
+          else
+            this.monthsDays.push({year: this.initDate.getFullYear(), month: i, number: new Date(this.initDate.getFullYear(), i, 0).getDate(), init: 1, end: new Date(this.initDate.getFullYear(), i, 0).getDate()});  
+       }
+      }
+    }
+    else {
+      for(var k = this.initDate.getFullYear(); k <= this.endDate.getFullYear(); k++){
+
+        if(k == this.initDate.getFullYear()){
+          for(var i = this.initDate.getMonth()+1; i <= 12; i++){
+            if(i == this.initDate.getMonth()+1){
+              this.monthsDays.push({year: this.initDate.getFullYear(), month: i, number: new Date(this.initDate.getFullYear(), i, 0).getDate() - (this.initDate.getDate()), init: this.initDate.getDate(), end:  new Date(this.initDate.getFullYear(), i, 0).getDate()}); 
+            }
+            else
+              this.monthsDays.push({year: this.initDate.getFullYear(), month: i, number: new Date(this.initDate.getFullYear(), i, 0).getDate(), init: 1, end: new Date(this.initDate.getFullYear(), i, 0).getDate()});  
+          }
+        }
+        else if(k == this.endDate.getFullYear()){
+          for(var i = 1; i <= this.endDate.getMonth()+1; i++){
+            if(i == this.endDate.getMonth()+1){
+              this.monthsDays.push({year: this.endDate.getFullYear(), month: i, number: this.endDate.getDate(), init: 1, end:  this.endDate.getDate()}); 
+            }
+            else
+              this.monthsDays.push({year: this.endDate.getFullYear(), month: i, number: new Date(this.endDate.getFullYear(), i, 0).getDate(), init: 1, end: new Date(this.endDate.getFullYear(), i, 0).getDate()});  
+          }
+        }
+        else{
+          for(var i = 1; i <= 12; i++){
+              this.monthsDays.push({year: k, month: i, number: new Date(k, i, 0).getDate(), init: 1, end: new Date(k, i, 0).getDate()});  
+          }
+        }
+      }
+    }
+  }
+  getHeaderClass(object: any): string{
+    if(object == "Nombre")
+      return "name";
+    if(object == "Laborales"||object == "Ausencias"||object == "Festivos")
+      return "count"; 
+    return "day";
+  }
+
   formatDatasource(person: any, source: any): any{
 
     for(var l = 0; l < this.monthsDays.length; l++)
     {
       for(var o = this.monthsDays[l].init; o <= this.monthsDays[l].end; o++){
-        this.typeOfDay(o,this.monthsDays[l].month, person);
-        source[this.monthsDays[l].month + "/" + o] = o;
 
+        source[this.monthsDays[l].year + "/" +this.monthsDays[l].month + "/" + o] = {value: "", class: this.typeOfDay(o,this.monthsDays[l].month, person)};
       }
     }
     return source;
@@ -295,7 +340,9 @@ export class ForecastDetailComponent implements OnInit {
     for(var i = 0; i < absences.length; i++){
       if((date.toISOString().substring(0, 10).localeCompare(absences[i].date)) == 0)
       {
-        return "Ausencia";
+        if(absences[i].type == "A" || absences[i].type == "P")
+          return "Ausencia";
+        return "Festivo"
       }  
     }
     if((date.getDay() === 6) || (date.getDay() === 0))

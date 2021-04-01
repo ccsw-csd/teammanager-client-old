@@ -47,7 +47,7 @@
           </th>
           <td mat-cell *matCellDef="let estimate" class="cell-actions" layout="row"
             style="padding-right:0px;">
-            <button mat-button layout="column" class="cell-button" [matTooltip]="'Visualizar'">
+            <button mat-button layout="column" class="cell-button" [matTooltip]="'Visualizar'" (click)="detailForecast(estimate)">
               <mat-icon>pageview</mat-icon>
             </button>
           </td>
