@@ -164,6 +164,9 @@ export class ForecastDetailComponent implements OnInit {
     var countA;
     var countF;
     var countLabor;
+    var TotalA = 0;
+    var TotalLabor = 0;
+    var TotalF = 0;
 
     this.isloading = true;
     this.forecastService.getAbsences(Number(this.id), this.initDate, this.endDate).subscribe(data => {
@@ -179,10 +182,19 @@ export class ForecastDetailComponent implements OnInit {
           countF: {value: countF, class: "count"},
           countA: {value: countA, class: "count"}
         }
-
+        TotalA += countA;
+        TotalF += countF;
+        TotalLabor += countLabor;
         source = this.formatDatasource(data[i], source);
         sourceArray.push(source);
       }
+      source = {
+        name: {value: "Total", class: "name-total"},
+        countLab: {value: TotalLabor, class: "count-total"},
+        countF: {value: TotalF, class: "count-total"},
+        countA: {value: TotalA, class: "count-total"}
+      }
+      sourceArray.push(source);
       this.dataSource.data = sourceArray;
       this.isloading = false;
     });
