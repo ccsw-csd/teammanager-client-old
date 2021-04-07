@@ -297,13 +297,15 @@ export class ForecastDetailComponent implements OnInit {
 
     if(type === "A" || type === "P"){
       for (var i in data){
-        if(data[i].type === "A"  || data[i].type === "P")
+        var date = new Date(data[i].date);
+        if((data[i].type === "A"  || data[i].type === "P") && ((date.getDay() !== 6) || (date.getDay() !== 0)))
           count++;
       }
     }
     else if(type === "F"){
       for (var i in data){
-        if(data[i].type === "F")
+        var date = new Date(data[i].date);
+        if(data[i].type === "F" || ((data[i].type === "A"  || data[i].type === "P") && ((date.getDay() == 6) || (date.getDay() == 0))))
           count++;
       }
     }
