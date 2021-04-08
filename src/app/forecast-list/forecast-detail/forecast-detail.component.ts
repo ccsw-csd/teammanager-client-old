@@ -1,3 +1,4 @@
+import { CompileShallowModuleMetadata } from '@angular/compiler';
 import { ThrowStmt, typeofExpr } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
@@ -297,17 +298,23 @@ export class ForecastDetailComponent implements OnInit {
 
     if(type === "A" || type === "P"){
       for (var i in data){
-        if(data[i].type === "A"  || data[i].type === "P")
+        if((data[i].type === "A"  || data[i].type === "P") && (this.isWeekend(data[i].date) == false))
           count++;
       }
     }
     else if(type === "F"){
       for (var i in data){
-        if(data[i].type === "F")
+        if(data[i].type === "F" && (this.isWeekend(data[i].date) == false))
           count++;
       }
     }
     return count;
+  }
+  isWeekend(dateString: string): boolean{
+    var date: Date = new Date(dateString);
+    if((date.getDay() === 6) || (date.getDay() === 0))
+      return true
+    return false
   }
 
   countLaborDays(init: Date, end: Date): number
@@ -337,10 +344,10 @@ export class ForecastDetailComponent implements OnInit {
 
   typeOfDay(day: number, month: number, absences: any): string{
     var date = new Date(2021, month-1, day);
-
     if((date.getDay() === 6) || (date.getDay() === 0))
       return "day Weekend";
 
+    date = new Date(2021, month-1, day+1);
     var isFestive = false;
     var isAbsence = false;
 

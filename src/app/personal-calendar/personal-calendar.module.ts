@@ -5,6 +5,7 @@ import { MonthCalendarModule } from 'src/app/core/month-calendar/month-calendar.
 import {​​​​​​​​ FormsModule, ReactiveFormsModule }​​​​​​​​ from'@angular/forms';
 import {​​​​​​​​ MatInputModule }​​​​​​​​ from'@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 
@@ -17,6 +18,7 @@ import { MatSelectModule } from '@angular/material/select';
     ReactiveFormsModule,
     MatInputModule,
     MatSelectModule,
+    MatProgressSpinnerModule
     
   ]
 })

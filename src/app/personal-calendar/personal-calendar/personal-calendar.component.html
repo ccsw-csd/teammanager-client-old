@@ -2,7 +2,7 @@
 	<div class="center">
 		<mat-form-field>
 			<mat-label>Selecciona año</mat-label>
-			<mat-select [(ngModel)]=year>
+			<mat-select [(ngModel)]=year (selectionChange)="getAbsences()">
 				<mat-option [value]="actualYear-1">{{actualYear-1}}</mat-option>
 				<mat-option [value]="actualYear" selected>{{actualYear}}</mat-option>
 				<mat-option [value]="actualYear+1">{{actualYear+1}}</mat-option>
@@ -10,17 +10,22 @@
 		</mat-form-field>
 	</div> 
 	<div class= "calendar">
-		<app-month-calendar [year]=year month=1></app-month-calendar>
-		<app-month-calendar [year]=year month=2></app-month-calendar>
-		<app-month-calendar [year]=year month=3></app-month-calendar>
-    	<app-month-calendar [year]=year [month]=4></app-month-calendar>
-		<app-month-calendar [year]=year [month]=5></app-month-calendar>
-		<app-month-calendar [year]=year [month]=6></app-month-calendar>
-		<app-month-calendar [year]=year [month]=7></app-month-calendar>
-		<app-month-calendar [year]=year [month]=8></app-month-calendar>
-		<app-month-calendar [year]=year [month]=9></app-month-calendar>
-		<app-month-calendar [year]=year [month]=10></app-month-calendar>
-		<app-month-calendar [year]=year [month]=11></app-month-calendar>
-		<app-month-calendar [year]=year [month]=12></app-month-calendar>
+		<app-month-calendar [year]=year month=1 [absences]=absences[1]></app-month-calendar>
+		<app-month-calendar [year]=year month=2 [absences]=absences[2]></app-month-calendar>
+		<app-month-calendar [year]=year month=3 [absences]=absences[3]></app-month-calendar>
+    	<app-month-calendar [year]=year [month]=4 [absences]=absences[4]></app-month-calendar>
+		<app-month-calendar [year]=year [month]=5 [absences]=absences[5]></app-month-calendar>
+		<app-month-calendar [year]=year [month]=6 [absences]=absences[6]></app-month-calendar>
+		<app-month-calendar [year]=year [month]=7 [absences]=absences[7]></app-month-calendar>
+		<app-month-calendar [year]=year [month]=8 [absences]=absences[8]></app-month-calendar>
+		<app-month-calendar [year]=year [month]=9 [absences]=absences[9]></app-month-calendar>
+		<app-month-calendar [year]=year [month]=10 [absences]=absences[10]></app-month-calendar>
+		<app-month-calendar [year]=year [month]=11 [absences]=absences[11] ></app-month-calendar>
+		<app-month-calendar [year]=year [month]=12 [absences]=absences[12]></app-month-calendar>
 	</div>
 </div>
+<div class="loadWrapper" *ngIf="isloading">
+    <mat-spinner></mat-spinner>
+</div>
+    
+  
