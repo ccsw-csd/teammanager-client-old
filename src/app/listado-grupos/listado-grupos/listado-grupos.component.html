@@ -46,8 +46,8 @@
           <th class="cell-actions" mat-header-cell *matHeaderCellDef>
             Actions
           </th>
-          <td class="cell-actions" mat-cell *matCellDef="" layout="row">
-            <button mat-button layout="column" class="cell-button" [matTooltip]="'Editar'">
+          <td class="cell-actions" mat-cell *matCellDef="let group" layout="row">
+            <button mat-button layout="column" class="cell-button" [matTooltip]="'Editar'" (click)="editGroup(group)">
               <mat-icon>edit</mat-icon>
             </button>
             <button mat-button layout="column" class="cell-button" [matTooltip]="'Borrar'">
