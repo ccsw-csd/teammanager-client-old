@@ -1,24 +1,48 @@
 @import "./src/assets/scss/master";
 
-#zona-titulo{
-  width: 100%;
+.container{
+  border: 2px solid rgb(255, 0, 0);
+  width: auto;
+  height: 100%;
 }
-div{
-  margin: 1em;
+.formMembers{
+  border: 2px solid rgb(255, 255, 0);
+  width: 30em;
+  height: auto;
 }
-#zona-configuracion-izq{
-  float:left;
-  box-shadow: 1px;
-  width: 45%;
+.formManagers{
+  border: 2px solid rgb(0, 255, 0);
+  width: 30em;
+  height: auto;
 }
-#zona-configuracion-der{
+.formSubgroups{
+  border: 2px solid rgb(0, 255, 255);
+  width: 30em;
+  height: auto;
+}
+#zona-config{
+  display: flex;
+  flex-flow: row wrap;
+}
+#zona-config-izq{
+  display: flex;
+  flex-flow: column;
+  float: left;
+  width: 50%;
+}
+#zona-config-der{
+  float: right;
+  display: flex;
+  flex-flow: column;
+  width: 50%;
+  height: fit-content;
+}
+#zona-members{
+  max-height: 50%;
+}
+#zona-subgroups{
+  max-height: 50%;
+}
+button{
   float:right;
-  box-shadow: 1px;
-  width: 45%;
-}
-#zona-gestores{
-  height: 50%;
-}
-#zona-subgrupos{
-  height: 50%;
 }

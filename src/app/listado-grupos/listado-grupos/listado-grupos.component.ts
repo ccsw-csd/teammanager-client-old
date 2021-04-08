@@ -7,6 +7,8 @@ import { ListadoGrupos } from '../model/ListadoGrupos';
 import { Pageable } from '../../core/to/Pageable';
 import { ListadoGruposService } from '../services/listado-grupos.service';
 import { ListadoGruposDialogComponent } from './listado-grupos-dialog/listado-grupos-dialog.component';
+import { Group } from '../model/Group';
+import { delay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-listado-grupos',
@@ -21,6 +23,7 @@ export class ListadoGruposComponent implements OnInit {
   pageNumber = 0;
   pageSize = 20;
   totalElements = 0;
+  editingGroup!: Group;
 
   dataSource = new MatTableDataSource<ListadoGrupos>();
   displayedColumns: string[] = [
@@ -72,15 +75,27 @@ export class ListadoGruposComponent implements OnInit {
     });
   }
 
-  createGroup() : void {
+  createGroup() {
     const dialogRef = this.dialog.open(ListadoGruposDialogComponent, {
-      data: {}
-    });
+      width: '90%', height: '90%', data: {}
+
+  });
 
     dialogRef.afterClosed().subscribe(() => {
       this.loadPage();
     });
   }
 
-
+  editGroup(groupEdit: ListadoGrupos){
+    if (groupEdit.id !== undefined) {
+      this.listadoGruposService.getGroup(groupEdit.id).subscribe(data => {
+        const dialogRef = this.dialog.open(ListadoGruposDialogComponent, {data});
+        dialogRef.afterClosed().subscribe(() => {
+          delay(2000);
+          this.loadPage();
+        });
+      });
+    }
+  }
 }
+
