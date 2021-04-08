@@ -18,7 +18,7 @@
     button {
       width: 150px;
     }
-    
+
     h1 {
       color: #838383;
       font-size: 20px;
@@ -30,7 +30,7 @@
   .containerTableList {
     flex: 1;
     height: calc(100vh - 195px);
-    
+
     .tableList {
       width: 100%;
       overflow: scroll;
@@ -39,37 +39,37 @@
 
 
   .cell-left {
-    text-align: cleft;
+    text-align: left;
   }
 
   .cell-center {
     text-align: center;
   }
-  
+
   .cell-actions {
     width: 90px;
     text-align: center;
     padding-right: 0px;
   }
-  
+
   .cell-button {
     background-color: $foreground;
     width: 35px;
     min-width: 35px;
-    
+
     .material-icons {
       color: $icon;
     }
   }
-  
+
   td {
     background-color: $foreground !important;
   }
-  
+
   mat-paginator {
     background-color: $table-header;
   }
-  
+
 }
 
 

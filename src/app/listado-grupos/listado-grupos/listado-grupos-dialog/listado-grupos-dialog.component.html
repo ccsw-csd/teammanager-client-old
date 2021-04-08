@@ -1,6 +1,6 @@
 <div class="container">
   <div id="zona-titulo">
-    <h2><input matInput placeholder="Titulo" aria-label="State" [(ngModel)]="this.titulo"></h2>
+    <h2><input matInput placeholder="Nombre" aria-label="State" [(ngModel)]="this.titulo"></h2>
   </div>
   <div id="zona-config">
     <div id="zona-config-izq">
@@ -17,7 +17,7 @@
       </mat-form-field>
       <mat-list>
         <mat-list-item *ngFor="let manager of managers">
-          <mat-icon mat-list-icon (click)="deleteManager(this.manager)"></mat-icon>
+          <mat-icon [ngStyle]="{'color':'black'}" (click)="deleteManager(this.manager)">delete_forever</mat-icon>
           <span>{{manager.name}} {{manager.lastname}}</span>
         </mat-list-item>
       </mat-list>
@@ -37,7 +37,7 @@
         </mat-form-field>
         <mat-list>
           <mat-list-item *ngFor="let member of members">
-            <mat-icon mat-list-icon (click)="deleteManager(this.member)"></mat-icon>
+            <mat-icon [ngStyle]="{'color':'black'}" (click)="deleteMember(this.member)">delete_forever</mat-icon>
             <span>{{member.name}} {{member.lastname}}</span>
           </mat-list-item>
         </mat-list>
@@ -53,7 +53,7 @@
         </mat-form-field>
         <mat-list>
           <mat-list-item *ngFor="let subgroup of subgroups">
-            <mat-icon mat-list-icon (click)="deleteSubgroup(this.subgroup)"></mat-icon>
+            <mat-icon [ngStyle]="{'color':'black'}" (click)="deleteSubgroup(this.subgroup)">delete_forever</mat-icon>
             <span>{{subgroup.name}}</span>
           </mat-list-item>
         </mat-list>
@@ -61,5 +61,5 @@
     </div>
   </div>
   <button mat-raised-button color="primary" (click)="onSave()">Guardar</button>
-  <button mat-raised-button color="primary" (click)="cerrar()">Cancelar</button>
+  <button mat-raised-button color="secondary" (click)="cerrar()">Cancelar</button>
 </div>

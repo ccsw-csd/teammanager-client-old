@@ -7,6 +7,7 @@ import { debounceTime, finalize, switchMap, tap } from 'rxjs/operators';
 import { Group } from '../../model/Group';
 import { Person } from '../../model/Person';
 import { ListadoGruposService } from '../../services/listado-grupos.service';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-listado-grupos-dialog',
@@ -25,7 +26,8 @@ export class ListadoGruposDialogComponent implements OnInit {
   subgroups: Group[] = [];
   managers: Person[] = [];
   members: Person[] = [];
-  titulo = 'Titulo';
+  usuario = '';
+  titulo = '';
   errorMsg?: string;
   newGroup: Group = new Group();
   isLoading = false;
@@ -33,12 +35,32 @@ export class ListadoGruposDialogComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<ListadoGruposDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
+    @Inject(MAT_DIALOG_DATA) public data: Group,
     private listadoGruposService: ListadoGruposService,
     @Inject (MatAutocompleteModule) public auto: string,
+    private authService: AuthService,
   ) {}
 
   ngOnInit(): void {
+    if (this.data != null) {
+      this.newGroup = Object.assign({}, this.data);
+      if (this.newGroup.managers !== undefined){
+        this.managers = this.newGroup.managers; }
+      if (this.newGroup.members !== undefined){
+        this.members = this.newGroup.members; }
+      if (this.newGroup.subgroups !== undefined){
+        this.subgroups = this.newGroup.subgroups; }
+      if (this.newGroup.name !== undefined){
+        this.titulo = this.newGroup.name;
+      }
+    }
+    if (this.managers.length === 0){
+      if (this.authService.getUsername() !== null) {
+        // tslint:disable-next-line: no-non-null-assertion
+        this.usuario = this.authService.getUsername()!;
+        this.listadoGruposService.getManagerUsername(this.usuario).subscribe(data => this.addManager(data));
+      }
+    }
     this.searchManagersCtrl.valueChanges
       .pipe(
         debounceTime(100),
@@ -103,6 +125,7 @@ export class ListadoGruposDialogComponent implements OnInit {
       }
     );
   }
+  // tslint:disable-next-line: typedef
   addMember(member: Person){
     this.members.push(member);
 
@@ -135,8 +158,17 @@ export class ListadoGruposDialogComponent implements OnInit {
     this.newGroup.managers = this.managers;
     this.newGroup.members = this.members;
     this.newGroup.subgroups = this.subgroups;
-    this.listadoGruposService.saveGroup(this.newGroup).subscribe(data => {});
-    this.cerrar();
+    if(this.newGroup.name != ''){
+      if(this.newGroup.managers.length > 0){
+        this.listadoGruposService.saveGroup(this.newGroup).subscribe(data => {});
+        this.cerrar();
+      }
+      else {
+        alert('Managers no puede estar vacio.');
+      }
+    }else{
+      alert('El grupo tiene que tener un nombre');
+    }
   }
   cerrar(){
     this.dialogRef.close();
