@@ -12,7 +12,7 @@ export class PersonalCalendarService {
 
   
   getAbsencesPersonal(year: Number): Observable<any> {
-    return this.http.get<any>(environment.server + '/personAbsence/' + year + '/fromUser/');
+    return this.http.get<any>(environment.server + '/personAbsence/' + year + '/fromUser-groupByMonth/');
   }
 
 }
