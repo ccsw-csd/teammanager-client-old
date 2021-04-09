@@ -10,7 +10,8 @@ import * as moment from 'moment';
 export class MonthCalendarComponent implements OnInit, OnChanges {
   @Input() month !: any;
   @Input() year !: any;
-
+  @Input() absences !: any;
+  
   week: string[] = [
     "Lunes",
     "Martes",
@@ -24,11 +25,11 @@ export class MonthCalendarComponent implements OnInit, OnChanges {
   monthName: string[] = [
     "Enero",
     "Febrero",
-    "Marzo",
+    "Marzo", 
     "Abril",
-    "Mayo",
-    "Junio",
-    "Julio",
+    "Mayo", 
+    "Junio", 
+    "Julio", 
     "Agosto",
     "Septiembre",
     "Octubre",
@@ -49,9 +50,9 @@ export class MonthCalendarComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-      this.getDaysFromDate(this.month, this.year)
+      this.getDaysFromDate(this.month, this.year);
   }
-
+  
   getDaysFromDate(month: number, year: number) {
     //Fecha inicio y fecha fin
     const startDate = moment(`${year}-${month}-01`, "YYYY-M-DD");
@@ -60,21 +61,41 @@ export class MonthCalendarComponent implements OnInit, OnChanges {
     //Dias de diferencia entre la fecha inicio y fecha fin
     const diffDays = endDate.diff(startDate, 'days', true)
     const numberDays = Math.round(diffDays);
-
+    const dayAbsenceObject: any[] = [];
+    
+    if(this.absences != null){
+      for(var i in this.absences){
+        dayAbsenceObject.push(moment(this.absences[i].date, "YYYY-MM-D"));
+      }
+    }
+    
     const arrayDays = Object.keys([...Array(numberDays)]).map((a: any) => {
       a = parseInt(a) + 1; //El mes empieza en 1
       const dayObject = moment(`${year}-${month}-${a}`, "YYYY-M-D");
+      for(var i in dayAbsenceObject){
+        if(dayAbsenceObject[i].date() == dayObject.date())
+        {
+          return {
+            name: dayObject.format("dddd"),
+            value: this.absences[i].type,
+            indexWeek: dayObject.isoWeekday(),
+            class: this.absences[i].type + "-absence"
+          };
+        }
+      }
       return {
         name: dayObject.format("dddd"),
         value: a,
-        indexWeek: dayObject.isoWeekday()
+        indexWeek: dayObject.isoWeekday(),
+        class: "normal"
       };
+
     });
 
     this.monthSelect = arrayDays;
   }
   ngOnChanges(changes: SimpleChanges) {
-    this.getDaysFromDate(this.month, this.year)
+    this.getDaysFromDate(this.month, this.year);
   }
-
+  
 }

@@ -1,9 +1,18 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PersonalCalendarService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
+
+  
+  getAbsencesPersonal(year: Number): Observable<any> {
+    return this.http.get<any>(environment.server + '/personAbsence/' + year + '/fromUser-groupByMonth/');
+  }
+
 }
