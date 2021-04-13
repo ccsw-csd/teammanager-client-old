@@ -1,22 +1,18 @@
 @import "./src/assets/scss/master";
 
 .container{
-  border: 2px solid rgb(255, 0, 0);
   width: auto;
   height: 100%;
 }
 .formMembers{
-  border: 2px solid rgb(255, 255, 0);
   width: 30em;
   height: auto;
 }
 .formManagers{
-  border: 2px solid rgb(0, 255, 0);
   width: 30em;
   height: auto;
 }
 .formSubgroups{
-  border: 2px solid rgb(0, 255, 255);
   width: 30em;
   height: auto;
 }
@@ -35,14 +31,18 @@
   display: flex;
   flex-flow: column;
   width: 50%;
-  height: fit-content;
+  height: 100%;
 }
 #zona-members{
-  max-height: 50%;
+  height: 200px;
+  overflow: auto;
 }
 #zona-subgroups{
-  max-height: 50%;
+  height: 200px;
+  overflow: auto;
 }
-button{
-  float:right;
+button {
+  float: right;
+  float: bottom;
+  width: 150px;
 }
