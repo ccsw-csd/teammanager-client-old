@@ -9,6 +9,7 @@ import { ListadoGruposService } from '../services/listado-grupos.service';
 import { ListadoGruposDialogComponent } from './listado-grupos-dialog/listado-grupos-dialog.component';
 import { Group } from '../model/Group';
 import { delay } from 'rxjs/operators';
+import { DelDialogComponent } from './del-dialog/del-dialog.component';
 
 @Component({
   selector: 'app-listado-grupos',
@@ -36,6 +37,7 @@ export class ListadoGruposComponent implements OnInit {
   constructor(
     private listadoGruposService: ListadoGruposService,
     public dialog: MatDialog,
+    public confirmationDialog: MatDialog,
   ) { }
 
 
@@ -75,23 +77,32 @@ export class ListadoGruposComponent implements OnInit {
     });
   }
 
-  createGroup() {
+  async createGroup() {
     const dialogRef = this.dialog.open(ListadoGruposDialogComponent, {
       width: '90%', height: '90%', data: {}
 
   });
-
     dialogRef.afterClosed().subscribe(() => {
       this.loadPage();
     });
   }
 
-  editGroup(groupEdit: ListadoGrupos){
+  async editGroup(groupEdit: ListadoGrupos){
     if (groupEdit.id !== undefined) {
       this.listadoGruposService.getGroup(groupEdit.id).subscribe(data => {
-        const dialogRef = this.dialog.open(ListadoGruposDialogComponent, {data});
+        const dialogRef = this.dialog.open(ListadoGruposDialogComponent, {width: '90%', height: '90%', data});
         dialogRef.afterClosed().subscribe(() => {
-          delay(2000);
+          this.loadPage();
+        });
+      });
+    }
+  }
+
+  async deleteGroup(group: ListadoGrupos){
+    if(group.id !== undefined) {
+      this.listadoGruposService.getGroup(group.id).subscribe(data => {
+        const dialogRef = this.confirmationDialog.open(DelDialogComponent, {data});
+        dialogRef.afterClosed().subscribe(() => {
           this.loadPage();
         });
       });

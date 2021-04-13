@@ -7,6 +7,7 @@ import { environment } from 'src/environments/environment';
 import { Group } from '../model/Group';
 import { Person } from '../model/Person';
 import { group } from '@angular/animations';
+import { Respuesta } from '../model/Respuesta';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +31,9 @@ export class ListadoGruposService {
   }
   saveGroup(newGroup: Group): Observable<Group>{
     return this.http.put<Group>(environment.server + '/grouplist/', newGroup);
+  }
+  validarUsuario(id: number): Observable<Respuesta>{
+    return this.http.post<Respuesta>(environment.server + '/grouplist/validarUsuario/', id);
   }
 
   constructor(
