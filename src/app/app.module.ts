@@ -15,6 +15,7 @@ import { ListadoGruposModule } from './listado-grupos/listado-grupos.module';
 import { ForecastListComponent } from './forecast-list/forecast-list/forecast-list.component';
 import { ForecastDetailComponent } from './forecast-list/forecast-detail/forecast-detail.component';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     ListadoGruposModule,
     ReactiveFormsModule,
     MatPaginatorModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatProgressSpinnerModule
 
   ],
   providers: [],

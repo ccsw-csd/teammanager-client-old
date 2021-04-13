@@ -1,3 +1,4 @@
+import { CompileShallowModuleMetadata } from '@angular/compiler';
 import { ThrowStmt, typeofExpr } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
@@ -164,9 +165,6 @@ export class ForecastDetailComponent implements OnInit {
     var countA;
     var countF;
     var countLabor;
-    var TotalA = 0;
-    var TotalLabor = 0;
-    var TotalF = 0;
 
     this.isloading = true;
     this.forecastService.getAbsences(Number(this.id), this.initDate, this.endDate).subscribe(data => {
@@ -182,19 +180,10 @@ export class ForecastDetailComponent implements OnInit {
           countF: {value: countF, class: "count"},
           countA: {value: countA, class: "count"}
         }
-        TotalA += countA;
-        TotalF += countF;
-        TotalLabor += countLabor;
+
         source = this.formatDatasource(data[i], source);
         sourceArray.push(source);
       }
-      source = {
-        name: {value: "Total", class: "name-total"},
-        countLab: {value: TotalLabor, class: "count-total"},
-        countF: {value: TotalF, class: "count-total"},
-        countA: {value: TotalA, class: "count-total"}
-      }
-      sourceArray.push(source);
       this.dataSource.data = sourceArray;
       this.isloading = false;
     });
@@ -309,19 +298,23 @@ export class ForecastDetailComponent implements OnInit {
 
     if(type === "A" || type === "P"){
       for (var i in data){
-        var date = new Date(data[i].date);
-        if((data[i].type === "A"  || data[i].type === "P") && ((date.getDay() !== 6) || (date.getDay() !== 0)))
+        if((data[i].type === "A"  || data[i].type === "P") && (this.isWeekend(data[i].date) == false))
           count++;
       }
     }
     else if(type === "F"){
       for (var i in data){
-        var date = new Date(data[i].date);
-        if(data[i].type === "F" || ((data[i].type === "A"  || data[i].type === "P") && ((date.getDay() == 6) || (date.getDay() == 0))))
+        if(data[i].type === "F" && (this.isWeekend(data[i].date) == false))
           count++;
       }
     }
     return count;
+  }
+  isWeekend(dateString: string): boolean{
+    var date: Date = new Date(dateString);
+    if((date.getDay() === 6) || (date.getDay() === 0))
+      return true
+    return false
   }
 
   countLaborDays(init: Date, end: Date): number
@@ -351,10 +344,10 @@ export class ForecastDetailComponent implements OnInit {
 
   typeOfDay(day: number, month: number, absences: any): string{
     var date = new Date(2021, month-1, day);
-
     if((date.getDay() === 6) || (date.getDay() === 0))
       return "day Weekend";
 
+    date = new Date(2021, month-1, day+1);
     var isFestive = false;
     var isAbsence = false;
 
