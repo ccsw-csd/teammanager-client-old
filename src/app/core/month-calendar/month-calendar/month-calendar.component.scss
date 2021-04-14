@@ -41,6 +41,20 @@
   padding: 0px;
   text-align: center;
 }
+div[class*="absence"]:hover {background-color: #a3a3ad!important; cursor: pointer;}
+div[class*="absence"]:active {
+  background-color: #a3a3ad!important;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+.normal:hover {background-color: #a3a3ad!important; cursor: pointer;}
+.normal:active {
+  background-color: #a3a3ad!important;
+  box-shadow: 0 5px #666!important;
+  transform: translateY(2px)!important;
+}
+
+
 .F-absence{
   background-color: #aae3ff !important;
 }
