@@ -1,4 +1,6 @@
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import * as moment from 'moment';
+import { Moment } from 'moment';
 import { PersonAbsenceDto } from 'src/app/core/person/personAbsenceDto';
 import { PersonalCalendarService } from '../services/personal-calendar.service';
 
@@ -13,7 +15,6 @@ export class PersonalCalendarComponent implements OnInit, OnChanges  {
   absences: PersonAbsenceDto[] = [];
   isloading = false;
   newAbsences: Date[] = [];
-  deletedAbsences: PersonAbsenceDto[] = [];
 
   constructor(    private personalService: PersonalCalendarService,) {}
 
@@ -21,43 +22,28 @@ export class PersonalCalendarComponent implements OnInit, OnChanges  {
     this.getAbsences();
   }
   saveAbsences(): void{
-    this.personalService.saveAbsencePersonal(this.deletedAbsences, this.newAbsences).subscribe(result => {
+    this.isloading = true;
+    this.personalService.saveAbsencePersonal(this.year, this.newAbsences).subscribe(result => {
       this.getAbsences();
     });
   }
 
   addNewAbsence(data: any): void{
-    var index = -1;
+
     switch(data.type) {
       case "laboral":
-        {
-          if(data.absence == null)
-            index = this.deletedAbsences.findIndex((element) => element.date == data.date);
-          else
-            index = this.deletedAbsences.findIndex((element) => element.date == data.absence.date);
-          if(index != -1)
-            this.deletedAbsences.splice(index, 1)
-          if(data.absence == null)
-            this.newAbsences.push(data.date);
-        }
+        this.newAbsences.push(data.date.toDate());
         break;
       case "A":
-        {
-        index = this.newAbsences.findIndex((element) => element == data.date);
-        if(index != -1)
-          this.newAbsences.splice(index, 1)
-        if(data.absence != null)  
-          this.deletedAbsences.push(data.absence);
-        }
+        this.newAbsences = this.newAbsences.filter(item => !this.isSameDate(item, data.date.toDate()))
         break;
       default:
-        // code block
     }
-    console.log(this.newAbsences);
-    console.log(this.deletedAbsences);
-
   }
 
+  isSameDate(date1 : Date, date2 : Date) : boolean {
+    return date1.getFullYear() == date2.getFullYear() && date1.getMonth() == date2.getMonth() && date1.getDate() == date2.getDate();
+  }
 
   getAbsences(): void
   {
@@ -65,12 +51,23 @@ export class PersonalCalendarComponent implements OnInit, OnChanges  {
     this.personalService.getAbsencesPersonal(this.year).subscribe(data => {
       this.absences = data;
       this.isloading = false;
+
+      this.newAbsences = [];
+      let dataCast : any = data;
+
+      for (let index in dataCast) {
+        let personAbsences: PersonAbsenceDto[] = dataCast[index];
+
+        this.newAbsences = this.newAbsences.concat(
+          personAbsences.filter(item => item.type == 'A' && item.date != undefined)
+                        .map(item => new Date(item.date != undefined ? item.date : ""))          
+        );
+      }
     });
 
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log(changes);
     this.year = this.actualYear;
     this.getAbsences();
   }

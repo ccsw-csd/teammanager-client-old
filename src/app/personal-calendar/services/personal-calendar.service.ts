@@ -16,8 +16,8 @@ export class PersonalCalendarService {
     return this.http.get<PersonAbsenceDto[]>(environment.server + '/personAbsence/' + year + '/fromUser-groupByMonth/');
   }
   
-  saveAbsencePersonal(absences: PersonAbsenceDto[], dates: Date[]): Observable<void>{
-    return this.http.post<void>(environment.server + '/personAbsence/save/', {dates, absences});
+  saveAbsencePersonal(year: Number, dates: Date[]): Observable<void>{
+    return this.http.post<void>(environment.server + '/personAbsence/save/', {year:year, dates:dates});
   }
 
 
