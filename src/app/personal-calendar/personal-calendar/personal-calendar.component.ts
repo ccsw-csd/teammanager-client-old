@@ -1,4 +1,5 @@
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { PersonAbsenceDto } from 'src/app/core/person/personAbsenceDto';
 import { PersonalCalendarService } from '../services/personal-calendar.service';
 
 @Component({
@@ -9,13 +10,52 @@ import { PersonalCalendarService } from '../services/personal-calendar.service';
 export class PersonalCalendarComponent implements OnInit, OnChanges  {
   actualYear : number = new Date().getFullYear();
   year : number = this.actualYear;
-  absences: any[] = [];
+  absences: PersonAbsenceDto[] = [];
   isloading = false;
+  newAbsences: Date[] = [];
+  deletedAbsences: PersonAbsenceDto[] = [];
 
   constructor(    private personalService: PersonalCalendarService,) {}
 
   ngOnInit(): void {
     this.getAbsences();
+  }
+  saveAbsences(): void{
+    this.personalService.saveAbsencePersonal(this.deletedAbsences, this.newAbsences).subscribe(result => {
+      this.getAbsences();
+    });
+  }
+
+  addNewAbsence(data: any): void{
+    var index = -1;
+    switch(data.type) {
+      case "laboral":
+        {
+          if(data.absence == null)
+            index = this.deletedAbsences.findIndex((element) => element.date == data.date);
+          else
+            index = this.deletedAbsences.findIndex((element) => element.date == data.absence.date);
+          if(index != -1)
+            this.deletedAbsences.splice(index, 1)
+          if(data.absence == null)
+            this.newAbsences.push(data.date);
+        }
+        break;
+      case "A":
+        {
+        index = this.newAbsences.findIndex((element) => element == data.date);
+        if(index != -1)
+          this.newAbsences.splice(index, 1)
+        if(data.absence != null)  
+          this.deletedAbsences.push(data.absence);
+        }
+        break;
+      default:
+        // code block
+    }
+    console.log(this.newAbsences);
+    console.log(this.deletedAbsences);
+
   }
 
 
@@ -30,6 +70,7 @@ export class PersonalCalendarComponent implements OnInit, OnChanges  {
   }
 
   ngOnChanges(changes: SimpleChanges) {
+    console.log(changes);
     this.year = this.actualYear;
     this.getAbsences();
   }

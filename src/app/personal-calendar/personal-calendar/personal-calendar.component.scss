@@ -16,7 +16,11 @@
   margin: 0;
 }
 
-
+button{
+  position: absolute;
+  right: 0;
+  margin-right: 95px;
+}
 
 app-month-calendar {
   flex: 1;
