@@ -35,7 +35,7 @@
             </ng-container>
           </mat-autocomplete>
         </mat-form-field>
-        <mat-list>
+        <mat-list class="lista">
           <mat-list-item *ngFor="let member of members">
             <mat-icon [ngStyle]="{'color':'black'}" (click)="deleteMember(this.member)">delete_forever</mat-icon>
             <span>{{member.name}} {{member.lastname}}</span>
@@ -51,8 +51,8 @@
               </mat-option>
           </mat-autocomplete>
         </mat-form-field>
-        <mat-list>
-          <mat-list-item *ngFor="let subgroup of subgroups">
+        <mat-list class="lista">
+          <mat-list-item *ngFor="let subgroup of subgroups" >
             <mat-icon [ngStyle]="{'color':'black'}" (click)="deleteSubgroup(this.subgroup)">delete_forever</mat-icon>
             <span>{{subgroup.name}}</span>
           </mat-list-item>

@@ -160,8 +160,8 @@ export class ListadoGruposDialogComponent implements OnInit {
     this.newGroup.subgroups = this.subgroups;
     if(this.newGroup.name != ''){
       if(this.newGroup.managers.length > 0){
-        this.listadoGruposService.saveGroup(this.newGroup).subscribe(data => {});
-        this.cerrar();
+        this.listadoGruposService.saveGroup(this.newGroup).subscribe(() => {this.cerrar(); });
+
       }
       else {
         alert('Managers no puede estar vacio.');
