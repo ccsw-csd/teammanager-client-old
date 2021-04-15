@@ -195,6 +195,8 @@ export class ForecastDetailComponent implements OnInit {
         countF: {value: countFestivoTotal, class: "total"},
         countA: {value: countAusenciaTotal, class: "total"}
       }
+      var emptyArray: any[] = [];
+      sourceTotal = this.formatDatasource(emptyArray, sourceTotal);
       sourceArray.push(sourceTotal);
       this.dataSource.data = sourceArray;
       this.isloading = false;

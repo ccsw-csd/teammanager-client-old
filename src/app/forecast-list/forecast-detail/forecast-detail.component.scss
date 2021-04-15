@@ -26,6 +26,14 @@ h1 {
   font-weight: bold;
 }
 
+.rangeButton{
+  margin-left: 10px;
+  padding-bottom: 9px;
+  background-clip: content-box;
+  background-color: #12abdb;
+  color: #f5f5f5;
+}
+
 .tableList {
   overflow: auto;
   max-height: calc(100vh - 245px);
