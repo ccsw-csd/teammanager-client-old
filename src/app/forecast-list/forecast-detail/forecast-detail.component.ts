@@ -163,6 +163,9 @@ export class ForecastDetailComponent implements OnInit {
       this.endDate = this.rangeEndDate;
     }
     var countA;
+    var countAusenciaTotal = 0;
+    var countFestivoTotal = 0;
+    var countLaboralTotal = 0;
     var countF;
     var countLabor;
 
@@ -180,10 +183,21 @@ export class ForecastDetailComponent implements OnInit {
           countF: {value: countF, class: "count"},
           countA: {value: countA, class: "count"}
         }
-
+        countAusenciaTotal += countA;
+        countFestivoTotal += countF;
+        countLaboralTotal += countLabor;
         source = this.formatDatasource(data[i], source);
         sourceArray.push(source);
       }
+      var sourceTotal = {
+        name: {value: "Total", class: "total"},
+        countLab: {value: countLaboralTotal, class: "total"},
+        countF: {value: countFestivoTotal, class: "total"},
+        countA: {value: countAusenciaTotal, class: "total"}
+      }
+      var emptyArray: any[] = [];
+      sourceTotal = this.formatDatasource(emptyArray, sourceTotal);
+      sourceArray.push(sourceTotal);
       this.dataSource.data = sourceArray;
       this.isloading = false;
     });
