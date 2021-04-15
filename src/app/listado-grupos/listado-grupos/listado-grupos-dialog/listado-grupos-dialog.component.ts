@@ -1,13 +1,14 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { iif } from 'rxjs';
 import { debounceTime, finalize, switchMap, tap } from 'rxjs/operators';
 import { Group } from '../../model/Group';
 import { Person } from '../../model/Person';
 import { ListadoGruposService } from '../../services/listado-grupos.service';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { AlertDialogComponent } from '../../alert-dialog/alert-dialog.component';
 
 @Component({
   selector: 'app-listado-grupos-dialog',
@@ -32,9 +33,10 @@ export class ListadoGruposDialogComponent implements OnInit {
   newGroup: Group = new Group();
   isLoading = false;
 
-
   constructor(
     public dialogRef: MatDialogRef<ListadoGruposDialogComponent>,
+    public dialogAlert: MatDialogRef<AlertDialogComponent>,
+    public dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: Group,
     private listadoGruposService: ListadoGruposService,
     @Inject (MatAutocompleteModule) public auto: string,
@@ -130,46 +132,60 @@ export class ListadoGruposDialogComponent implements OnInit {
     this.members.push(member);
 
   }
+  // tslint:disable-next-line: typedef
   addManager(manager: Person){
     this.managers.push(manager);
 
   }
+  // tslint:disable-next-line: typedef
   addSubgroup(group: Group){
     this.subgroups.push(group);
   }
 
+  // tslint:disable-next-line: typedef
   deleteMember(member: Person){
     if (this.members.indexOf(member) !== -1){
       this.members.splice(this.members.indexOf(member), 1);
     }
   }
+  // tslint:disable-next-line: typedef
   deleteManager(manager: Person){
     if (this.managers.indexOf(manager) !== -1){
       this.managers.splice(this.managers.indexOf(manager), 1);
     }
    }
+  // tslint:disable-next-line: typedef
   deleteSubgroup(group: Group){
     if (this.subgroups.indexOf(group) !== -1){
       this.subgroups.splice(this.subgroups.indexOf(group), 1);
     }
   }
+  // tslint:disable-next-line: typedef
   onSave(){
+    this.isLoading = true;
     this.newGroup.name = this.titulo;
     this.newGroup.managers = this.managers;
     this.newGroup.members = this.members;
     this.newGroup.subgroups = this.subgroups;
-    if(this.newGroup.name != ''){
-      if(this.newGroup.managers.length > 0){
-        this.listadoGruposService.saveGroup(this.newGroup).subscribe(() => {this.cerrar(); });
-
+    // tslint:disable-next-line: triple-equals
+    if (this.newGroup.name != ''){
+      if (this.newGroup.managers.length > 0){
+        this.listadoGruposService.saveGroup(this.newGroup).subscribe(() => {
+          this.isLoading = false;
+          this.cerrar(); });
       }
       else {
-        alert('Managers no puede estar vacio.');
+        const dialogAlert = this.dialog.open(AlertDialogComponent, {width: 'fit-content', height: 'fit-content', data: {
+          titulo: 'Managers vacio', informacion: 'El grupo tiene que tener un manager.'}});
+        this.isLoading = false;
       }
     }else{
-      alert('El grupo tiene que tener un nombre');
+      const dialogAlert = this.dialog.open(AlertDialogComponent, {width: 'fit-content', height: 'fit-content', data: {
+        titulo: 'Nombre necesario', informacion: 'El grupo tiene que tener un nombre.'}});
+      this.isLoading = false;
     }
   }
+  // tslint:disable-next-line: typedef
   cerrar(){
     this.dialogRef.close();
   }

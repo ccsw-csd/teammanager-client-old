@@ -8,8 +8,7 @@ import { Pageable } from '../../core/to/Pageable';
 import { ListadoGruposService } from '../services/listado-grupos.service';
 import { ListadoGruposDialogComponent } from './listado-grupos-dialog/listado-grupos-dialog.component';
 import { Group } from '../model/Group';
-import { delay } from 'rxjs/operators';
-import { DelDialogComponent } from './del-dialog/del-dialog.component';
+import { ConfirmDeleteDialogComponent } from './confirmDelete-dialog/confirmDelete-dialog.component';
 
 @Component({
   selector: 'app-listado-grupos',
@@ -25,7 +24,6 @@ export class ListadoGruposComponent implements OnInit {
   pageSize = 20;
   totalElements = 0;
   editingGroup!: Group;
-
   dataSource = new MatTableDataSource<ListadoGrupos>();
   displayedColumns: string[] = [
     'name',
@@ -77,7 +75,8 @@ export class ListadoGruposComponent implements OnInit {
     });
   }
 
-  async createGroup() {
+  // tslint:disable-next-line: typedef
+  createGroup() {
     const dialogRef = this.dialog.open(ListadoGruposDialogComponent, {
       width: '90%', height: '90%', data: {}
 
@@ -87,7 +86,8 @@ export class ListadoGruposComponent implements OnInit {
     });
   }
 
-  async editGroup(groupEdit: ListadoGrupos){
+  // tslint:disable-next-line: typedef
+  editGroup(groupEdit: ListadoGrupos){
     if (groupEdit.id !== undefined) {
       this.listadoGruposService.getGroup(groupEdit.id).subscribe(data => {
         const dialogRef = this.dialog.open(ListadoGruposDialogComponent, {width: '90%', height: '90%', data});
@@ -98,10 +98,11 @@ export class ListadoGruposComponent implements OnInit {
     }
   }
 
-  async deleteGroup(group: ListadoGrupos){
-    if(group.id !== undefined) {
+  // tslint:disable-next-line: typedef
+  deleteGroup(group: ListadoGrupos){
+    if (group.id !== undefined) {
       this.listadoGruposService.getGroup(group.id).subscribe(data => {
-        const dialogRef = this.confirmationDialog.open(DelDialogComponent, {data});
+        const dialogRef = this.confirmationDialog.open(ConfirmDeleteDialogComponent, {data});
         dialogRef.afterClosed().subscribe(() => {
           this.loadPage();
         });

@@ -1,3 +1,5 @@
 export class Respuesta {
-  response!: string;
+  informacion!: string;
+  activo!: boolean;
+  titulo!: string;
 }
