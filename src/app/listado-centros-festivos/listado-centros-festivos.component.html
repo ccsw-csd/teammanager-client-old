@@ -1,0 +1,47 @@
+<div class="content">
+  <div class="title-block">
+    <h1>Listado de centros festivos</h1>
+  </div>
+<div class="containerTableList">
+  <div class="tableList">
+    <table mat-table [dataSource]="dataSource" matSort>
+      <ng-container matColumnDef="icon">
+        <th class="cell-actions" mat-header-cell *matHeaderCellDef>
+          Editar
+        </th>
+        <td mat-cell class="cell-actions">
+          <mat-icon>Edit</mat-icon>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="nombreCentro">
+        <th class="cell-left" mat-header-cell *matHeaderCellDef>
+          Nombre del centro
+        </th>
+        <td mat-cell class="cell-left">
+
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="numFestivosAnoActual">
+        <th class="cell-center" mat-header-cell *matHeaderCellDef>
+          Numero de festivos en el año actual
+        </th>
+        <td mat-cell class="cell-center">
+
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="numFestivosAnoSiguiente">
+        <th class="cell-center" mat-header-cell *matHeaderCellDef>
+          Numero de festivos en el proximo año
+        </th>
+        <td mat-cell class="cell-center">
+
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
+</div>
+</div>

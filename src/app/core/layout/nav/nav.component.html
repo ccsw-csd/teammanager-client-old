@@ -6,6 +6,12 @@
     <a *ngIf="authService.isGestor()" mat-list-item routerLinkActive="item-active" routerLink="/listado-grupos">
       <span>Mis grupos</span>
     </a>
+    <a *ngIf="authService.isGestor()" mat-list-item routerLinkActive="item-active" routerLink="/listado-centros-festivos">
+      <span>Centros festivos</span>
+    </a>
+    <a *ngIf="authService.isGestor() == false" mat-list-item routerLinkActive="item-active" routerLink="/listado-centros-festivos">
+      <span>Centros festivos</span>
+    </a>
     <a *ngIf="authService.isGestor() == false" mat-list-item routerLinkActive="item-active" (click)="gruposAlert()">
       <span>Mis grupos</span>
     </a>
