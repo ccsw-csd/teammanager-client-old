@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnChanges, SimpleChanges  } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChanges, Output, EventEmitter  } from '@angular/core';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
 
@@ -11,6 +11,7 @@ export class MonthCalendarComponent implements OnInit, OnChanges {
   @Input() month !: any;
   @Input() year !: any;
   @Input() absences !: any;
+  @Output() newAbsence = new EventEmitter<any>();
   
   week: string[] = [
     "Lunes",
@@ -49,10 +50,25 @@ export class MonthCalendarComponent implements OnInit, OnChanges {
 
   }
 
+
   ngOnInit(): void {
       this.getDaysFromDate(this.month, this.year);
   }
-  
+
+  addNewAbsence(data: any) {
+    this.newAbsence.emit(data);
+    if(data.class == "A-absence"){
+      data.class = "normal";
+      data.type = "laboral";
+    }
+
+    else if(data.class == "normal"){
+      data.class = "A-absence";
+      data.type = "A";
+    }
+
+  }
+
   getDaysFromDate(month: number, year: number) {
     //Fecha inicio y fecha fin
     const startDate = moment(`${year}-${month}-01`, "YYYY-M-DD");
@@ -77,9 +93,12 @@ export class MonthCalendarComponent implements OnInit, OnChanges {
         {
           return {
             name: dayObject.format("dddd"),
-            value: this.absences[i].type,
+            value: a,
             indexWeek: dayObject.isoWeekday(),
-            class: this.absences[i].type + "-absence"
+            class: this.absences[i].type + "-absence",
+            type: this.absences[i].type,
+            date: dayAbsenceObject[i],
+            absence: this.absences[i]
           };
         }
       }
@@ -87,7 +106,10 @@ export class MonthCalendarComponent implements OnInit, OnChanges {
         name: dayObject.format("dddd"),
         value: a,
         indexWeek: dayObject.isoWeekday(),
-        class: "normal"
+        class: "normal",
+        type: "laboral",
+        date: dayObject,
+        absence: null
       };
 
     });

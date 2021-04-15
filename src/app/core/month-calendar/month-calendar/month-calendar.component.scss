@@ -41,6 +41,11 @@
   padding: 0px;
   text-align: center;
 }
+
+div[class*="absence"]:hover {background-color: #bebe33 !important; cursor: pointer;}
+
+.normal:hover {background-color: #a3a3ad; cursor: pointer;}
+
 .F-absence{
   background-color: #aae3ff !important;
 }
