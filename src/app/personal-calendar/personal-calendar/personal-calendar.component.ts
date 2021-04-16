@@ -21,6 +21,7 @@ export class PersonalCalendarComponent implements OnInit, OnChanges  {
   ngOnInit(): void {
     this.getAbsences();
   }
+  
   saveAbsences(): void{
     this.isloading = true;
     this.personalService.saveAbsencePersonal(this.year, this.newAbsences).subscribe(result => {
@@ -29,7 +30,6 @@ export class PersonalCalendarComponent implements OnInit, OnChanges  {
   }
 
   addNewAbsence(data: any): void{
-
     switch(data.type) {
       case "laboral":
         this.newAbsences.push(data.date.toDate());
