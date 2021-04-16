@@ -243,15 +243,6 @@ button[secondary] {
 }
 
 
-/** Para quitar el focus de los botones al volver a la pantalla **/
-button.cdk-program-focused {
-  background-color: inherit;
-
-  div {
-    background-color: inherit;
-  }
-}
-
 /** Estilos para el texto de compilación **/
 span.text_grey {
   color: darkgrey;
@@ -427,4 +418,8 @@ table:not(.mat-calendar-table) {
   .mat-form-field-appearance-outline .mat-form-field-outline-thick {
     color: $primary !important;
   }
+}
+
+*:focus {
+  outline: none !important;
 }
