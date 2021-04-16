@@ -15,9 +15,15 @@ h1 {
 
 .filters {
   text-align: end;
+  display: flex;
 
   .filter-input {
     width: 200px;
+  }
+
+  .filter-input-range {
+    width: 0px;
+    overflow: hidden;
     margin-left: 20px;
   }
 }

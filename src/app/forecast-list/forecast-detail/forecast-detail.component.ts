@@ -131,21 +131,33 @@ export class ForecastDetailComponent implements OnInit {
         if (event.start && event.end) {
             this.rangeInitDate= event.start;
             this.rangeEndDate = event.end;
-            if(this.months.length == 12)
-              this.months.push(
-                {name:this.rangeInitDate.toISOString().split('T')[0] + " / " + this.rangeEndDate.toISOString().split('T')[0], num: 12}
-                )
-            else{
-              this.months.pop();
-              this.months.push(
-                {name:this.rangeInitDate.toISOString().split('T')[0] + " / " + this.rangeEndDate.toISOString().split('T')[0], num: 12}
-                )
-            }
+
+            if(this.months.length > 12) this.months.pop();
+
+            this.months.push(
+              {name: this.convertDateToString(this.rangeInitDate) + "  -  " + this.convertDateToString(this.rangeEndDate), num: 12}
+            );
+
+            this.selectedMonth = 12;
+
             if(this.selectedMonth == 12)
               this.getAbsences();
         }
     });
-}
+  }
+
+
+  private convertDateToString(date : Date) : string {
+    
+    let locale = 'en-EN';
+    return date.toLocaleDateString(locale, {day:'2-digit'})+"/"
+      +date.toLocaleDateString(locale, {month:'2-digit'})+"/"
+      +date.toLocaleDateString(locale, {year:'numeric'});
+  }
+
+
+
+
 
   ngOnChanges() {
     this.getAbsences();
