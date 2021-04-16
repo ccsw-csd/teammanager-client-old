@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { PersonDto } from 'src/app/core/person/personDto';
+import { AuthService } from 'src/app/core/services/auth.service';
 import { SnackbarService } from 'src/app/core/services/snackbar.service';
 import { ResponseCredentials } from 'src/app/core/to/ResponseCredentials';
 import { ModifyPersonComponent } from '../modify-person/modify-person.component';
@@ -21,12 +22,16 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private loginService: LoginService,
+    private auth: AuthService,
     private router: Router,
     private snackbarService: SnackbarService,
     public dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
+    if(this.auth.getToken() != null){
+      this.router.navigate(['main']);
+    }
   }
 
   login() {
