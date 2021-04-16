@@ -13,12 +13,12 @@
             <div style="height:200px;width:300px;" id="login-card">
                 <mat-form-field appearance="standard">
                     <mat-label>Usuario</mat-label>
-                    <input matInput name="user" [(ngModel)]="user" required matInput placeholder="Usuario" />
+                    <input matInput name="user" [(ngModel)]="user" required matInput placeholder="Usuario" (keyup.enter)="login()"/>
                     <mat-error>Campo usuario vacío</mat-error>
                 </mat-form-field>
                 <mat-form-field appearance="standard">
                     <mat-label>Contraseña</mat-label>
-                    <input matInput name="password" [(ngModel)]="password" required matInput type="password" placeholder="Contraseña" />
+                    <input matInput name="password" [(ngModel)]="password" required matInput type="password" placeholder="Contraseña" (keyup.enter)="login()"/>
                     <mat-error>Campo contraseña vacío</mat-error>
                 </mat-form-field>                
                 <button mat-button primary [disabled]="user == '' || password == ''" (click)="login()">Login</button>

@@ -17,8 +17,20 @@ export class PersonalCalendarService {
   }
   
   saveAbsencePersonal(year: Number, dates: Date[]): Observable<void>{
-    return this.http.post<void>(environment.server + '/personAbsence/save/', {year:year, dates:dates});
+    return this.http.post<void>(environment.server + '/personAbsence/save/', {year:year, dates:this.convertArrayDateToString(dates)});
   }
 
+
+  private convertArrayDateToString(dates:Date[]) : string[] {
+    return dates.map(item => this.convertDateToString(item));
+  }
+  
+  private convertDateToString(date : Date) : string {
+    
+    let locale = 'en-EN';
+    return date.toLocaleDateString(locale, {year:'numeric'})+"-"
+      +date.toLocaleDateString(locale, {month:'2-digit'})+"-"
+      +date.toLocaleDateString(locale, {day:'2-digit'});
+  }
 
 }

@@ -131,21 +131,33 @@ export class ForecastDetailComponent implements OnInit {
         if (event.start && event.end) {
             this.rangeInitDate= event.start;
             this.rangeEndDate = event.end;
-            if(this.months.length == 12)
-              this.months.push(
-                {name:this.rangeInitDate.toISOString().split('T')[0] + " / " + this.rangeEndDate.toISOString().split('T')[0], num: 12}
-                )
-            else{
-              this.months.pop();
-              this.months.push(
-                {name:this.rangeInitDate.toISOString().split('T')[0] + " / " + this.rangeEndDate.toISOString().split('T')[0], num: 12}
-                )
-            }
+
+            if(this.months.length > 12) this.months.pop();
+
+            this.months.push(
+              {name: this.convertDateToString(this.rangeInitDate) + "  -  " + this.convertDateToString(this.rangeEndDate), num: 12}
+            );
+
+            this.selectedMonth = 12;
+
             if(this.selectedMonth == 12)
               this.getAbsences();
         }
     });
-}
+  }
+
+
+  private convertDateToString(date : Date) : string {
+    
+    let locale = 'en-EN';
+    return date.toLocaleDateString(locale, {day:'2-digit'})+"/"
+      +date.toLocaleDateString(locale, {month:'2-digit'})+"/"
+      +date.toLocaleDateString(locale, {year:'numeric'});
+  }
+
+
+
+
 
   ngOnChanges() {
     this.getAbsences();
@@ -163,6 +175,9 @@ export class ForecastDetailComponent implements OnInit {
       this.endDate = this.rangeEndDate;
     }
     var countA;
+    var countAusenciaTotal = 0;
+    var countFestivoTotal = 0;
+    var countLaboralTotal = 0;
     var countF;
     var countLabor;
 
@@ -180,10 +195,21 @@ export class ForecastDetailComponent implements OnInit {
           countF: {value: countF, class: "count"},
           countA: {value: countA, class: "count"}
         }
-
+        countAusenciaTotal += countA;
+        countFestivoTotal += countF;
+        countLaboralTotal += countLabor;
         source = this.formatDatasource(data[i], source);
         sourceArray.push(source);
       }
+      var sourceTotal = {
+        name: {value: "Total", class: "total"},
+        countLab: {value: countLaboralTotal, class: "total"},
+        countF: {value: countFestivoTotal, class: "total"},
+        countA: {value: countAusenciaTotal, class: "total"}
+      }
+      var emptyArray: any[] = [];
+      sourceTotal = this.formatDatasource(emptyArray, sourceTotal);
+      sourceArray.push(sourceTotal);
       this.dataSource.data = sourceArray;
       this.isloading = false;
     });
