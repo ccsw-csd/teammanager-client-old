@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit {
             this.dialog
               .open(ModifyPersonComponent, {
                 width: '700px',
-                height: '350px',
+                height: '400px',
                 data: {
                   user: this.user,
                   create: true

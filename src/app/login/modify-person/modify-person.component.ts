@@ -17,6 +17,7 @@ export class ModifyPersonComponent implements OnInit {
   selectedCenter: CenterDto|undefined;
   isloading = false;
   person: PersonDto = new PersonDto();
+  title: string|undefined = "Creacion de Usuario";
 
   constructor(
     public dialogRef: MatDialogRef<ModifyPersonComponent>, 
@@ -29,9 +30,12 @@ export class ModifyPersonComponent implements OnInit {
 
   ngOnInit(): void {
 
+
     if(!this.data.create){
       this.person = this.data.person;
+      this.title = "Editar información personal";
     }
+
     this.person.username = this.data.user;
     this.getCenters()
   }
