@@ -3,7 +3,6 @@
     <h1>Mis grupos</h1>
     <button mat-button primary (click)="createGroup()">Nuevo grupo</button>
   </div>
-
   <div class="containerTableList">
     <div class="tableList">
       <table mat-table [dataSource]="dataSource" matSort>
@@ -15,7 +14,6 @@
             {{group.name}}
           </td>
         </ng-container>
-
         <ng-container matColumnDef="manager">
           <th class="cell-left" mat-header-cell *matHeaderCellDef>
             Gestores
@@ -24,7 +22,6 @@
             {{group.manager}}
           </td>
         </ng-container>
-
         <ng-container matColumnDef="members">
           <th class="cell-center" mat-header-cell *matHeaderCellDef>
             Miembros
@@ -33,7 +30,6 @@
             {{group.members}}
           </td>
         </ng-container>
-
         <ng-container matColumnDef="subgroups">
           <th class="cell-center" mat-header-cell *matHeaderCellDef>
             Subgrupos

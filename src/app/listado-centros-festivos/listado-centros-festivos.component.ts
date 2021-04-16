@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
+import { ListadoCentrosFestivos } from './model/ListadoCentrosFestivos';
+import { ListadoCentrosFestivosService } from './service/ListadoCentrosFestivos.service';
 
 @Component({
   selector: 'app-listado-centros-festivos',
@@ -8,17 +11,28 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class ListadoCentrosFestivosComponent implements OnInit {
 
-  dataSource = new MatTableDataSource();
+  dataSource = new MatTableDataSource<ListadoCentrosFestivos>();
   displayedColumns: string[] = [
+    'name',
+    'festiveActualYear',
+    'festiveNextYear',
     'icon',
-    'nombreCentro',
-    'numFestivosAnoActual',
-    'numFestivosAnoSiguiente',
   ];
 
-  constructor() { }
+  constructor(
+    private listadoCentrosFestivosService: ListadoCentrosFestivosService,
+    public dialog: MatDialog,
+  ) { }
 
   ngOnInit(): void {
+    this.load();
+  }
+
+  // tslint:disable-next-line: typedef
+  load(){
+    this.listadoCentrosFestivosService.getCentrosFestivos().subscribe(data => {
+      this.dataSource.data = data;
+    });
   }
 
 }

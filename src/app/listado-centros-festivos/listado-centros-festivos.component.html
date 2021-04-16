@@ -5,38 +5,36 @@
 <div class="containerTableList">
   <div class="tableList">
     <table mat-table [dataSource]="dataSource" matSort>
+      <ng-container matColumnDef="name">
+        <th class="cell-left" mat-header-cell *matHeaderCellDef>
+          Nombre del centro
+        </th>
+        <td mat-cell *matCellDef="let listadoCentrosFestivos" class="cell-left">
+          {{listadoCentrosFestivos.name}}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="festiveActualYear">
+        <th class="cell-center" mat-header-cell *matHeaderCellDef>
+          Numero de festivos en el año actual
+        </th>
+        <td mat-cell *matCellDef="let listadoCentrosFestivos" class="cell-center">
+          {{listadoCentrosFestivos.festiveActualYear}}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="festiveNextYear">
+        <th class="cell-center" mat-header-cell *matHeaderCellDef>
+          Numero de festivos en el proximo año
+        </th>
+        <td mat-cell *matCellDef="let listadoCentrosFestivos" class="cell-center">
+          {{listadoCentrosFestivos.festiveNextYear}}
+        </td>
+      </ng-container>
       <ng-container matColumnDef="icon">
         <th class="cell-actions" mat-header-cell *matHeaderCellDef>
           Editar
         </th>
-        <td mat-cell class="cell-actions">
-          <mat-icon>Edit</mat-icon>
-        </td>
-      </ng-container>
-
-      <ng-container matColumnDef="nombreCentro">
-        <th class="cell-left" mat-header-cell *matHeaderCellDef>
-          Nombre del centro
-        </th>
-        <td mat-cell class="cell-left">
-
-        </td>
-      </ng-container>
-
-      <ng-container matColumnDef="numFestivosAnoActual">
-        <th class="cell-center" mat-header-cell *matHeaderCellDef>
-          Numero de festivos en el año actual
-        </th>
-        <td mat-cell class="cell-center">
-
-        </td>
-      </ng-container>
-      <ng-container matColumnDef="numFestivosAnoSiguiente">
-        <th class="cell-center" mat-header-cell *matHeaderCellDef>
-          Numero de festivos en el proximo año
-        </th>
-        <td mat-cell class="cell-center">
-
+        <td class="cell-actions" mat-cell *matCellDef="let listadoCentrosFestivos" layout="row">
+          <mat-icon [ngStyle]="{'color':'black'}">edit</mat-icon>
         </td>
       </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>

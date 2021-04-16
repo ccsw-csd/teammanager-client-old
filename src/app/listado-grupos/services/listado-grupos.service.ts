@@ -6,7 +6,6 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Group } from '../model/Group';
 import { Person } from '../model/Person';
-import { group } from '@angular/animations';
 import { Respuesta } from '../model/Respuesta';
 
 @Injectable({
