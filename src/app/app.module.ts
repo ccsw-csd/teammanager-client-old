@@ -16,13 +16,15 @@ import { ForecastListComponent } from './forecast-list/forecast-list/forecast-li
 import { ForecastDetailComponent } from './forecast-list/forecast-detail/forecast-detail.component';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ListadoCentrosFestivosComponent } from './listado-centros-festivos/listado-centros-festivos.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     ForecastListComponent,
-    ForecastDetailComponent
+    ForecastDetailComponent,
+    ListadoCentrosFestivosComponent
   ],
   imports: [
     BrowserModule,
