@@ -15,7 +15,7 @@
       </ng-container>
       <ng-container matColumnDef="festiveActualYear">
         <th class="cell-center" mat-header-cell *matHeaderCellDef>
-          Numero de festivos en el año actual
+          Festivos año actual
         </th>
         <td mat-cell *matCellDef="let listadoCentrosFestivos" class="cell-center">
           {{listadoCentrosFestivos.festiveActualYear}}
@@ -23,7 +23,7 @@
       </ng-container>
       <ng-container matColumnDef="festiveNextYear">
         <th class="cell-center" mat-header-cell *matHeaderCellDef>
-          Numero de festivos en el proximo año
+          Festivos proximo año
         </th>
         <td mat-cell *matCellDef="let listadoCentrosFestivos" class="cell-center">
           {{listadoCentrosFestivos.festiveNextYear}}
@@ -31,7 +31,7 @@
       </ng-container>
       <ng-container matColumnDef="icon">
         <th class="cell-actions" mat-header-cell *matHeaderCellDef>
-          Editar
+          Acciones
         </th>
         <td class="cell-actions" mat-cell *matCellDef="let listadoCentrosFestivos" layout="row">
           <mat-icon [ngStyle]="{'color':'black'}" (click)="edit(listadoCentrosFestivos.id)">edit</mat-icon>
