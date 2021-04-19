@@ -17,6 +17,7 @@ import { ForecastDetailComponent } from './forecast-list/forecast-detail/forecas
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ListadoCentrosFestivosComponent } from './listado-centros-festivos/listado-centros-festivos.component';
+import { MatSortModule } from '@angular/material/sort';
 
 
 @NgModule({
@@ -41,8 +42,8 @@ import { ListadoCentrosFestivosComponent } from './listado-centros-festivos/list
     ReactiveFormsModule,
     MatPaginatorModule,
     MatNativeDateModule,
-    MatProgressSpinnerModule
-
+    MatProgressSpinnerModule,
+    MatSortModule
   ],
   providers: [],
   bootstrap: [AppComponent]

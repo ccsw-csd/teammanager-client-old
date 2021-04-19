@@ -33,10 +33,14 @@
 
     .tableList {
       width: 100%;
-      overflow: scroll;
+      height: calc(100vh - 195px);
+      overflow-y: scroll;
     }
   }
 
+  th.mat-sort-header-sorted {
+    color: black;
+  }
 
   .cell-left {
     text-align: left;
