@@ -175,13 +175,13 @@ export class ListadoGruposDialogComponent implements OnInit {
           this.cerrar(); });
       }
       else {
-        const dialogAlert = this.dialog.open(AlertDialogComponent, {width: 'fit-content', height: 'fit-content', data: {
-          titulo: 'Managers vacio', informacion: 'El grupo tiene que tener un manager.'}});
+        const dialogAlert = this.dialog.open(AlertDialogComponent, {width: '500px', height: '250px', data: {
+          titulo: 'Error en la validación del formulario', informacion: 'El campo managers es obligatorio y no puede estar vacío. Por favor rellene el campo para poder continuar.'}});
         this.isLoading = false;
       }
     }else{
-      const dialogAlert = this.dialog.open(AlertDialogComponent, {width: 'fit-content', height: 'fit-content', data: {
-        titulo: 'Nombre necesario', informacion: 'El grupo tiene que tener un nombre.'}});
+      const dialogAlert = this.dialog.open(AlertDialogComponent, {width: '500px', height: '250px', data: {
+        titulo: 'Error en la validación del formulario', informacion: 'El campo nombre es obligatorio y no puede estar vacío. Por favor rellene el campo para poder continuar.'}});
       this.isLoading = false;
     }
   }

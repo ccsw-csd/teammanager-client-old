@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { ListadoCentrosFestivos } from './model/ListadoCentrosFestivos';
@@ -33,6 +33,11 @@ export class ListadoCentrosFestivosComponent implements OnInit {
     this.listadoCentrosFestivosService.getCentrosFestivos().subscribe(data => {
       this.dataSource.data = data;
     });
+  }
+
+  // tslint:disable-next-line: typedef
+  edit(id: ListadoCentrosFestivos){
+
   }
 
 }

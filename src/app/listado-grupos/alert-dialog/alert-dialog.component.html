@@ -1,3 +1,7 @@
-<h1 mat-dialog-title>{{data.titulo}}</h1>
-<p>{{data.informacion}}</p>
-<button mat-raised-button secondary (click)="cerrar()">Aceptar</button>
+<div class="bodyAlert">
+  <h1 mat-dialog-title>{{data.titulo}}</h1>
+  <p>{{data.informacion}}</p>
+  <div id="zona-botones">
+    <button mat-raised-button secondary (click)="cerrar()">Aceptar</button>
+  </div>
+</div>
