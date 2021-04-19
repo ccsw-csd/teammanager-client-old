@@ -33,7 +33,7 @@ export class ConfirmDeleteDialogComponent implements OnInit {
     this.listadoGruposService.validarUsuario(group.id!).subscribe(data => {
 
       if (data.activo === true){
-        const dialogRef = this.dialog.open(AlertDialogComponent, {width: 'fit-content', height: 'fit-content', data});
+        const dialogRef = this.dialog.open(AlertDialogComponent, {width: '500px', height: '250px', data});
         this.isLoading = false;
         this.cerrar();
       }

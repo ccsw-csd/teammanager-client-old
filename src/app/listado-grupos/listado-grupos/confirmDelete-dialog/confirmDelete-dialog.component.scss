@@ -1,0 +1,10 @@
+@import './../../../../assets/scss/master';
+
+#zona-botones{
+  display: flex;
+  flex-direction: row-reverse;
+
+}
+button{
+  margin: 15px;
+}

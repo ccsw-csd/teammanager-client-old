@@ -37,7 +37,6 @@
     }
   }
 
-
   .cell-left {
     text-align: left;
   }
@@ -51,7 +50,9 @@
     text-align: center;
     padding-right: 0px;
   }
-
+  .mat-button{
+    padding: 0px !important;
+  }
   .cell-button {
     background-color: $foreground;
     width: 35px;

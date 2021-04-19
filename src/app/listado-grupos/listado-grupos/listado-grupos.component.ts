@@ -90,7 +90,7 @@ export class ListadoGruposComponent implements OnInit {
   editGroup(groupEdit: ListadoGrupos){
     if (groupEdit.id !== undefined) {
       this.listadoGruposService.getGroup(groupEdit.id).subscribe(data => {
-        const dialogRef = this.dialog.open(ListadoGruposDialogComponent, {width: '90%', height: '90%', data});
+        const dialogRef = this.dialog.open(ListadoGruposDialogComponent, {width: '90%', height: 'fit-content', data});
         dialogRef.afterClosed().subscribe(() => {
           this.loadPage();
         });

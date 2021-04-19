@@ -35,4 +35,9 @@ export class ListadoCentrosFestivosComponent implements OnInit {
     });
   }
 
+  // tslint:disable-next-line: typedef
+  edit(id: ListadoCentrosFestivos){
+
+  }
+
 }
