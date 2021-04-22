@@ -9,6 +9,7 @@ import { ListadoGruposService } from '../services/listado-grupos.service';
 import { ListadoGruposDialogComponent } from './listado-grupos-dialog/listado-grupos-dialog.component';
 import { Group } from '../model/Group';
 import { ConfirmDeleteDialogComponent } from './confirmDelete-dialog/confirmDelete-dialog.component';
+import { ScrollStrategy } from '@angular/cdk/overlay/scroll';
 
 @Component({
   selector: 'app-listado-grupos',
@@ -90,7 +91,7 @@ export class ListadoGruposComponent implements OnInit {
   editGroup(groupEdit: ListadoGrupos){
     if (groupEdit.id !== undefined) {
       this.listadoGruposService.getGroup(groupEdit.id).subscribe(data => {
-        const dialogRef = this.dialog.open(ListadoGruposDialogComponent, {width: '90%', height: 'fit-content', data});
+        const dialogRef = this.dialog.open(ListadoGruposDialogComponent, {width: '90%', height: '90%', data});
         dialogRef.afterClosed().subscribe(() => {
           this.loadPage();
         });

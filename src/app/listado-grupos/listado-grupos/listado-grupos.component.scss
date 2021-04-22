@@ -2,10 +2,8 @@
 
 .content {
   width: 100%;
-  height: 100%;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
   background-color: white;
 
   .title-block {
@@ -29,14 +27,15 @@
 
   .containerTableList {
     flex: 1;
-    height: calc(100vh - 195px);
-
+    
     .tableList {
       width: 100%;
-      overflow: scroll;
+      max-height: calc(100vh - 270px);
+      overflow: auto;
     }
   }
 
+  
   .cell-left {
     text-align: left;
   }
