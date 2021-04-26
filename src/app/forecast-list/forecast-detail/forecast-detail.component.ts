@@ -201,6 +201,9 @@ export class ForecastDetailComponent implements OnInit {
         source = this.formatDatasource(data[i], source);
         sourceArray.push(source);
       }
+
+      sourceArray.sort((a,b) => { return a.name.value.localeCompare(b.name.value); });
+
       var sourceTotal = {
         name: {value: "Total", class: "total"},
         countLab: {value: countLaboralTotal, class: "total"},
@@ -210,6 +213,7 @@ export class ForecastDetailComponent implements OnInit {
       var emptyArray: any[] = [];
       sourceTotal = this.formatDatasource(emptyArray, sourceTotal);
       sourceArray.push(sourceTotal);
+
       this.dataSource.data = sourceArray;
       this.isloading = false;
     });
