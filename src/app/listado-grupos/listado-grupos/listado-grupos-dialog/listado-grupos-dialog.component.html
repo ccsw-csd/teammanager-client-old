@@ -74,10 +74,12 @@
   </div>
 
   <div class="zona-botones">
-    <button primary (click)="onSave()">Guardar</button>
-    <div class="loadWrapper" *ngIf="isLoading">
-      <mat-spinner></mat-spinner>
-    </div>
-    <button secondary (click)="cerrar()">Cancelar</button>
+    <button *ngIf="data.readOnly == false" primary (click)="onSave()">Save</button>
+    <button *ngIf="data.readOnly == false" secondary (click)="cerrar()">Close</button>
+    <button *ngIf="data.readOnly == true" primary (click)="cerrar()">Close</button>
   </div>
+</div>
+
+<div class="loadWrapper" *ngIf="isLoading">
+  <mat-spinner></mat-spinner>
 </div>

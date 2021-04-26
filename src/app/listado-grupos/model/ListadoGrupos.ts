@@ -4,4 +4,5 @@ export class ListadoGrupos {
   manager?: string;
   members?: number;
   subgroups?: number;
+  externalId?: string;
 }

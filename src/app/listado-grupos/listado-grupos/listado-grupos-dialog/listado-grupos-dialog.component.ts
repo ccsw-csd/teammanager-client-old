@@ -37,15 +37,15 @@ export class ListadoGruposDialogComponent implements OnInit {
     public dialogRef: MatDialogRef<ListadoGruposDialogComponent>,
     public dialogAlert: MatDialogRef<AlertDialogComponent>,
     public dialog: MatDialog,
-    @Inject(MAT_DIALOG_DATA) public data: Group,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     private listadoGruposService: ListadoGruposService,
     @Inject (MatAutocompleteModule) public auto: string,
     private authService: AuthService,
   ) {}
 
   ngOnInit(): void {
-    if (this.data != null) {
-      this.newGroup = Object.assign({}, this.data);
+    if (this.data != null && this.data.data != null) {
+      this.newGroup = Object.assign({}, this.data.data);
       if (this.newGroup.managers !== undefined){
         this.managers = this.newGroup.managers; }
       if (this.newGroup.members !== undefined){

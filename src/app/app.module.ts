@@ -18,7 +18,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ListadoCentrosFestivosComponent } from './listado-centros-festivos/listado-centros-festivos.component';
 import { MatSortModule } from '@angular/material/sort';
-
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [
@@ -43,7 +43,8 @@ import { MatSortModule } from '@angular/material/sort';
     MatPaginatorModule,
     MatNativeDateModule,
     MatProgressSpinnerModule,
-    MatSortModule
+    MatSortModule,
+    MatSlideToggleModule
   ],
   providers: [],
   bootstrap: [AppComponent]

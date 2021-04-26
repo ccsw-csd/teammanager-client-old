@@ -10,6 +10,8 @@ import { ListadoGruposDialogComponent } from './listado-grupos-dialog/listado-gr
 import { Group } from '../model/Group';
 import { ConfirmDeleteDialogComponent } from './confirmDelete-dialog/confirmDelete-dialog.component';
 import { ScrollStrategy } from '@angular/cdk/overlay/scroll';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-listado-grupos',
@@ -21,6 +23,7 @@ export class ListadoGruposComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator | undefined;
   @ViewChild(MatSort, { static: true }) sort: MatSort | undefined;
 
+  adminView : boolean = false;
   pageNumber = 0;
   pageSize = 20;
   totalElements = 0;
@@ -37,6 +40,7 @@ export class ListadoGruposComponent implements OnInit {
     private listadoGruposService: ListadoGruposService,
     public dialog: MatDialog,
     public confirmationDialog: MatDialog,
+    public authService: AuthService,
   ) { }
 
 
@@ -60,7 +64,7 @@ export class ListadoGruposComponent implements OnInit {
       pageable.pageNumber = event.pageIndex;
     }
 
-    this.listadoGruposService.getGrupos(pageable).subscribe(data => {
+    this.listadoGruposService.getGrupos(this.adminView, pageable).subscribe(data => {
       if (data.content != null) {
         this.dataSource.data = data.content;
       }
@@ -76,10 +80,15 @@ export class ListadoGruposComponent implements OnInit {
     });
   }
 
+  changeAdminView(event: MatSlideToggleChange) {
+    this.adminView = event.checked;
+    this.loadPage();
+  }
+
   // tslint:disable-next-line: typedef
   createGroup() {
     const dialogRef = this.dialog.open(ListadoGruposDialogComponent, {
-      width: '90%', height: '90%', data: {}
+      width: '90%', height: '90%', data: {readOnly: false}
 
   });
     dialogRef.afterClosed().subscribe(() => {
@@ -88,10 +97,10 @@ export class ListadoGruposComponent implements OnInit {
   }
 
   // tslint:disable-next-line: typedef
-  editGroup(groupEdit: ListadoGrupos){
+  editGroup(groupEdit: ListadoGrupos, readOnly : boolean){
     if (groupEdit.id !== undefined) {
-      this.listadoGruposService.getGroup(groupEdit.id).subscribe(data => {
-        const dialogRef = this.dialog.open(ListadoGruposDialogComponent, {width: '90%', height: '90%', data});
+      this.listadoGruposService.getGroup(groupEdit.id).subscribe(data => {        
+        const dialogRef = this.dialog.open(ListadoGruposDialogComponent, {width: '90%', height: '90%', data: {data:data, readOnly: readOnly}});
         dialogRef.afterClosed().subscribe(() => {
           this.loadPage();
         });

@@ -62,6 +62,10 @@
   
   td {
     background-color: $foreground !important;
+
+    button {
+      background-color: inherit;
+    }
   }
   
   mat-paginator {
@@ -70,4 +74,12 @@
   
 }
 
+
+
+.externalGroup {
+  td {
+    background-color: #fafafa !important;
+    color: $icon;
+  }
+}
 

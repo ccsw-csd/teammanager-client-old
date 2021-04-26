@@ -16,8 +16,8 @@ export class ListadoGruposService {
   getManagerUsername(usuario: string): Observable<Person> {
     return this.http.post<Person>(environment.server + '/grouplist/grupoNuevo/', usuario);
   }
-  getGrupos(pageable: Pageable): Observable<ListadoGruposPage> {
-    return this.http.post<ListadoGruposPage>(environment.server + '/grouplist/', {pageable});
+  getGrupos(viewAdmin: boolean, pageable: Pageable): Observable<ListadoGruposPage> {
+    return this.http.post<ListadoGruposPage>(environment.server + '/grouplist/', {viewAdmin: viewAdmin, pageable: pageable});
   }
   getGroup(id: number): Observable<Group>{
     return this.http.post<Group>(environment.server + '/grouplist/editgroup/', id);
