@@ -21,11 +21,11 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     resolve: {user: UserResolverService},
     children: [
-      { path: 'main', component: PersonalCalendarComponent,},
-      { path: 'listado-grupos', component: ListadoGruposComponent,},
-      { path: 'listado-centros-festivos', component: ListadoCentrosFestivosComponent,},
-      { path: 'forecast', component: ForecastListComponent,},
-      { path: 'forecast-detail', component: ForecastDetailComponent,},
+      { path: 'main', component: PersonalCalendarComponent, },
+      { path: 'listado-grupos', component: ListadoGruposComponent, },
+      { path: 'listado-centros-festivos', component: ListadoCentrosFestivosComponent, },
+      { path: 'forecast', component: ForecastListComponent, },
+      { path: 'forecast-detail', component: ForecastDetailComponent, },
     ]
   },
   { path: '**', redirectTo: 'login', pathMatch: 'full' },

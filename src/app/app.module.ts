@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -18,6 +18,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ListadoCentrosFestivosComponent } from './listado-centros-festivos/listado-centros-festivos.component';
 import { MatSortModule } from '@angular/material/sort';
+import { EditCentroComponent } from './listado-centros-festivos/edit-centro/edit-centro/edit-centro.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { MatSortModule } from '@angular/material/sort';
     AppComponent,
     ForecastListComponent,
     ForecastDetailComponent,
-    ListadoCentrosFestivosComponent
+    ListadoCentrosFestivosComponent,
+    EditCentroComponent
   ],
   imports: [
     BrowserModule,

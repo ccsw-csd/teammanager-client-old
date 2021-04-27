@@ -1,0 +1,30 @@
+<div>
+	<div class="center">
+		<mat-form-field>
+			<mat-label>Selecciona el año</mat-label>
+			<mat-select [(ngModel)]=year (selectionChange)="getFestives()">
+				<mat-option [value]="actualYear-1">{{actualYear-1}}</mat-option>
+				<mat-option [value]="actualYear" selected>{{actualYear}}</mat-option>
+				<mat-option [value]="actualYear+1">{{actualYear+1}}</mat-option>
+			</mat-select>
+		</mat-form-field>
+		<button mat-button primary (click)="saveFestives()">Guardar</button>
+	</div>
+	<div class= "calendar">
+		<app-month-calendar-festive [year]=year [month]=1 [festives]=festives (newFestive)="addNewFestive($event)"></app-month-calendar-festive>
+		<app-month-calendar-festive [year]=year [month]=2 [festives]=festives (newFestive)="addNewFestive($event)"></app-month-calendar-festive>
+		<app-month-calendar-festive [year]=year [month]=3 [festives]=festives (newFestive)="addNewFestive($event)"></app-month-calendar-festive>
+    <app-month-calendar-festive [year]=year [month]=4 [festives]=festives (newFestive)="addNewFestive($event)"></app-month-calendar-festive>
+		<app-month-calendar-festive [year]=year [month]=5 [festives]=festives (newFestive)="addNewFestive($event)"></app-month-calendar-festive>
+		<app-month-calendar-festive [year]=year [month]=6 [festives]=festives (newFestive)="addNewFestive($event)"></app-month-calendar-festive>
+		<app-month-calendar-festive [year]=year [month]=7 [festives]=festives (newFestive)="addNewFestive($event)"></app-month-calendar-festive>
+		<app-month-calendar-festive [year]=year [month]=8 [festives]=festives (newFestive)="addNewFestive($event)"></app-month-calendar-festive>
+		<app-month-calendar-festive [year]=year [month]=9 [festives]=festives (newFestive)="addNewFestive($event)"></app-month-calendar-festive>
+		<app-month-calendar-festive [year]=year [month]=10 [festives]=festives (newFestive)="addNewFestive($event)"></app-month-calendar-festive>
+		<app-month-calendar-festive [year]=year [month]=11 [festives]=festives (newFestive)="addNewFestive($event)"></app-month-calendar-festive>
+		<app-month-calendar-festive [year]=year [month]=12 [festives]=festives (newFestive)="addNewFestive($event)"></app-month-calendar-festive>
+	</div>
+</div>
+<div class="loadWrapper" *ngIf="isLoading">
+    <mat-spinner></mat-spinner>
+</div>
