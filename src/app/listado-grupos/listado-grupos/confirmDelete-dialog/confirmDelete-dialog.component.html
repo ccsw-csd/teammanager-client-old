@@ -1,8 +1,8 @@
 <div class="container" *ngIf="!isLoading">
-  <h1>¿Desea eliminar el grupo?</h1>
-    <p>Atención va a eliminar el grupo y toda su información, ¿está seguro que desea eliminar el grupo?</p>
+  <h1>Attention: Delete group</h1>
+    <p>Attention you are going to delete the group and all its information. Are you sure you want to delete the group?</p>
     <div id="zona-botones">
-      <button primary (click)="confirmarBorrado(data)">Si</button>
+      <button primary (click)="confirmarBorrado(data)">Yes</button>
       <button secondary (click)="cerrar()">No</button>
     </div>
 </div>

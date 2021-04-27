@@ -14,11 +14,12 @@ import { MatSelectModule } from '@angular/material/select';
 import { ListadoGruposModule } from './listado-grupos/listado-grupos.module';
 import { ForecastListComponent } from './forecast-list/forecast-list/forecast-list.component';
 import { ForecastDetailComponent } from './forecast-list/forecast-detail/forecast-detail.component';
-import { MatNativeDateModule } from '@angular/material/core';
+import { DateAdapter, MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ListadoCentrosFestivosComponent } from './listado-centros-festivos/listado-centros-festivos.component';
 import { MatSortModule } from '@angular/material/sort';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { CustomDateAdapter } from './core/date-adapter/custom-date-adapter';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,13 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     MatSortModule,
     MatSlideToggleModule
   ],
-  providers: [],
+  providers: [{ provide: DateAdapter, useClass: CustomDateAdapter }],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+
+  constructor(private dateAdapter: DateAdapter<Date>) {
+    this.dateAdapter.setLocale('es-ES');
+  }
+
+ }

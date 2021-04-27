@@ -5,11 +5,11 @@
 
   <div>
     <form [formGroup]="form" class="filters">
-      <button secondary>Exportar</button>
+      <button secondary>Export data</button>
       <div style='flex:1'></div>
       <!-- SELECTOR MONTH-->
       <mat-form-field class="filter-input">
-        <mat-label>Selecciona Mes/Fecha</mat-label>
+        <mat-label>Selected Month/Date range</mat-label>
         <mat-select [(ngModel)]="selectedMonth" [ngModelOptions]="{standalone: true}" (selectionChange)="getAbsences()">
           <mat-option
           *ngFor="let option of months"
@@ -26,7 +26,7 @@
         </mat-date-range-input> 
         <mat-date-range-picker #picker></mat-date-range-picker>
       </mat-form-field>
-      <button primary (click)="picker.open()">Crear Rango</button>
+      <button primary (click)="picker.open()">Create Date Range</button>
       <!-- End date -->
     </form>
   </div>

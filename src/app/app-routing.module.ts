@@ -26,6 +26,7 @@ const routes: Routes = [
       { path: 'listado-centros-festivos', component: ListadoCentrosFestivosComponent,},
       { path: 'forecast', component: ForecastListComponent,},
       { path: 'forecast-detail', component: ForecastDetailComponent,},
+      { path: '**', redirectTo: 'main', pathMatch: 'full' },
     ]
   },
   { path: '**', redirectTo: 'login', pathMatch: 'full' },

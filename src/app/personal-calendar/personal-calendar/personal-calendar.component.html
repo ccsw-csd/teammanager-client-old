@@ -1,14 +1,14 @@
 <div>
 	<div class="center">
 		<mat-form-field>
-			<mat-label>Selecciona año</mat-label>
+			<mat-label>Selected Year</mat-label>
 			<mat-select [(ngModel)]=year (selectionChange)="getAbsences()">
 				<mat-option [value]="actualYear-1">{{actualYear-1}}</mat-option>
 				<mat-option [value]="actualYear" selected>{{actualYear}}</mat-option>
 				<mat-option [value]="actualYear+1">{{actualYear+1}}</mat-option>
 			</mat-select>
 		</mat-form-field>
-		<button mat-button primary (click)="saveAbsences()">Guardar</button>
+		<button mat-button primary (click)="saveAbsences()">Update</button>
 	</div> 
 	<div class= "calendar">
 		<app-month-calendar [year]=year month=1 [absences]=absences[1] (newAbsence)="addNewAbsence($event)"></app-month-calendar>

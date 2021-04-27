@@ -9,7 +9,6 @@ import { ListadoGruposService } from '../services/listado-grupos.service';
 import { ListadoGruposDialogComponent } from './listado-grupos-dialog/listado-grupos-dialog.component';
 import { Group } from '../model/Group';
 import { ConfirmDeleteDialogComponent } from './confirmDelete-dialog/confirmDelete-dialog.component';
-import { ScrollStrategy } from '@angular/cdk/overlay/scroll';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 

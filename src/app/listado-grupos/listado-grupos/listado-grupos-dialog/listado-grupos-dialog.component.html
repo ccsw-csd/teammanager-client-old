@@ -1,11 +1,11 @@
 <div class="container">
   <div class="titulo">
-    <h1>Edicion de grupo</h1>
+    <h1>Edit Group</h1>
   </div>
 
   <div class="form-nombre">
     <mat-form-field>
-      <input matInput placeholder="Nombre del grupo" [(ngModel)]="this.titulo">
+      <input matInput placeholder="Group name" [(ngModel)]="this.titulo">
     </mat-form-field>
   </div>
 
@@ -13,12 +13,12 @@
 
     <div class="zona-config-izq">
       <mat-form-field class="input-form">
-        <input matInput placeholder="Buscar miembros" aria-label="State" [matAutocomplete]="autocompleteMembers" [formControl]="searchMembersCtrl">
+        <input matInput placeholder="Members: search person" aria-label="State" [matAutocomplete]="autocompleteMembers" [formControl]="searchMembersCtrl">
         <mat-autocomplete #autocompleteMembers="matAutocomplete">
           <mat-option *ngIf="isLoading" class="is-loading">Loading...</mat-option>
           <ng-container *ngIf="!isLoading">
             <mat-option *ngFor="let member of persons" [value]="member.username" (click)="addMember(member)">
-              <span><b>{{member.username}}</b> {{member.name}} {{member.lastname}}</span>
+              <span>{{member.name}} {{member.lastname}} (<i><b>{{member.username}}</b></i>)</span>
             </mat-option>
           </ng-container>
         </mat-autocomplete>
@@ -34,7 +34,7 @@
     <div class="zona-config-der">
       
       <mat-form-field class="input-form">
-        <input matInput placeholder="Buscar managers" aria-label="State" [matAutocomplete]="autocompleteManagers" [formControl]="searchManagersCtrl">
+        <input matInput placeholder="Administrators: search person" aria-label="State" [matAutocomplete]="autocompleteManagers" [formControl]="searchManagersCtrl">
         <mat-autocomplete #autocompleteManagers="matAutocomplete">
           <mat-option *ngIf="isLoading" class="is-loading">Loading...</mat-option>
           <ng-container *ngIf="!isLoading">
@@ -53,7 +53,7 @@
       </mat-list>
 
       <mat-form-field class="input-form">
-        <input matInput placeholder="Buscar subgrupos" aria-label="State" [matAutocomplete]="subgrupos" [formControl]="searchSubgroupsCtrl">
+        <input matInput placeholder="Subgroups: search groups" aria-label="State" [matAutocomplete]="subgrupos" [formControl]="searchSubgroupsCtrl">
         <mat-autocomplete #subgrupos="matAutocomplete">
           <mat-option *ngIf="isLoading" class="is-loading">Loading...</mat-option>
           <ng-container *ngIf="!isLoading">

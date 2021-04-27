@@ -73,7 +73,7 @@ export class LoginComponent implements OnInit {
       },
       () => {
 
-        this.snackbarService.error('Credenciales incorrectas.');
+        this.snackbarService.error('Wrong credentials.');
         this.isloading = false;
       }
     );

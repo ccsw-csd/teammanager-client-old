@@ -1,6 +1,6 @@
 <div class="content">
   <div class="title-block">
-    <h1>Forecast</h1>
+    <h1>View Forecast</h1>
     <div style="flex:1"></div>
     <mat-slide-toggle *ngIf="authService.isAdmin()" (change)="changeAdminView($event)" [checked]="adminView">Admin View</mat-slide-toggle>
   </div>
@@ -10,7 +10,7 @@
       <table mat-table [dataSource]="dataSource" matSort>
         <ng-container matColumnDef="name">
           <th class="cell-left" mat-header-cell *matHeaderCellDef mat-sort-header="name">
-            Nombre
+            Group Name
           </th>
           <td mat-cell *matCellDef="let group" class="cell-left">
             {{group.name}}
@@ -19,7 +19,7 @@
 
         <ng-container matColumnDef="manager">
           <th class="cell-left" mat-header-cell *matHeaderCellDef mat-sort-header="date">
-            Gestores
+            Administrators
           </th>
           <td mat-cell *matCellDef="let group" class="cell-left">
             {{group.manager}}
@@ -28,7 +28,7 @@
 
         <ng-container matColumnDef="members">
           <th class="cell-center" mat-header-cell *matHeaderCellDef mat-sort-header="versions">
-            Miembros
+            Members
           </th>
           <td mat-cell *matCellDef="let group" class="cell-center">
             {{group.members}}
@@ -37,7 +37,7 @@
 
         <ng-container matColumnDef="subgroups">
           <th class="cell-center" mat-header-cell *matHeaderCellDef mat-sort-header="days">
-            Subgrupos
+            Subgroups
           </th>
           <td mat-cell *matCellDef="let group" class="cell-center">
             {{group.subgroups}}
@@ -49,7 +49,7 @@
           </th>
           <td mat-cell *matCellDef="let estimate" class="cell-actions" layout="row"
             style="padding-right:0px;">
-            <button mat-button layout="column" class="cell-button" [matTooltip]="'Visualizar'" (click)="detailForecast(estimate)">
+            <button mat-button layout="column" class="cell-button" [matTooltip]="'View'" (click)="detailForecast(estimate)">
               <mat-icon>visibility</mat-icon>
             </button>
           </td>
