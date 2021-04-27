@@ -2,8 +2,8 @@
   <h1>¿Desea eliminar el grupo?</h1>
     <p>Atención va a eliminar el grupo y toda su información, ¿está seguro que desea eliminar el grupo?</p>
     <div id="zona-botones">
-      <button mat-raised-button primary (click)="confirmarBorrado(data)">Si</button>
-      <button mat-raised-button secondary (click)="cerrar()">No</button>
+      <button primary (click)="confirmarBorrado(data)">Si</button>
+      <button secondary (click)="cerrar()">No</button>
     </div>
 </div>
 <div class="loadWrapper" *ngIf="isLoading">

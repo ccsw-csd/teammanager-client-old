@@ -57,7 +57,9 @@ export class ModifyPersonComponent implements OnInit {
         case 'update':
           this.updateInDb(this.data.person)
           break;
-          
+        case 'close': 
+          this.dialogRef.close(false);
+          break;
       }
     }
   }

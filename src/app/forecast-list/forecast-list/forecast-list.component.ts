@@ -8,6 +8,7 @@ import { Pageable } from 'src/app/core/to/Pageable';
 import { ListadoGruposService } from 'src/app/listado-grupos/services/listado-grupos.service';
 import { ThrowStmt } from '@angular/compiler';
 import { Router } from '@angular/router';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-forecast-list',
@@ -19,6 +20,7 @@ export class ForecastListComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator | undefined;
   @ViewChild(MatSort, { static: true }) sort: MatSort | undefined;
 
+  adminView : boolean = false;
   pageNumber = 0;
   pageSize = 20;
   totalElements = 0;
@@ -35,7 +37,8 @@ export class ForecastListComponent implements OnInit {
   
   constructor(public authService: AuthService,
     private listadoGruposService: ListadoGruposService,
-    private router: Router) {
+    private router: Router,
+  ) {
 
   }
 
@@ -48,6 +51,11 @@ export class ForecastListComponent implements OnInit {
   
   detailForecast(row: any): void{
     this.router.navigate(['forecast-detail'], { queryParams: {id: row.id } });
+  }
+
+  changeAdminView(event: MatSlideToggleChange) {
+    this.adminView = event.checked;
+    this.loadPage();
   }
 
   loadPage(event?: PageEvent){
@@ -65,7 +73,7 @@ export class ForecastListComponent implements OnInit {
       pageable.pageNumber = event.pageIndex;
     }
 
-    this.listadoGruposService.getGrupos(pageable).subscribe(data => {
+    this.listadoGruposService.getGrupos(this.adminView, pageable).subscribe(data => {
       if (data.content != null) {
         this.dataSource.data = data.content;
       }

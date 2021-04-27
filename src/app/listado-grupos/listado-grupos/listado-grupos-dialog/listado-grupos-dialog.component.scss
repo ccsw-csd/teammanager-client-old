@@ -4,55 +4,70 @@
   display: flex;
   align-items: flex-start;
   flex-direction: column;
-}
-.formManagers{
-  width: 40em;
-}
-.formMembers{
-  width: 40em;
-}
-.formSubgroups{
-  width: 40em;
+  overflow: hidden;
+  height: 100%;
 }
 
-#zona-config-izq{
-  float: left;
-  width: 50%;
+.titulo {
+  height: 50px;
 }
-#zona-config-der{
-  float: right;
-  width: 50%;
+
+.form-nombre {
+  height: 50px;
+  width: 500px;
+  display: flex;
+
+  mat-form-field {
+    flex: 1;
+  }
+
 }
-#zona-members{
-  overflow-y: scroll;
-  margin: 1px;
+
+.zona-config {
+  flex: 1;
+  width: 100%;  
+  height: calc(100vh - 296px);
+  display: flex;
+  flex-direction: row;
+
+  .zona-config-izq {
+    flex: 1;
+  }
+
+  .zona-config-der {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
 }
-#zona-managers{
-  height: 240px;
-  margin: 1px;
+
+.input-form {
+  width: 90%;
 }
-#zona-subgroups{
-  height: 240px;
-  margin: 1px;
+
+.lista {
+  overflow-y: auto;
+  height: calc(100vh - 490px);
 }
-#zona-config-der mat-list{
-  overflow-y: scroll;
-  overflow-x: auto;
-  height: 190px;
+
+.lista-doble {
+  height: calc(100vh - 315px);
+  overflow-y: auto;
+  margin-right: 25px;
 }
-#zona-config-izq mat-list{
-  overflow-y: scroll;
-  height: 400px;
-}
+
 mat-icon{
   cursor: pointer;
 }
 button {
   width: 150px;
-  margin: 15px;
+  margin-left: 10px;
 }
-#zona-botones{
+
+.zona-botones{
   display: flex;
   flex-direction: row-reverse;
   width: 100%;
+  margin-top: 10px;
 }
