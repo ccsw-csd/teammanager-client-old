@@ -37,10 +37,12 @@ export class ListadoCentrosFestivosComponent implements OnInit {
   }
 
   // tslint:disable-next-line: typedef
-  edit(id: number){
-    if (id != null){
+  edit(id: number, name: string){
+    console.log(name);
+    console.log(id);
+    if (id != null && name != null){
       // tslint:disable-next-line: deprecation
-        const dialogRef = this.dialog.open(EditCentroComponent, {width: '90%', height: 'fit-content', data: id});
+        const dialogRef = this.dialog.open(EditCentroComponent, {width: '90%', height: 'fit-content', data: {id, name}});
         dialogRef.afterClosed().subscribe(() => {
           this.loadPage();
         });

@@ -19,6 +19,7 @@ export class EditCentroComponent implements OnInit {
   constructor(
     private listadoCentrosFestivosService: ListadoCentrosFestivosService,
     @Inject(MAT_DIALOG_DATA) public ID: number,
+    @Inject(MAT_DIALOG_DATA) public nameCentro: string
   ) { }
 
   // tslint:disable-next-line: typedef
@@ -48,7 +49,7 @@ export class EditCentroComponent implements OnInit {
       default:
     }
   }
-  isSameDate(date1 : Date, date2 : Date) : boolean {
+  isSameDate(date1: Date, date2: Date): boolean {
     return date1.getFullYear() == date2.getFullYear() && date1.getMonth() == date2.getMonth() && date1.getDate() == date2.getDate();
   }
   // tslint:disable-next-line: typedef
@@ -59,7 +60,7 @@ export class EditCentroComponent implements OnInit {
       this.festives = data;
       this.isLoading = false;
 
-      this.newFestives = this.festives.map(item => new Date (item.date != undefined ? item.date : ""));
+      this.newFestives = this.festives.map(item => new Date (item.date != undefined ? item.date : ''));
 
     });
   }
