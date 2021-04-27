@@ -7,6 +7,23 @@
     <form [formGroup]="form" class="filters">
       <button secondary>Export data</button>
       <div style='flex:1'></div>
+      <div style="display:flex; flex-direction: row; flex:1;padding-top:10px;padding-left: 45px;border:1px #bebebe solid;height: 40px;">
+        <div style="display:flex; flex-direction: row;">
+          <div class="legend" style="background-color: #aae3ff;"></div>
+          <div>Festive</div>
+        </div>
+        <div style="display:flex; flex-direction: row; margin-left:30px;">
+          <div class="legend" style="background-color: #ffffaa;"></div>
+          <div>Inactivity</div>
+        </div>
+        <div style="display:flex; flex-direction: row; margin-left:30px;">
+          <div class="legend" style="background-color: rgb(194, 194, 204);"></div>
+          <div>Weekend</div>
+        </div>
+      </div>
+
+
+      <div style='flex:1'></div>
       <!-- SELECTOR MONTH-->
       <mat-form-field class="filter-input">
         <mat-label>Selected Month/Date range</mat-label>

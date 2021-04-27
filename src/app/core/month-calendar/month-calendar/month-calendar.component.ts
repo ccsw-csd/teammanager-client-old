@@ -42,7 +42,7 @@ export class MonthCalendarComponent implements OnInit, OnChanges {
   monthSelect: any[] | undefined;
   dateSelect: any;
   dateValue: any;
-
+  diasLaborales: number = 20;
 
   constructor(
     private router: Router
@@ -79,6 +79,8 @@ export class MonthCalendarComponent implements OnInit, OnChanges {
     const numberDays = Math.round(diffDays);
     const dayAbsenceObject: any[] = [];
     
+    this.diasLaborales = 0;
+
     if(this.absences != null){
       for(var i in this.absences){
         dayAbsenceObject.push(moment(this.absences[i].date, "YYYY-MM-D"));
@@ -102,6 +104,9 @@ export class MonthCalendarComponent implements OnInit, OnChanges {
           };
         }
       }
+
+      if (dayObject.isoWeekday() < 6) this.diasLaborales++; 
+      
       return {
         name: dayObject.format("dddd"),
         value: a,
