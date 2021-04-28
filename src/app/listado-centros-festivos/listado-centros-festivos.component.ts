@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { EditCentroComponent } from './edit-centro/edit-centro/edit-centro.component';
-import { InfoCentro } from './model/infoCentro';
+import { InfoCentro } from './model/InfoCentro';
 import { ListadoCentrosFestivos } from './model/ListadoCentrosFestivos';
 import { ListadoCentrosFestivosService } from './service/ListadoCentrosFestivos.service';
 
