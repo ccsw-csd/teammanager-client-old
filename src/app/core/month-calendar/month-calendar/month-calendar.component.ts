@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, OnChanges, SimpleChanges, Output, EventEmitter  } from '@angular/core';
-import { Router } from '@angular/router';
 import * as moment from 'moment';
+import { AuthService } from '../../services/auth.service';
+import { User } from '../../to/User';
 
 @Component({
   selector: 'app-month-calendar',
@@ -44,9 +45,8 @@ export class MonthCalendarComponent implements OnInit, OnChanges {
   dateValue: any;
   diasLaborales: number = 20;
 
-  constructor(
-    private router: Router
-  ) {
+  constructor(    
+    private authService : AuthService) {
 
   }
 
@@ -56,6 +56,12 @@ export class MonthCalendarComponent implements OnInit, OnChanges {
   }
 
   addNewAbsence(data: any) {
+    let userInfo : User | null = this.authService.getUserInfo();
+
+    if (userInfo?.withPON) {
+      if(data.type != "A") return;
+    }
+
     this.newAbsence.emit(data);
     if(data.class == "A-absence"){
       data.class = "normal";

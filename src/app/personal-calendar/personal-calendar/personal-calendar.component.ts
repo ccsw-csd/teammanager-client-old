@@ -15,7 +15,8 @@ export class PersonalCalendarComponent implements OnInit, OnChanges  {
   absences: PersonAbsenceDto[] = [];
   isloading = false;
   newAbsences: Date[] = [];
-
+  updateDisabled = true;
+  
   constructor(    private personalService: PersonalCalendarService,) {}
 
   ngOnInit(): void {
@@ -30,6 +31,8 @@ export class PersonalCalendarComponent implements OnInit, OnChanges  {
   }
 
   addNewAbsence(data: any): void{
+    this.updateDisabled = false;
+
     switch(data.type) {
       case "laboral":
         this.newAbsences.push(data.date.toDate());
@@ -47,6 +50,7 @@ export class PersonalCalendarComponent implements OnInit, OnChanges  {
 
   getAbsences(): void
   {
+    this.updateDisabled = true;
     this.isloading = true;
     this.personalService.getAbsencesPersonal(this.year).subscribe(data => {
       this.absences = data;

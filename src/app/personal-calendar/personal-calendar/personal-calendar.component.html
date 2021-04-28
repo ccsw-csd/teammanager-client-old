@@ -33,7 +33,7 @@
 			</mat-form-field>
 		</div>
 		<div style="flex:1;text-align: right;">
-			<button mat-button primary (click)="saveAbsences()">Update</button>
+			<button mat-button primary [disabled]="updateDisabled" (click)="saveAbsences()">Update</button>
 		</div>
 	</div> 
 	<div class= "calendar">
