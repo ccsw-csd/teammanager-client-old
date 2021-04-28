@@ -34,7 +34,7 @@
           Actions
         </th>
         <td class="cell-actions" mat-cell *matCellDef="let listadoCentrosFestivos" layout="row">
-          <mat-icon [ngStyle]="{'color':'black'}" (click)="edit(listadoCentrosFestivos.id)">edit</mat-icon>
+          <mat-icon [ngStyle]="{'color':'black'}" (click)="edit(listadoCentrosFestivos.id, listadoCentrosFestivos.name)">edit</mat-icon>
         </td>
       </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
