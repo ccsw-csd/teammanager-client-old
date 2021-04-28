@@ -25,7 +25,6 @@ export class EditCentroComponent implements OnInit {
   // tslint:disable-next-line: typedef
   ngOnInit() {
     this.getFestives();
-    console.log(this.data);
   }
 
   // tslint:disable-next-line: typedef
