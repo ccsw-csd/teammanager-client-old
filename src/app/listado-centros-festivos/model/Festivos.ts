@@ -1,7 +1,7 @@
 export class Festivos
 {
   id?: number;
-  centerid?: string;
+  centerid?: number;
   year?: number;
   month?: number;
   date?: Date;

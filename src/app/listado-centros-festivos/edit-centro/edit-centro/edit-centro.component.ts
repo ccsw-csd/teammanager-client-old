@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit, SimpleChanges } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Festivos } from '../../model/Festivos';
+import { InfoCentro } from '../../model/infoCentro';
 import { ListadoCentrosFestivosService } from '../../service/ListadoCentrosFestivos.service';
 
 @Component({
@@ -18,20 +19,20 @@ export class EditCentroComponent implements OnInit {
   dateFromFestives!: Date;
   constructor(
     private listadoCentrosFestivosService: ListadoCentrosFestivosService,
-    @Inject(MAT_DIALOG_DATA) public ID: number,
-    @Inject(MAT_DIALOG_DATA) public nameCentro: string
+    @Inject(MAT_DIALOG_DATA) public data: InfoCentro,
   ) { }
 
   // tslint:disable-next-line: typedef
   ngOnInit() {
     this.getFestives();
+    console.log(this.data);
   }
 
   // tslint:disable-next-line: typedef
   saveFestives(){
     this.isLoading = true;
-    console.log(this.newFestives);
-    this.listadoCentrosFestivosService.saveFestives(this.year, this.ID, this.newFestives).subscribe(() => {
+    // tslint:disable-next-line: no-non-null-assertion
+    this.listadoCentrosFestivosService.saveFestives(this.year, this.data.centerid!, this.newFestives).subscribe(() => {
       this.getFestives();
       this.isLoading = false;
     });
@@ -56,11 +57,12 @@ export class EditCentroComponent implements OnInit {
   getFestives(){
     this.isLoading = true;
 
-    this.listadoCentrosFestivosService.getFestives(this.ID, this.year).subscribe(data => {
+    // tslint:disable-next-line: no-non-null-assertion
+    this.listadoCentrosFestivosService.getFestives(this.data.centerid!, this.year).subscribe(data => {
       this.festives = data;
       this.isLoading = false;
 
-      this.newFestives = this.festives.map(item => new Date (item.date != undefined ? item.date : ''));
+      this.newFestives = this.festives.map(item => new Date (item.date !== undefined ? item.date : ''));
 
     });
   }

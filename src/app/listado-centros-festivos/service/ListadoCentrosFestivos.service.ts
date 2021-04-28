@@ -17,8 +17,8 @@ export class ListadoCentrosFestivosService {
     return this.http.get<ListadoCentrosFestivos[]>(environment.server + '/center/festiveCenter/');
   }
 
-  getFestives(centerID: number, year: number): Observable<Festivos[]> {
-    return this.http.post<Festivos[]>(environment.server + '/festives/editFestives/', {centerID, year});
+  getFestives(centerid: number, year: number): Observable<Festivos[]> {
+    return this.http.post<Festivos[]>(environment.server + '/festives/editFestives/', {centerid, year});
   }
   private convertArrayDateToString(dates: Date[]): string[] {
     return dates.map(item => this.convertDateToString(item));
