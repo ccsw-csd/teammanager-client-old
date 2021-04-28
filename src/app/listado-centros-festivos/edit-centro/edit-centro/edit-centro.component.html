@@ -2,14 +2,14 @@
 	<div class="center">
     <h2>{{this.data.name}}</h2>
 		<mat-form-field>
-			<mat-label>Selecciona el año</mat-label>
+			<mat-label>Select the year</mat-label>
 			<mat-select [(ngModel)]=year (selectionChange)="getFestives()">
 				<mat-option [value]="actualYear-1">{{actualYear-1}}</mat-option>
 				<mat-option [value]="actualYear" selected>{{actualYear}}</mat-option>
 				<mat-option [value]="actualYear+1">{{actualYear+1}}</mat-option>
 			</mat-select>
 		</mat-form-field>
-		<button mat-button primary (click)="saveFestives()">Guardar</button>
+		<button mat-button primary (click)="saveFestives()">Save</button>
 	</div>
 	<div class= "calendar">
 		<app-month-calendar-festive [year]=year [month]=1 [festives]=festives (newFestive)="addNewFestive($event)"></app-month-calendar-festive>
