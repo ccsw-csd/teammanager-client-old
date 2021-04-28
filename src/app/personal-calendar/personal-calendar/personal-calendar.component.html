@@ -1,14 +1,40 @@
 <div>
 	<div class="center">
-		<mat-form-field>
-			<mat-label>Selecciona año</mat-label>
-			<mat-select [(ngModel)]=year (selectionChange)="getAbsences()">
-				<mat-option [value]="actualYear-1">{{actualYear-1}}</mat-option>
-				<mat-option [value]="actualYear" selected>{{actualYear}}</mat-option>
-				<mat-option [value]="actualYear+1">{{actualYear+1}}</mat-option>
-			</mat-select>
-		</mat-form-field>
-		<button mat-button primary (click)="saveAbsences()">Guardar</button>
+		<div style="display:flex; flex-direction: row; flex:1">
+			<div style="display:flex; flex-direction: column; width: 125px">
+				<div style="display:flex; flex-direction: row;">
+					<div class="legend" style="background-color: #aae3ff;"></div>
+					<div>Festive</div>
+				</div>
+				<div style="display:flex; flex-direction: row;">
+					<div class="legend" style="background-color: #ffffaa;"></div>
+					<div>Inactivity</div>
+				</div>
+			</div>
+			<div style="display:flex; flex-direction: column; width: 200px">
+				<div style="display:flex; flex-direction: row;">
+					<div class="legend" style="background-color: rgb(194, 194, 204);"></div>
+					<div>Weekend</div>
+				</div>
+				<div style="display:flex; flex-direction: row;">
+					<div class="legend-day">(xx)</div>
+					<div>Effective working days</div>
+				</div>
+			</div>
+		</div>
+		<div style="flex:1;text-align: center;">
+			<mat-form-field style="width: 100px">
+				<mat-label>Selected Year</mat-label>
+				<mat-select [(ngModel)]=year (selectionChange)="getAbsences()">
+					<mat-option [value]="actualYear-1">{{actualYear-1}}</mat-option>
+					<mat-option [value]="actualYear" selected>{{actualYear}}</mat-option>
+					<mat-option [value]="actualYear+1">{{actualYear+1}}</mat-option>
+				</mat-select>
+			</mat-form-field>
+		</div>
+		<div style="flex:1;text-align: right;">
+			<button mat-button primary (click)="saveAbsences()">Update</button>
+		</div>
 	</div> 
 	<div class= "calendar">
 		<app-month-calendar [year]=year month=1 [absences]=absences[1] (newAbsence)="addNewAbsence($event)"></app-month-calendar>

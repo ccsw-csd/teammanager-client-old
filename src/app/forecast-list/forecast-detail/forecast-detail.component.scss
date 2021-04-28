@@ -7,6 +7,14 @@
   height: calc(100vh - 135px);
 }
 
+.legend {
+  width:24px; 
+  height:16px; 
+  margin: 2px 10px 0px 0px; 
+  background-color: #ffffaa; 
+  border: 1px #bebebe solid;
+}
+
 h1 {
   color: $title;
   font-size: 20px;

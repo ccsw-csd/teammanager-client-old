@@ -1,6 +1,6 @@
 <div class="calendar-wrapper">	 
 	<div class="calendar-header">
-		<h1>{{monthName[month-1]}}, {{ year }}</h1>
+		<h1>{{monthName[month-1]}}, {{ year }}</h1>({{diasLaborales}})
 	</div>
 	<div class="calendar-data">
 		<div *ngFor="let day of week" class="day-name">{{day | slice:0:3}}</div>

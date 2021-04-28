@@ -17,7 +17,7 @@ export class ModifyPersonComponent implements OnInit {
   selectedCenter: CenterDto|undefined;
   isloading = false;
   person: PersonDto = new PersonDto();
-  title: string|undefined = "Creacion de Usuario";
+  title: string|undefined = "Create user";
 
   constructor(
     public dialogRef: MatDialogRef<ModifyPersonComponent>, 
@@ -33,7 +33,7 @@ export class ModifyPersonComponent implements OnInit {
 
     if(!this.data.create){
       this.person = this.data.person;
-      this.title = "Editar información personal";
+      this.title = "Edit user profile";
     }
 
     this.person.username = this.data.user;
@@ -47,7 +47,7 @@ export class ModifyPersonComponent implements OnInit {
            || (this.person.email == null) 
            || (this.person.name == null)
            || (this.person.lastname == null) )  {
-            this.snackService.showMessage('Faltan campos por rellenar');
+            this.snackService.showMessage('Missing fields to fill.');
            }
     else{
       switch (option) {
@@ -92,7 +92,7 @@ export class ModifyPersonComponent implements OnInit {
         this.dialogRef.close(true);
       }
       else{
-        this.snackService.showMessage('El código SAGA está duplicado en BBDD. Por favor revíselo o póngase en contacto con el administrador.');
+        this.snackService.showMessage('The SAGA code is duplicated in the BBDD. Please review it or contact the administrator.');
         this.dialogRef.close(false);
       }
       this.isloading = false;

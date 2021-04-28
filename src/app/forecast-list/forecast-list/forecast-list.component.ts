@@ -50,7 +50,7 @@ export class ForecastListComponent implements OnInit {
   }
   
   detailForecast(row: any): void{
-    this.router.navigate(['forecast-detail'], { queryParams: {id: row.id } });
+    this.router.navigate(['forecast-detail'], { queryParams: {id: row.id, name: row.name } });
   }
 
   changeAdminView(event: MatSlideToggleChange) {

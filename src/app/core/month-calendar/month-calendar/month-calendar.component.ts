@@ -14,35 +14,35 @@ export class MonthCalendarComponent implements OnInit, OnChanges {
   @Output() newAbsence = new EventEmitter<any>();
   
   week: string[] = [
-    "Lunes",
-    "Martes",
-    "Miercoles",
-    "Jueves",
-    "Viernes",
-    "Sabado",
-    "Domingo"
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday"
   ];
 
   monthName: string[] = [
-    "Enero",
-    "Febrero",
-    "Marzo", 
-    "Abril",
-    "Mayo", 
-    "Junio", 
-    "Julio", 
-    "Agosto",
-    "Septiembre",
-    "Octubre",
-    "Noviembre",
-    "Diciembre"
+    "January",
+    "February",
+    "March", 
+    "April",
+    "May", 
+    "June", 
+    "July", 
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
   ];
 
 
   monthSelect: any[] | undefined;
   dateSelect: any;
   dateValue: any;
-
+  diasLaborales: number = 20;
 
   constructor(
     private router: Router
@@ -79,6 +79,8 @@ export class MonthCalendarComponent implements OnInit, OnChanges {
     const numberDays = Math.round(diffDays);
     const dayAbsenceObject: any[] = [];
     
+    this.diasLaborales = 0;
+
     if(this.absences != null){
       for(var i in this.absences){
         dayAbsenceObject.push(moment(this.absences[i].date, "YYYY-MM-D"));
@@ -102,6 +104,9 @@ export class MonthCalendarComponent implements OnInit, OnChanges {
           };
         }
       }
+
+      if (dayObject.isoWeekday() < 6) this.diasLaborales++; 
+      
       return {
         name: dayObject.format("dddd"),
         value: a,
