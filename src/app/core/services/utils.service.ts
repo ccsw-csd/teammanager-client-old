@@ -12,6 +12,6 @@ export class UtilsService {
   constructor(private http: HttpClient) { }
 
   getAppVersion(): Observable<any> {
-    return this.http.get<CenterDto[]>(environment.server+ 'utils/version');
+    return this.http.get<CenterDto[]>(environment.server+ '/utils/version');
   }
 }
