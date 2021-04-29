@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit, SimpleChanges } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Festivos } from '../../model/Festivos';
 import { InfoCentro } from '../../model/InfoCentro';
 import { ListadoCentrosFestivosService } from '../../service/ListadoCentrosFestivos.service';
@@ -20,11 +20,16 @@ export class EditCentroComponent implements OnInit {
   constructor(
     private listadoCentrosFestivosService: ListadoCentrosFestivosService,
     @Inject(MAT_DIALOG_DATA) public data: InfoCentro,
+    public dialogRef: MatDialogRef<EditCentroComponent>,
   ) { }
 
   // tslint:disable-next-line: typedef
   ngOnInit() {
     this.getFestives();
+  }
+
+  close() {
+    this.dialogRef.close();
   }
 
   // tslint:disable-next-line: typedef

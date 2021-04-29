@@ -49,7 +49,7 @@ export class ListadoCentrosFestivosComponent implements OnInit {
 
     if (centerid != null && name != null){
       // tslint:disable-next-line: deprecation
-        const dialogRef = this.dialog.open(EditCentroComponent, {width: '90%', height: 'fit-content', data: this.infoCentro});
+        const dialogRef = this.dialog.open(EditCentroComponent, {maxWidth: '90vw', width: '90vw', height: 'calc(100vh - 100px)', data: this.infoCentro});
         dialogRef.afterClosed().subscribe(() => {
           this.loadPage();
         });
