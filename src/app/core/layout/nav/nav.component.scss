@@ -1,13 +1,13 @@
 @import "./src/assets/scss/master";
 @import '../../../../styles';
 nav {
-  background-color: $secondary;
+  background-color: $primary;
   height: 100%;
   a {
     span {
       font-size: 16px;
       padding: 0 20px 0 14px;
-      color: $white;
+      color: $background;
       white-space: nowrap;
     }
   }
@@ -23,7 +23,7 @@ nav {
     position: absolute;
     width: 100%;
     height: inherit;
-    border-left: 6px solid $white;
+    border-left: 6px solid $background;
     box-sizing: border-box;
   }
 }

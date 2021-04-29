@@ -6,22 +6,22 @@
     <div id="login-right">        
         <div id="card" style="display:flex;flex-direction: column;">
             <div style="flex:1"></div>
-            <div style="height:50px" id="header">
-                Logo - TeamManager                
+            <div id="header">
+                <img src="assets/images/logo-negative.png" alt="" />
             </div>
 
             <div style="height:200px;width:300px;" id="login-card">
                 <mat-form-field appearance="standard">
-                    <mat-label>Usuario</mat-label>
-                    <input matInput name="user" [(ngModel)]="user" required matInput placeholder="Usuario" />
-                    <mat-error>Campo usuario vacío</mat-error>
+                    <mat-label>Username</mat-label>
+                    <input matInput name="user" [(ngModel)]="user" required matInput placeholder="Username" (keyup.enter)="login()"/>
+                    <mat-error>this field cannot be empty</mat-error>
                 </mat-form-field>
                 <mat-form-field appearance="standard">
                     <mat-label>Contraseña</mat-label>
-                    <input matInput name="password" [(ngModel)]="password" required matInput type="password" placeholder="Contraseña" />
-                    <mat-error>Campo contraseña vacío</mat-error>
+                    <input matInput name="password" [(ngModel)]="password" required matInput type="password" placeholder="Password" (keyup.enter)="login()"/>
+                    <mat-error>this field cannot be empty</mat-error>
                 </mat-form-field>                
-                <button mat-button primary [disabled]="user == '' || password == ''" (click)="login()">Entrar</button>
+                <button mat-button primary [disabled]="user == '' || password == ''" (click)="login()">Login</button>
             </div>
             <div style="flex:1"></div>
         </div>

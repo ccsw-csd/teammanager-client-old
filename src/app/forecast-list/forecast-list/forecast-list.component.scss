@@ -1,0 +1,85 @@
+@import './../../../assets/scss/master';
+
+.content {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: white;
+
+  .title-block {
+    width: 100%;
+    height: 70px;
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+
+    button {
+      width: 150px;
+    }
+    
+    h1 {
+      color: #838383;
+      font-size: 20px;
+      font-weight: 700;
+      margin-right: 25px;
+    }
+  }
+
+  .containerTableList {
+    flex: 1;
+    
+    .tableList {
+      width: 100%;
+      max-height: calc(100vh - 270px);
+      overflow: auto;
+    }
+  }
+
+
+  .cell-left {
+    text-align: left;
+  }
+
+  .cell-center {
+    text-align: center;
+  }
+  
+  .cell-actions {
+    width: 90px;
+    text-align: center;
+    padding-right: 0px;
+  }
+  
+  .cell-button {
+    background-color: $foreground;
+    width: 35px;
+    min-width: 35px;
+    
+    .material-icons {
+      color: $icon;
+    }
+  }
+  
+  td {
+    background-color: $foreground !important;
+
+    button {
+      background-color: inherit;
+    }
+  }
+  
+  mat-paginator {
+    background-color: $table-header;
+  }
+  
+}
+
+
+
+.externalGroup {
+  td {
+    background-color: #fafafa !important;
+    color: $icon;
+  }
+}
+

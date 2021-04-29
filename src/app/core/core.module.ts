@@ -24,6 +24,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatCardModule} from '@angular/material/card';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { MonthCalendarModule } from './month-calendar/month-calendar.module';
+import { MonthCalendarFestiveModule } from './month-calendar-festive/month-calendar-festive.module';
 
 
 @NgModule({
@@ -40,7 +42,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatIconModule,
     MatProgressSpinnerModule,
     MatFormFieldModule,
-    MatInputModule,    
+    MatInputModule,
     RouterModule,
     MatMenuModule,
     MatDialogModule,
@@ -48,14 +50,16 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatPaginatorModule,
     MatCardModule,
     MatChipsModule,
-    MatTooltipModule,    
+    MatTooltipModule,
+    MonthCalendarModule,
+    MonthCalendarFestiveModule,
   ],
   providers: [
     HttpClientModule,
     { provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true },
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
     { provide: MatDialogRef, useValue: {}},
-    { provide: MAT_DIALOG_DATA, useValue:{}},
+    { provide: MAT_DIALOG_DATA, useValue: {}},
     JwtHelperService,
     UserResolverService,
   ],
@@ -70,7 +74,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatIconModule,
     MatProgressSpinnerModule,
     MatFormFieldModule,
-    MatInputModule,    
+    MatInputModule,
     RouterModule,
     MatMenuModule,
     MatDialogModule,
@@ -79,6 +83,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatCardModule,
     MatChipsModule,
     MatTooltipModule,
+    MonthCalendarModule,
+    MonthCalendarFestiveModule,
   ],
 })
 export class CoreModule { }

@@ -6,17 +6,21 @@
       </button>
     </mat-toolbar-row>
   
-    <mat-toolbar-row routerLink="/dashboard">
-      Logo - TeamManager
+    <mat-toolbar-row routerLink="/main">
+      <img src="assets/images/logo.png" height="40px" alt="" />
     </mat-toolbar-row>
   
     <mat-toolbar-row class="header-submenu">
       <mat-menu #menu="matMenu" xPosition="before" yPosition="below">
         <mat-divider class="divider">
         </mat-divider>
+        <button mat-menu-item (click)="update()">
+          <mat-icon class="dark">perm_identity</mat-icon>
+          <span>Edit profile</span>
+        </button>
         <button mat-menu-item (click)="logout()">
-          <mat-icon>input</mat-icon>
-          <span>Cerrar sesión</span>
+          <mat-icon class="dark">logout</mat-icon>
+          <span>Logout</span>
         </button>
       </mat-menu>
   

@@ -1,7 +1,7 @@
 @import './src/assets/scss/master';
 
 .container {
-  background-color: $dark;
+  background-color: $primary;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -15,6 +15,11 @@
   button {
     color: white;
   }
+}
+
+
+.dark {
+  color: $icon;
 }
 
 .menu-button {

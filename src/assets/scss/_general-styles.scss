@@ -1,22 +1,97 @@
-body {
-  font-family: 'Roboto', 'Helvetica-Neue', sans-serif;
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700&display=swap");
+@import '~@angular/material/theming';
+
+@import "./color";
+
+* {
+  box-sizing: border-box;
+  font-family: "Source Sans Pro", sans-serif !important;
+  &::-webkit-scrollbar-track {
+    background-color: none;
+  }
+  &::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+    background-color: none;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: $scrollbar;    
+  }
+  
+  /* Handle on hover */
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: $scrollbar-hover;
+  }
+
+  &::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px #eaeaea;
+    border-radius: 10px;
+  }
+}
+
+.mat-dialog-container::before {
+  overflow: hidden !important;
+}
+
+
+html,
+body,
+header,
+nav,
+main {
+  position: relative;
+  width: 100%;
+  height: 100%;
   margin: 0;
-  overflow-x: hidden;
-  overflow-y: hidden;
+  padding: 0;
+  color: $body;
+}
+.mat-cell {
+  font-family: "Source Sans Pro", sans-serif !important;
+  letter-spacing: normal;
+  font-size: 16px !important;
 }
 
-h1,
-h2,
-h3 {
-  font-weight: 500 !important;
+body {
+  background-color: $background;
 }
 
+nav > * ~ * {
+  color: $foreground;
+}
+.material-icons {
+  font-family: "Material Icons" !important;
+  color: white;
+}
 h1 {
-  color: $dark;
-  font-weight: 500 !important;
-  /*font-size: 40px;
-  margin-top: -1px;*/
+  color: $title;
+  font-size: 20px;
+  font-weight: 700;
 }
+h2 {
+  color: $title;
+  font-size: 20px;
+  font-weight: 400;
+}
+mat-tab-group {
+  height: 100%;
+  mat-tab-header {
+    width: fit-content;
+  }
+  .mat-tab-label {
+    font-size: 18px !important;
+    font-weight: 600 !important;
+  }
+  mat-tab-body {
+    padding: 1em 0 0 0;
+  }
+  .mat-tab-body-wrapper {
+    height: 100%;
+  }
+}
+
 
 .mat-h1 {
   font-weight: 500 !important;
@@ -32,7 +107,7 @@ button:active {
 }
 
 .title-secondcolor {
-  color: $active-salmon;
+  color: $selected;
   font-family: 'Source Sans Pro', sans-serif;
 }
 
@@ -85,7 +160,7 @@ a[href] {
 }
 
 button {
-  font-size: 16px;
+  font-size: 14px;
   min-width: 100px;
   min-height: 40px;
   max-height: 40px;
@@ -169,21 +244,6 @@ button[secondary] {
   color: $white;
 }
 
-html,
-body {
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-}
-
-/** Para quitar el focus de los botones al volver a la pantalla **/
-button.cdk-program-focused {
-  background-color: inherit;
-
-  div {
-    background-color: inherit;
-  }
-}
 
 /** Estilos para el texto de compilación **/
 span.text_grey {
@@ -220,7 +280,9 @@ span.text_red {
       .title {
         h1 {
           margin-bottom: 0;
-          color: black;
+          color: $title;
+          font-size: 20px;
+          font-weight: 700;
         }
       }
       .button {
@@ -252,15 +314,10 @@ span.text_red {
         height: auto;
       }
     }
-    h1,
-    h2 {
-      margin: 0;
-      color: black;
-      margin-bottom: 1em;
-    }
-
     h1 {
-      font-size: 2vw;
+      color: $title;
+      font-size: 20px;
+      font-weight: 700;
     }
     h2 {
       font-size: 1.2vw;
@@ -274,6 +331,69 @@ span.text_red {
         margin: 0;
       }
     }
+  }
+}
+
+table:not(.mat-calendar-table) {
+  width: 100%;
+  box-shadow: none !important;
+
+  th {
+    // padding-left: 1em;
+    // padding-right: 1em;
+    background-color: $table-header;
+    font-size: 16px;
+    font-weight: 700;
+    border-bottom-color: #36b8e0;
+  }
+
+  td {
+    // padding-left: 1em;
+    // padding-right: 1em;
+    background-color: $table-header;
+    border-bottom-color: #36b8e0 !important;
+    height: 3.5em;
+  }
+
+  input {
+    background: none;
+    height: auto;
+    outline: none;
+    border: none;
+    padding: 0;
+    &::placeholder {
+      opacity: 0.5;
+    }
+  }
+
+  input[type="number"] {
+    -moz-appearance: textfield;
+
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }
+
+  .mat-footer-row > * {
+    background-color: $table-result;
+    font-weight: 700;
+    border-bottom-color: white !important;
+  }
+
+  .mat-cell,
+  .mat-footer-cell {
+    font-size: unset;
+  }
+
+  // Optional classes for special table styles
+  .center {
+    text-align: center !important;
+  }
+  .editable {
+    background-color: $table-editable-field;
+    border-bottom-color: white;
   }
 }
 
@@ -300,4 +420,8 @@ span.text_red {
   .mat-form-field-appearance-outline .mat-form-field-outline-thick {
     color: $primary !important;
   }
+}
+
+*:focus {
+  outline: none !important;
 }

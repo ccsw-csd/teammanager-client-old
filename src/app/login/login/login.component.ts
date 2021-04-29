@@ -1,7 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { PersonDto } from 'src/app/core/person/personDto';
+import { AuthService } from 'src/app/core/services/auth.service';
 import { SnackbarService } from 'src/app/core/services/snackbar.service';
 import { ResponseCredentials } from 'src/app/core/to/ResponseCredentials';
+import { ModifyPersonComponent } from '../modify-person/modify-person.component';
 import { LoginService } from '../services/login.service';
 
 @Component({
@@ -14,14 +18,20 @@ export class LoginComponent implements OnInit {
   user: string = "";
   password: string = "";
   isloading : boolean = false;
+  person: PersonDto = new PersonDto();
 
   constructor(
     private loginService: LoginService,
+    private auth: AuthService,
     private router: Router,
     private snackbarService: SnackbarService,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
+    if(this.auth.getToken() != null){
+      this.router.navigate(['main']);
+    }
   }
 
   login() {
@@ -36,15 +46,34 @@ export class LoginComponent implements OnInit {
 
         this.loginService.putCredentials(res);
 
-        this.loginService.getUserInfo().subscribe();
-
-        this.router.navigate(['main']);
-        
-        this.isloading = false;
+        this.loginService.personExists(this.user).subscribe((res: PersonDto) => {
+          this.person = res;
+          if(this.person.username == null){
+            this.dialog
+              .open(ModifyPersonComponent, {
+                width: '700px',
+                height: '400px',
+                data: {
+                  user: this.user,
+                  create: true
+                },
+              }).afterClosed()
+              .subscribe((result) => {
+                if(result)
+                  this.router.navigate(['main']);
+              })
+            this.isloading = false;
+          }
+          else{
+            this.router.navigate(['main']);
+            this.isloading = false;
+          }
+          
+        },);
       },
       () => {
 
-        this.snackbarService.error('Credenciales incorrectas.');
+        this.snackbarService.error('Wrong credentials.');
         this.isloading = false;
       }
     );

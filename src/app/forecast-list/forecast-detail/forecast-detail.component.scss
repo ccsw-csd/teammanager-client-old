@@ -1,0 +1,129 @@
+@import './../../../assets/scss/master';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  height: calc(100vh - 135px);
+}
+
+.legend {
+  width:24px; 
+  height:16px; 
+  margin: 2px 10px 0px 0px; 
+  background-color: #ffffaa; 
+  border: 1px #bebebe solid;
+}
+
+h1 {
+  color: $title;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.filters {
+  text-align: end;
+  display: flex;
+
+  .filter-input {
+    width: 200px;
+  }
+
+  .filter-input-range {
+    width: 0px;
+    overflow: hidden;
+    margin-left: 20px;
+  }
+}
+
+.total{
+  font-weight: bold;
+}
+
+.rangeButton{
+  margin-left: 10px;
+  padding-bottom: 9px;
+  background-clip: content-box;
+  background-color: #12abdb;
+  color: #f5f5f5;
+}
+
+.tableList {
+  overflow: auto;
+  max-height: calc(100vh - 245px);
+
+  .upperHeader{
+    text-align: center;
+  }
+
+  tr.mat-header-row {
+    height: 40px;
+  }
+
+  tr.mat-row {
+    height: 30px !important;
+    max-height: 30px !important;
+  }
+
+  th.day {
+    font-size: 14px;
+  }
+
+  td {
+    background-color: $foreground !important;
+    height: 20px !important;
+    max-height: 20px !important;
+  }
+
+
+  .mat-column-name{
+    width: 300px !important;
+    min-width: 300px  !important;
+  }
+
+  .mat-column-countLab, 
+  .mat-column-countF, 
+  .mat-column-countA {
+    width: 80px !important;
+    min-width: 80px  !important;
+    text-align: center;
+  }
+
+  .mat-column-countA {
+    border-right: 1px solid rgb(54, 184, 224);
+  }
+
+  .name-total{
+    background-color: #f5f5f5 !important;
+    font-weight: bold;
+  }
+  .count-total{
+    background-color: #f5f5f5 !important;
+    font-weight: bold;
+  }
+
+
+  .day{
+    width:25px !important;
+    min-width: 25px  !important;
+    border-left: 1px solid #f5f5f5;
+    text-align: center;
+  }
+
+  .Ausencia{
+    background-color: #ffffaa!important;
+  }
+
+  .Weekend{
+    background-color: #dadada  !important;
+  }
+
+  .Festivo{
+    background-color: #aae3ff !important;
+  }
+
+  .Laboral{
+    background-color: $foreground !important;
+  }
+
+}

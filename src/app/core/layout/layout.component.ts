@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatSidenav, MatSidenavContent } from '@angular/material/sidenav';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 
@@ -7,7 +8,12 @@ import { AuthService } from '../services/auth.service';
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss']
 })
-export class LayoutComponent implements OnInit {
+export class LayoutComponent implements OnInit { 
+
+  @ViewChild('sidenav') 
+  private sideNav?: MatSidenav;
+
+  openNav? : boolean = true;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -25,6 +31,11 @@ export class LayoutComponent implements OnInit {
 
       //TODO no existe el usuario lanzar pantalla de edición
     }
+  }
+
+  public toggleMenu() : void {
+    this.sideNav?.toggle();
+    this.openNav = this.sideNav?.opened;
   }
   
   

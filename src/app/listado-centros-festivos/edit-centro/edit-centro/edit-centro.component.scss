@@ -1,0 +1,84 @@
+@import '../../../../assets/scss/master';
+
+
+.header {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  height: 48px;
+
+  .header-left {
+    flex: 1;
+  }
+
+  .header-right {
+    flex: 1;
+    text-align: right;
+  }
+}
+
+
+
+
+
+.calendar {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 4;
+  flex-wrap: wrap;
+  width: 100%;
+
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0px 0px 10px 0px;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: calc(100vh - 247px);  
+}
+
+app-month-calendar-festive {
+  flex: 1;
+  text-align: -webkit-center;
+  flex-basis: 25%;
+}
+    
+
+/*
+
+
+.calendar {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 4;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 600px;
+  overflow-y: scroll;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+*/
+
+/*
+
+app-month-calendar {
+  flex: 1;
+  text-align: -webkit-center;
+  flex-basis: 25%;
+}
+*/
+
+button{
+  width: 150px;
+}
+
+
+.footer {
+  text-align: right;
+
+  button {
+    margin-left: 10px;
+  }
+}

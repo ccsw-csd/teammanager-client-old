@@ -1,0 +1,73 @@
+@import "./src/assets/scss/master";
+
+.container{
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  overflow: hidden;
+  height: 100%;
+}
+
+.titulo {
+  height: 50px;
+}
+
+.form-nombre {
+  height: 50px;
+  width: 500px;
+  display: flex;
+
+  mat-form-field {
+    flex: 1;
+  }
+
+}
+
+.zona-config {
+  flex: 1;
+  width: 100%;  
+  height: calc(100vh - 296px);
+  display: flex;
+  flex-direction: row;
+
+  .zona-config-izq {
+    flex: 1;
+  }
+
+  .zona-config-der {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+}
+
+.input-form {
+  width: 90%;
+}
+
+.lista {
+  overflow-y: auto;
+  height: calc(100vh - 490px);
+}
+
+.lista-doble {
+  height: calc(100vh - 315px);
+  overflow-y: auto;
+  margin-right: 25px;
+}
+
+mat-icon{
+  cursor: pointer;
+}
+button {
+  width: 150px;
+  margin-left: 10px;
+}
+
+.zona-botones{
+  display: flex;
+  flex-direction: row-reverse;
+  width: 100%;
+  margin-top: 10px;
+}

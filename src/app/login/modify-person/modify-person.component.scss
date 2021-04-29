@@ -1,0 +1,50 @@
+@import './../../../assets/scss/master.scss';
+
+.buttons {
+  margin-top: 1rem;
+  padding-bottom: 1rem;
+
+  .button{
+    float: right;
+    margin-right: 10px;
+  }
+
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  margin-left: auto;
+  padding-top: 2px;
+  .icon{
+    margin-left: auto;
+    opacity: 0.5;
+  }
+  .icon:hover{
+      cursor: pointer;
+      opacity: 1;
+  }
+}
+.column {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  margin-right: 1rem;
+}
+
+.read-only {
+  background-color: #e5e7e9;
+}
+.input {
+  height: 2.25rem;
+  width: 100%;
+  border-radius: 0.25rem;
+  padding-left: 0.75rem;
+}
+.column{
+  display:flex;
+  flex-direction: column;
+  flex:1;
+  margin-right: 1rem;
+}
+
