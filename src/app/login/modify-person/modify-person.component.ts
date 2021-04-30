@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit, CUSTOM_ELEMENTS_SCHEMA, Input } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { CenterDto } from 'src/app/core/center/centerDto';
-import { PersonDto } from 'src/app/core/person/personDto';
+import { CenterDto } from 'src/app/core/to/CenterDto';
+import { PersonDto } from 'src/app/core/to/PersonDto';
 import { CenterService } from 'src/app/core/services/center.service';
 import { SnackbarService } from 'src/app/core/services/snackbar.service';
 import { LoginService } from '../services/login.service';

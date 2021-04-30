@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, OnChanges, SimpleChanges, Output, EventEmitter  } from '@angular/core';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
-import { Festivos } from 'src/app/listado-centros-festivos/model/Festivos';
+import { Festivos } from 'src/app/festives/model/Festivos';
 
 @Component({
   selector: 'app-month-calendar-festive',

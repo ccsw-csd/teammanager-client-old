@@ -2,7 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ModifyPersonComponent } from 'src/app/login/modify-person/modify-person.component';
 import { LoginService } from 'src/app/login/services/login.service';
-import { PersonDto } from '../../person/personDto';
+import { PersonDto } from '../../to/PersonDto';
 import { AuthService } from '../../services/auth.service';
 import { SnackbarService } from '../../services/snackbar.service';
 import { User } from '../../to/User';

@@ -16,38 +16,36 @@ import { ForecastListComponent } from './forecast-list/forecast-list/forecast-li
 import { ForecastDetailComponent } from './forecast-list/forecast-detail/forecast-detail.component';
 import { DateAdapter, MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { ListadoCentrosFestivosComponent } from './listado-centros-festivos/listado-centros-festivos.component';
 import { MatSortModule } from '@angular/material/sort';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { CustomDateAdapter } from './core/date-adapter/custom-date-adapter';
-import { EditCentroComponent } from './listado-centros-festivos/edit-centro/edit-centro/edit-centro.component';
+import { FestivesModule } from './festives/festives.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     ForecastListComponent,
     ForecastDetailComponent,
-    ListadoCentrosFestivosComponent,
-    EditCentroComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    CoreModule,
-    LoginModule,
-    PersonalCalendarModule,
     MatDatepickerModule,
     MatGridListModule,
     FormsModule,
     MatSelectModule,
-    ListadoGruposModule,
     ReactiveFormsModule,
     MatPaginatorModule,
     MatNativeDateModule,
     MatProgressSpinnerModule,
     MatSortModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    CoreModule,
+    LoginModule,
+    PersonalCalendarModule,
+    ListadoGruposModule,
+    FestivesModule,
   ],
   providers: [{ provide: DateAdapter, useClass: CustomDateAdapter }],
   bootstrap: [AppComponent]
@@ -55,7 +53,7 @@ import { EditCentroComponent } from './listado-centros-festivos/edit-centro/edit
 export class AppModule {
 
   constructor(private dateAdapter: DateAdapter<Date>) {
-    this.dateAdapter.setLocale('es-ES');
+    this.dateAdapter.setLocale('en-EN');
   }
 
  }

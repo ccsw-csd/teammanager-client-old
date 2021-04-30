@@ -1,7 +1,7 @@
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import * as moment from 'moment';
 import { Moment } from 'moment';
-import { PersonAbsenceDto } from 'src/app/core/person/personAbsenceDto';
+import { PersonAbsenceDto } from 'src/app/core/to/PersonAbsenceDto';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { User } from 'src/app/core/to/User';
 import { PersonalCalendarService } from '../services/personal-calendar.service';
