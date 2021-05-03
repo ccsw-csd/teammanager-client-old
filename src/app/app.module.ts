@@ -12,42 +12,45 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
 import { ListadoGruposModule } from './listado-grupos/listado-grupos.module';
-import { ForecastListComponent } from './forecast-list/forecast-list/forecast-list.component';
-import { ForecastDetailComponent } from './forecast-list/forecast-detail/forecast-detail.component';
-import { DateAdapter, MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
+import { ForecastListComponent } from './forecast/forecast-list/forecast-list.component';
+import { ForecastDetailComponent } from './forecast/forecast-detail/forecast-detail.component';
+import { DateAdapter, MatNativeDateModule } from '@angular/material/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { ListadoCentrosFestivosComponent } from './listado-centros-festivos/listado-centros-festivos.component';
 import { MatSortModule } from '@angular/material/sort';
+import { ForecastDetailExportDialogComponent } from './forecast/forecast-detail/forecast-detail-export-dialog/forecast-detail-export-dialog.component';
+import {MatRadioModule} from '@angular/material/radio';
+
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { CustomDateAdapter } from './core/date-adapter/custom-date-adapter';
-import { EditCentroComponent } from './listado-centros-festivos/edit-centro/edit-centro/edit-centro.component';
+import { FestivesModule } from './festives/festives.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     ForecastListComponent,
     ForecastDetailComponent,
-    ListadoCentrosFestivosComponent,
-    EditCentroComponent
+    ForecastDetailExportDialogComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    CoreModule,
-    LoginModule,
-    PersonalCalendarModule,
     MatDatepickerModule,
     MatGridListModule,
     FormsModule,
     MatSelectModule,
-    ListadoGruposModule,
     ReactiveFormsModule,
     MatPaginatorModule,
     MatNativeDateModule,
     MatProgressSpinnerModule,
     MatSortModule,
-    MatSlideToggleModule
+    MatRadioModule,
+    MatSlideToggleModule,
+    CoreModule,
+    LoginModule,
+    PersonalCalendarModule,
+    ListadoGruposModule,
+    FestivesModule,
   ],
   providers: [{ provide: DateAdapter, useClass: CustomDateAdapter }],
   bootstrap: [AppComponent]
@@ -55,7 +58,7 @@ import { EditCentroComponent } from './listado-centros-festivos/edit-centro/edit
 export class AppModule {
 
   constructor(private dateAdapter: DateAdapter<Date>) {
-    this.dateAdapter.setLocale('es-ES');
+    this.dateAdapter.setLocale('en-EN');
   }
 
  }

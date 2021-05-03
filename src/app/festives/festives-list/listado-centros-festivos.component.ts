@@ -1,10 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
-import { EditCentroComponent } from './edit-centro/edit-centro/edit-centro.component';
-import { InfoCentro } from './model/InfoCentro';
-import { ListadoCentrosFestivos } from './model/ListadoCentrosFestivos';
-import { ListadoCentrosFestivosService } from './service/ListadoCentrosFestivos.service';
+import { EditCentroComponent } from '../festives-edit/edit-centro.component';
+import { InfoCentro } from '../model/InfoCentro';
+import { ListadoCentrosFestivos } from '../model/ListadoCentrosFestivos';
+import { ListadoCentrosFestivosService } from '../services/ListadoCentrosFestivos.service';
 
 @Component({
   selector: 'app-listado-centros-festivos',

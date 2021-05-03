@@ -8,6 +8,7 @@
   align-items: center;
   max-height: 56px;
   min-height: 56px;
+  overflow:hidden;
 }  
 
 .header-menu {
@@ -21,6 +22,12 @@
 .dark {
   color: $icon;
 }
+
+.feedback-button {
+  width: 50px;
+  min-width: 50px;
+}
+
 
 .menu-button {
   color: white;

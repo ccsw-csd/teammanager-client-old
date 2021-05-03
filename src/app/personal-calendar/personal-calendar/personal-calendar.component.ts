@@ -1,7 +1,9 @@
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import * as moment from 'moment';
 import { Moment } from 'moment';
-import { PersonAbsenceDto } from 'src/app/core/person/personAbsenceDto';
+import { PersonAbsenceDto } from 'src/app/core/to/PersonAbsenceDto';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { User } from 'src/app/core/to/User';
 import { PersonalCalendarService } from '../services/personal-calendar.service';
 
 @Component({
@@ -16,10 +18,19 @@ export class PersonalCalendarComponent implements OnInit, OnChanges  {
   isloading = false;
   newAbsences: Date[] = [];
   updateDisabled = true;
+  canSave : boolean = true;
   
-  constructor(    private personalService: PersonalCalendarService,) {}
+  constructor(    
+    private personalService: PersonalCalendarService,
+    private authService : AuthService,
+    ) {}
 
   ngOnInit(): void {
+    let userInfo : User | null = this.authService.getUserInfo();
+
+    if (userInfo != null)
+      this.canSave = userInfo.withPON == false;
+
     this.getAbsences();
   }
   
@@ -32,6 +43,7 @@ export class PersonalCalendarComponent implements OnInit, OnChanges  {
 
   addNewAbsence(data: any): void{
     this.updateDisabled = false;
+    this.canSave = true;
 
     switch(data.type) {
       case "laboral":

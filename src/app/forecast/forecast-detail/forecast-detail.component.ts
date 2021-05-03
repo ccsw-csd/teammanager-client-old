@@ -2,11 +2,13 @@ import { CompileShallowModuleMetadata } from '@angular/compiler';
 import { ThrowStmt, typeofExpr } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
 import { debounceTime } from 'rxjs/operators';
 import { ListadoGrupos } from 'src/app/listado-grupos/model/ListadoGrupos';
 import { ForecastService } from '../services/forecast.service';
+import { ForecastDetailExportDialogComponent } from './forecast-detail-export-dialog/forecast-detail-export-dialog.component';
 
 @Component({
   selector: 'app-forecast-detail',
@@ -19,6 +21,7 @@ export class ForecastDetailComponent implements OnInit {
     private route: ActivatedRoute,
     public formBuilder: FormBuilder,
     private forecastService: ForecastService,
+    public dialog: MatDialog,
     ) {this.form = this.formBuilder.group(this.formControl);}
 
   pageNumber = 0;
@@ -393,5 +396,16 @@ export class ForecastDetailComponent implements OnInit {
     if (isFestive) return "day Festivo";
     if (isAbsence) return "day Ausencia";
     return "day Laboral";
+  }
+
+  exportForecast(): void{
+    const dialogRef = this.dialog.open(ForecastDetailExportDialogComponent, {width: "500px", data: {
+      groupId: Number(this.id),
+      init: this.initDate,
+      end: this.endDate
+    }});
+        dialogRef.afterClosed().subscribe(() => {
+        });
+   
   }
 }

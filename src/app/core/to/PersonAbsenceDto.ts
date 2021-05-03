@@ -1,4 +1,4 @@
-import { PersonDto } from "./personDto";
+import { PersonDto } from "./PersonDto";
 
 export class PersonAbsenceDto {
     id: string|undefined;

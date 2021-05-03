@@ -1,0 +1,17 @@
+<div class="bodyAlert">
+    <h1 mat-dialog-title>Excel Type</h1>
+    <div>The selected date range contains multiple months. How do you want to group the export data?</div>
+    <div id="zona-botones">
+            <mat-radio-group class="radio-group" aria-label="Select an option">
+                <mat-radio-button color="primary" value="1" (change)="type = 1" [checked]="true">Sheet per month</mat-radio-button>
+                <mat-radio-button color="primary" value="2" (change)="type = 2" >All in One</mat-radio-button>
+            </mat-radio-group>
+        <div class="botones">
+            <button secondary class="buttonAction" (click)="this.close()">Close</button>
+            <button primary class="buttonAction"  (click)="this.export()">Export</button>
+        </div>
+    </div>
+  </div>
+  <div class="loadWrapper" *ngIf="isloading">
+    <mat-spinner></mat-spinner>
+</div>

@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { PersonDto } from 'src/app/core/person/personDto';
+import { PersonDto } from 'src/app/core/to/PersonDto';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { SnackbarService } from 'src/app/core/services/snackbar.service';
 import { ResponseCredentials } from 'src/app/core/to/ResponseCredentials';

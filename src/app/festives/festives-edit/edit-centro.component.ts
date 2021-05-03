@@ -1,8 +1,8 @@
 import { Component, Inject, OnInit, SimpleChanges } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Festivos } from '../../model/Festivos';
-import { InfoCentro } from '../../model/InfoCentro';
-import { ListadoCentrosFestivosService } from '../../service/ListadoCentrosFestivos.service';
+import { Festivos } from '../model/Festivos';
+import { InfoCentro } from '../model/InfoCentro';
+import { ListadoCentrosFestivosService } from '../services/ListadoCentrosFestivos.service';
 
 @Component({
   selector: 'app-edit-centro',

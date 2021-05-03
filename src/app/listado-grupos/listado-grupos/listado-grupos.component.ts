@@ -87,7 +87,7 @@ export class ListadoGruposComponent implements OnInit {
   // tslint:disable-next-line: typedef
   createGroup() {
     const dialogRef = this.dialog.open(ListadoGruposDialogComponent, {
-      width: '90%', height: '90%', data: {readOnly: false}
+      width: '90%', data: {readOnly: false}
 
   });
     dialogRef.afterClosed().subscribe(() => {
@@ -99,7 +99,7 @@ export class ListadoGruposComponent implements OnInit {
   editGroup(groupEdit: ListadoGrupos, readOnly : boolean){
     if (groupEdit.id !== undefined) {
       this.listadoGruposService.getGroup(groupEdit.id).subscribe(data => {        
-        const dialogRef = this.dialog.open(ListadoGruposDialogComponent, {width: '90%', height: '90%', data: {data:data, readOnly: readOnly}});
+        const dialogRef = this.dialog.open(ListadoGruposDialogComponent, {width: '90%',  data: {data:data, readOnly: readOnly}});
         dialogRef.afterClosed().subscribe(() => {
           this.loadPage();
         });

@@ -3,9 +3,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { LayoutComponent } from './core/layout/layout.component';
 import { AuthGuard } from './core/services/auth.guard';
 import { UserResolverService } from './core/services/user-resolver.service';
-import { ForecastDetailComponent } from './forecast-list/forecast-detail/forecast-detail.component';
-import { ForecastListComponent } from './forecast-list/forecast-list/forecast-list.component';
-import { ListadoCentrosFestivosComponent } from './listado-centros-festivos/listado-centros-festivos.component';
+import { ListadoCentrosFestivosComponent } from './festives/festives-list/listado-centros-festivos.component';
+import { ForecastDetailComponent } from './forecast/forecast-detail/forecast-detail.component';
+import { ForecastListComponent } from './forecast/forecast-list/forecast-list.component';
 import { ListadoGruposComponent } from './listado-grupos/listado-grupos/listado-grupos.component';
 import { LoginComponent } from './login/login/login.component';
 import { PersonalCalendarComponent } from './personal-calendar/personal-calendar/personal-calendar.component';
@@ -21,12 +21,12 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     resolve: {user: UserResolverService},
     children: [
-      { path: 'main', component: PersonalCalendarComponent,},
-      { path: 'listado-grupos', component: ListadoGruposComponent,},
-      { path: 'listado-centros-festivos', component: ListadoCentrosFestivosComponent,},
+      { path: 'calendar', component: PersonalCalendarComponent,},
+      { path: 'groups', component: ListadoGruposComponent,},
+      { path: 'festives', component: ListadoCentrosFestivosComponent,},
       { path: 'forecast', component: ForecastListComponent,},
       { path: 'forecast-detail', component: ForecastDetailComponent,},
-      { path: '**', redirectTo: 'main', pathMatch: 'full' },
+      { path: '**', redirectTo: 'calendar', pathMatch: 'full' },
     ]
   },
   { path: '**', redirectTo: 'login', pathMatch: 'full' },

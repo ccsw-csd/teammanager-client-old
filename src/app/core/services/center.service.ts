@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { CenterDto } from '../center/centerDto';
+import { CenterDto } from '../to/CenterDto';
 import { environment } from 'src/environments/environment';
 
 @Injectable({

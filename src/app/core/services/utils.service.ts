@@ -1,16 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { CenterDto } from '../to/CenterDto';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ForecastService {
+export class UtilsService {
 
   constructor(private http: HttpClient) { }
 
-  getAbsences(groupId: Number, init: Date, end: Date): Observable<any> {
-    return this.http.post<any>(environment.server + '/forecast/', {groupId, init, end});
+  getAppVersion(): Observable<any> {
+    return this.http.get<CenterDto[]>(environment.server+ '/utils/version');
   }
 }
