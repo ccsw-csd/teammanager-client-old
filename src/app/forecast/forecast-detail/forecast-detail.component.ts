@@ -399,7 +399,7 @@ export class ForecastDetailComponent implements OnInit {
   }
 
   exportForecast(): void{
-    const dialogRef = this.dialog.open(ForecastDetailExportDialogComponent, {data: {
+    const dialogRef = this.dialog.open(ForecastDetailExportDialogComponent, {width: "500px", data: {
       groupId: Number(this.id),
       init: this.initDate,
       end: this.endDate

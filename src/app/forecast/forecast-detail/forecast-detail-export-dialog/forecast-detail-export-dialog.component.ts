@@ -9,9 +9,10 @@ import { ForecastService } from '../../services/forecast.service';
 })
 export class ForecastDetailExportDialogComponent implements OnInit {
   isloading: boolean = false;
-  type: any;
+  type: any = 1;
   Difference_In_Time = this.data.end - this.data.init;
   Difference_In_Days = this.Difference_In_Time / (1000 * 3600 * 24);
+
 
   constructor(    public dialogRef: MatDialogRef<ForecastDetailExportDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -20,7 +21,10 @@ export class ForecastDetailExportDialogComponent implements OnInit {
 
 
   ngOnInit(): void {
-
+    if (this.data.init.getMonth() == this.data.end.getMonth() && this.data.init.getYear() == this.data.end.getYear()) {
+      this.type = 1;
+      this.export();
+    }
   }
   close(): void{
     this.dialogRef.close();
