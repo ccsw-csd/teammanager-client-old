@@ -18,6 +18,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ListadoCentrosFestivosComponent } from './listado-centros-festivos/listado-centros-festivos.component';
 import { MatSortModule } from '@angular/material/sort';
+import { ForecastDetailExportDialogComponent } from './forecast-list/forecast-detail/forecast-detail-export-dialog/forecast-detail-export-dialog.component';
+import {MatRadioModule} from '@angular/material/radio';
 
 
 @NgModule({
@@ -25,7 +27,8 @@ import { MatSortModule } from '@angular/material/sort';
     AppComponent,
     ForecastListComponent,
     ForecastDetailComponent,
-    ListadoCentrosFestivosComponent
+    ListadoCentrosFestivosComponent,
+    ForecastDetailExportDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +46,8 @@ import { MatSortModule } from '@angular/material/sort';
     MatPaginatorModule,
     MatNativeDateModule,
     MatProgressSpinnerModule,
-    MatSortModule
+    MatSortModule,
+    MatRadioModule
   ],
   providers: [],
   bootstrap: [AppComponent]

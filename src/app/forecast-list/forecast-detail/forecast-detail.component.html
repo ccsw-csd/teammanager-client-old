@@ -5,7 +5,7 @@
 
   <div>
     <form [formGroup]="form" class="filters">
-      <button secondary>Exportar</button>
+      <button secondary (click)="exportForecast()">Exportar</button>
       <div style='flex:1'></div>
       <!-- SELECTOR MONTH-->
       <mat-form-field class="filter-input">
