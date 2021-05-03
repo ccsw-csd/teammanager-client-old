@@ -8,7 +8,7 @@ import { Group } from '../../model/Group';
 import { Person } from '../../model/Person';
 import { ListadoGruposService } from '../../services/listado-grupos.service';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { AlertDialogComponent } from '../../alert-dialog/alert-dialog.component';
+import { AlertDialogComponent } from '../../../core/alert-dialog/alert-dialog.component';
 
 @Component({
   selector: 'app-listado-grupos-dialog',
@@ -37,15 +37,15 @@ export class ListadoGruposDialogComponent implements OnInit {
     public dialogRef: MatDialogRef<ListadoGruposDialogComponent>,
     public dialogAlert: MatDialogRef<AlertDialogComponent>,
     public dialog: MatDialog,
-    @Inject(MAT_DIALOG_DATA) public data: Group,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     private listadoGruposService: ListadoGruposService,
     @Inject (MatAutocompleteModule) public auto: string,
     private authService: AuthService,
   ) {}
 
   ngOnInit(): void {
-    if (this.data != null) {
-      this.newGroup = Object.assign({}, this.data);
+    if (this.data != null && this.data.data != null) {
+      this.newGroup = Object.assign({}, this.data.data);
       if (this.newGroup.managers !== undefined){
         this.managers = this.newGroup.managers; }
       if (this.newGroup.members !== undefined){
@@ -176,12 +176,12 @@ export class ListadoGruposDialogComponent implements OnInit {
       }
       else {
         const dialogAlert = this.dialog.open(AlertDialogComponent, {width: '500px', height: '250px', data: {
-          titulo: 'Error en la validación del formulario', informacion: 'El campo managers es obligatorio y no puede estar vacío. Por favor rellene el campo para poder continuar.'}});
+          titulo: 'Validation error', informacion: 'The "Administrator" field is mandatory and cannot be empty. Please fill in the field to continue.'}});
         this.isLoading = false;
       }
     }else{
       const dialogAlert = this.dialog.open(AlertDialogComponent, {width: '500px', height: '250px', data: {
-        titulo: 'Error en la validación del formulario', informacion: 'El campo nombre es obligatorio y no puede estar vacío. Por favor rellene el campo para poder continuar.'}});
+        titulo: 'Validation error', informacion: 'The "Group name" field is mandatory and cannot be empty. Please fill in the field to continue.'}});
       this.isLoading = false;
     }
   }

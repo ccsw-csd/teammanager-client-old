@@ -1,5 +1,5 @@
-import { CenterDto } from "src/app/core/center/centerDto";
-import { PersonDto } from "src/app/core/person/personDto";
+import { CenterDto } from "src/app/core/to/CenterDto";
+import { PersonDto } from "src/app/core/to/PersonDto";
 
 export class AbsenceDto {
     id?: string;

@@ -2,9 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ListadoGruposService } from '../../services/listado-grupos.service';
 import { Group } from '../../model/Group';
-import { AuthService } from 'src/app/core/services/auth.service';
-import { Respuesta } from '../../model/Respuesta';
-import { AlertDialogComponent } from '../../alert-dialog/alert-dialog.component';
+import { AlertDialogComponent } from '../../../core/alert-dialog/alert-dialog.component';
 
 @Component({
   // tslint:disable-next-line: component-selector

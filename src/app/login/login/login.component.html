@@ -12,17 +12,18 @@
 
             <div style="height:200px;width:300px;" id="login-card">
                 <mat-form-field appearance="standard">
-                    <mat-label>Usuario</mat-label>
-                    <input matInput name="user" [(ngModel)]="user" required matInput placeholder="Usuario" (keyup.enter)="login()"/>
-                    <mat-error>Campo usuario vacío</mat-error>
+                    <mat-label>Username</mat-label>
+                    <input matInput name="user" [(ngModel)]="user" required matInput placeholder="Username" (keyup.enter)="login()"/>
+                    <mat-error>this field cannot be empty</mat-error>
                 </mat-form-field>
                 <mat-form-field appearance="standard">
                     <mat-label>Contraseña</mat-label>
-                    <input matInput name="password" [(ngModel)]="password" required matInput type="password" placeholder="Contraseña" (keyup.enter)="login()"/>
-                    <mat-error>Campo contraseña vacío</mat-error>
+                    <input matInput name="password" [(ngModel)]="password" required matInput type="password" placeholder="Password" (keyup.enter)="login()"/>
+                    <mat-error>this field cannot be empty</mat-error>
                 </mat-form-field>                
                 <button mat-button primary [disabled]="user == '' || password == ''" (click)="login()">Login</button>
             </div>
+            <div class="support">If you need us to support you to resolve doubts or technical problems, send us an email to <a href="mailto:adcsd.internal.support@capgemini.com?subject=[TeamManager] Soporte / Consulta">adcsd.internal.support@capgemini.com</a>.</div>
             <div style="flex:1"></div>
         </div>
     </div>

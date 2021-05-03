@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit, CUSTOM_ELEMENTS_SCHEMA, Input } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { CenterDto } from 'src/app/core/center/centerDto';
-import { PersonDto } from 'src/app/core/person/personDto';
+import { CenterDto } from 'src/app/core/to/CenterDto';
+import { PersonDto } from 'src/app/core/to/PersonDto';
 import { CenterService } from 'src/app/core/services/center.service';
 import { SnackbarService } from 'src/app/core/services/snackbar.service';
 import { LoginService } from '../services/login.service';
@@ -17,7 +17,7 @@ export class ModifyPersonComponent implements OnInit {
   selectedCenter: CenterDto|undefined;
   isloading = false;
   person: PersonDto = new PersonDto();
-  title: string|undefined = "Creacion de Usuario";
+  title: string|undefined = "Create user";
 
   constructor(
     public dialogRef: MatDialogRef<ModifyPersonComponent>, 
@@ -33,7 +33,7 @@ export class ModifyPersonComponent implements OnInit {
 
     if(!this.data.create){
       this.person = this.data.person;
-      this.title = "Editar información personal";
+      this.title = "Edit user profile";
     }
 
     this.person.username = this.data.user;
@@ -47,7 +47,7 @@ export class ModifyPersonComponent implements OnInit {
            || (this.person.email == null) 
            || (this.person.name == null)
            || (this.person.lastname == null) )  {
-            this.snackService.showMessage('Faltan campos por rellenar');
+            this.snackService.showMessage('Missing fields to fill.');
            }
     else{
       switch (option) {
@@ -57,7 +57,9 @@ export class ModifyPersonComponent implements OnInit {
         case 'update':
           this.updateInDb(this.data.person)
           break;
-          
+        case 'close': 
+          this.dialogRef.close(false);
+          break;
       }
     }
   }
@@ -90,7 +92,7 @@ export class ModifyPersonComponent implements OnInit {
         this.dialogRef.close(true);
       }
       else{
-        this.snackService.showMessage('El código SAGA está duplicado en BBDD. Por favor revíselo o póngase en contacto con el administrador.');
+        this.snackService.showMessage('The SAGA code is duplicated in the BBDD. Please review it or contact the support email (adcsd.internal.support@capgemini.com).');
         this.dialogRef.close(false);
       }
       this.isloading = false;

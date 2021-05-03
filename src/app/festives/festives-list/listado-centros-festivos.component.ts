@@ -1,8 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
-import { ListadoCentrosFestivos } from './model/ListadoCentrosFestivos';
-import { ListadoCentrosFestivosService } from './service/ListadoCentrosFestivos.service';
+import { EditCentroComponent } from '../festives-edit/edit-centro.component';
+import { InfoCentro } from '../model/InfoCentro';
+import { ListadoCentrosFestivos } from '../model/ListadoCentrosFestivos';
+import { ListadoCentrosFestivosService } from '../services/ListadoCentrosFestivos.service';
 
 @Component({
   selector: 'app-listado-centros-festivos',
@@ -19,25 +21,39 @@ export class ListadoCentrosFestivosComponent implements OnInit {
     'icon',
   ];
 
+  infoCentro: InfoCentro = new InfoCentro();
+
   constructor(
     private listadoCentrosFestivosService: ListadoCentrosFestivosService,
     public dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
-    this.load();
+    this.loadPage();
   }
 
   // tslint:disable-next-line: typedef
-  load(){
+  loadPage(){
     this.listadoCentrosFestivosService.getCentrosFestivos().subscribe(data => {
       this.dataSource.data = data;
     });
   }
 
   // tslint:disable-next-line: typedef
-  edit(id: ListadoCentrosFestivos){
+  edit(centerid: number, name: string){
 
+    this.infoCentro.name = name;
+
+    this.infoCentro.centerid = centerid;
+
+
+    if (centerid != null && name != null){
+      // tslint:disable-next-line: deprecation
+        const dialogRef = this.dialog.open(EditCentroComponent, {maxWidth: '90vw', width: '90vw', height: 'calc(100vh - 100px)', data: this.infoCentro});
+        dialogRef.afterClosed().subscribe(() => {
+          this.loadPage();
+        });
+    }
   }
 
 }

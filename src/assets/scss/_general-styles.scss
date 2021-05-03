@@ -31,7 +31,9 @@
   }
 }
 
-
+.mat-dialog-container::before {
+  overflow: hidden !important;
+}
 
 
 html,

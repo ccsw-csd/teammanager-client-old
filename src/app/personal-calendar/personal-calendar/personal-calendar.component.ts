@@ -1,7 +1,9 @@
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import * as moment from 'moment';
 import { Moment } from 'moment';
-import { PersonAbsenceDto } from 'src/app/core/person/personAbsenceDto';
+import { PersonAbsenceDto } from 'src/app/core/to/PersonAbsenceDto';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { User } from 'src/app/core/to/User';
 import { PersonalCalendarService } from '../services/personal-calendar.service';
 
 @Component({
@@ -15,10 +17,20 @@ export class PersonalCalendarComponent implements OnInit, OnChanges  {
   absences: PersonAbsenceDto[] = [];
   isloading = false;
   newAbsences: Date[] = [];
-
-  constructor(    private personalService: PersonalCalendarService,) {}
+  updateDisabled = true;
+  canSave : boolean = true;
+  
+  constructor(    
+    private personalService: PersonalCalendarService,
+    private authService : AuthService,
+    ) {}
 
   ngOnInit(): void {
+    let userInfo : User | null = this.authService.getUserInfo();
+
+    if (userInfo != null)
+      this.canSave = userInfo.withPON == false;
+
     this.getAbsences();
   }
   
@@ -30,6 +42,9 @@ export class PersonalCalendarComponent implements OnInit, OnChanges  {
   }
 
   addNewAbsence(data: any): void{
+    this.updateDisabled = false;
+    this.canSave = true;
+
     switch(data.type) {
       case "laboral":
         this.newAbsences.push(data.date.toDate());
@@ -47,6 +62,7 @@ export class PersonalCalendarComponent implements OnInit, OnChanges  {
 
   getAbsences(): void
   {
+    this.updateDisabled = true;
     this.isloading = true;
     this.personalService.getAbsencesPersonal(this.year).subscribe(data => {
       this.absences = data;

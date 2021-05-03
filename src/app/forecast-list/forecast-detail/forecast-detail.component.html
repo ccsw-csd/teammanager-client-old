@@ -5,11 +5,28 @@
 
   <div>
     <form [formGroup]="form" class="filters">
-      <button secondary (click)="exportForecast()">Exportar</button>
+      <button secondary (click)= "exportForecast()">Export data</button>
+      <div style='flex:1'></div>
+      <div style="display:flex; flex-direction: row; flex:1;padding-top:10px;padding-left: 45px;border:1px #bebebe solid;height: 40px;">
+        <div style="display:flex; flex-direction: row;">
+          <div class="legend" style="background-color: #aae3ff;"></div>
+          <div>Festive</div>
+        </div>
+        <div style="display:flex; flex-direction: row; margin-left:30px;">
+          <div class="legend" style="background-color: #ffffaa;"></div>
+          <div>Inactivity</div>
+        </div>
+        <div style="display:flex; flex-direction: row; margin-left:30px;">
+          <div class="legend" style="background-color: rgb(194, 194, 204);"></div>
+          <div>Weekend</div>
+        </div>
+      </div>
+
+
       <div style='flex:1'></div>
       <!-- SELECTOR MONTH-->
       <mat-form-field class="filter-input">
-        <mat-label>Selecciona Mes/Fecha</mat-label>
+        <mat-label>Selected Month/Date range</mat-label>
         <mat-select [(ngModel)]="selectedMonth" [ngModelOptions]="{standalone: true}" (selectionChange)="getAbsences()">
           <mat-option
           *ngFor="let option of months"
@@ -26,7 +43,7 @@
         </mat-date-range-input> 
         <mat-date-range-picker #picker></mat-date-range-picker>
       </mat-form-field>
-      <button primary (click)="picker.open()">Crear Rango</button>
+      <button primary (click)="picker.open()">Create Date Range</button>
       <!-- End date -->
     </form>
   </div>

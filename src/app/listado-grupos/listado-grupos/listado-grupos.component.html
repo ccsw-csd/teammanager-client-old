@@ -1,14 +1,16 @@
 <div class="content">
   <div class="title-block">
-    <h1>Mis grupos</h1>
-    <button mat-button primary (click)="createGroup()">Nuevo grupo</button>
+    <h1>My groups</h1>
+    <button primary (click)="createGroup()">Create new group</button>
+    <div style="flex:1"></div>
+    <mat-slide-toggle *ngIf="authService.isAdmin()" (change)="changeAdminView($event)" [checked]="adminView">Admin View</mat-slide-toggle>
   </div>
   <div class="containerTableList">
     <div class="tableList">
       <table mat-table [dataSource]="dataSource" matSort>
         <ng-container matColumnDef="name">
           <th class="cell-left" mat-header-cell *matHeaderCellDef>
-            Nombre
+            Group name
           </th>
           <td mat-cell *matCellDef="let group" class="cell-left">
             {{group.name}}
@@ -16,7 +18,7 @@
         </ng-container>
         <ng-container matColumnDef="manager">
           <th class="cell-left" mat-header-cell *matHeaderCellDef>
-            Gestores
+            Administrators
           </th>
           <td mat-cell *matCellDef="let group" class="cell-left">
             {{group.manager}}
@@ -24,7 +26,7 @@
         </ng-container>
         <ng-container matColumnDef="members">
           <th class="cell-center" mat-header-cell *matHeaderCellDef>
-            Miembros
+            Members
           </th>
           <td mat-cell *matCellDef="let group" class="cell-center">
             {{group.members}}
@@ -32,7 +34,7 @@
         </ng-container>
         <ng-container matColumnDef="subgroups">
           <th class="cell-center" mat-header-cell *matHeaderCellDef>
-            Subgrupos
+            Subgroups
           </th>
           <td mat-cell *matCellDef="let group" class="cell-center">
             {{group.subgroups}}
@@ -43,16 +45,19 @@
             Actions
           </th>
           <td class="cell-actions" mat-cell *matCellDef="let group" layout="row">
-            <button mat-button layout="column" class="cell-button" [matTooltip]="'Editar'" (click)="editGroup(group)">
+            <button *ngIf="group.externalId != null" mat-button layout="column" class="cell-button" [matTooltip]="'View'" (click)="editGroup(group, true)">
+              <mat-icon>visibility</mat-icon> 
+            </button>
+            <button *ngIf="group.externalId == null" mat-button layout="column" class="cell-button" [matTooltip]="'Edit'" (click)="editGroup(group, false)">
               <mat-icon>edit</mat-icon>
             </button>
-            <button mat-button layout="column" class="cell-button" [matTooltip]="'Borrar'" (click)="deleteGroup(group)">
+            <button *ngIf="group.externalId == null" mat-button layout="column" class="cell-button" [matTooltip]="'Remove'" (click)="deleteGroup(group)">
               <mat-icon>delete</mat-icon>
             </button>
           </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns" [ngClass]="{'externalGroup': row.externalId != null }"></tr>
       </table>
     </div>
     <mat-paginator (page)="loadPage($event)" [pageSizeOptions]="[5, 10, 20]" [pageIndex]="pageNumber"

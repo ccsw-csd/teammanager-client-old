@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -14,42 +14,51 @@ import { MatSelectModule } from '@angular/material/select';
 import { ListadoGruposModule } from './listado-grupos/listado-grupos.module';
 import { ForecastListComponent } from './forecast-list/forecast-list/forecast-list.component';
 import { ForecastDetailComponent } from './forecast-list/forecast-detail/forecast-detail.component';
-import { MatNativeDateModule } from '@angular/material/core';
+import { DateAdapter, MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { ListadoCentrosFestivosComponent } from './listado-centros-festivos/listado-centros-festivos.component';
 import { MatSortModule } from '@angular/material/sort';
 import { ForecastDetailExportDialogComponent } from './forecast-list/forecast-detail/forecast-detail-export-dialog/forecast-detail-export-dialog.component';
 import {MatRadioModule} from '@angular/material/radio';
 
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { CustomDateAdapter } from './core/date-adapter/custom-date-adapter';
+import { FestivesModule } from './festives/festives.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     ForecastListComponent,
     ForecastDetailComponent,
-    ListadoCentrosFestivosComponent,
     ForecastDetailExportDialogComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    CoreModule,
-    LoginModule,
-    PersonalCalendarModule,
     MatDatepickerModule,
     MatGridListModule,
     FormsModule,
     MatSelectModule,
-    ListadoGruposModule,
     ReactiveFormsModule,
     MatPaginatorModule,
     MatNativeDateModule,
     MatProgressSpinnerModule,
     MatSortModule,
-    MatRadioModule
+    MatRadioModule,
+    MatSlideToggleModule,
+    CoreModule,
+    LoginModule,
+    PersonalCalendarModule,
+    ListadoGruposModule,
+    FestivesModule,
   ],
-  providers: [],
+  providers: [{ provide: DateAdapter, useClass: CustomDateAdapter }],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+
+  constructor(private dateAdapter: DateAdapter<Date>) {
+    this.dateAdapter.setLocale('en-EN');
+  }
+
+ }

@@ -2,10 +2,8 @@
 
 .content {
   width: 100%;
-  height: 100%;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
   background-color: white;
 
   .title-block {
@@ -29,14 +27,15 @@
 
   .containerTableList {
     flex: 1;
-    height: calc(100vh - 195px);
-
+    
     .tableList {
       width: 100%;
-      overflow: scroll;
+      max-height: calc(100vh - 270px);
+      overflow: auto;
     }
   }
 
+  
   .cell-left {
     text-align: left;
   }
@@ -45,11 +44,13 @@
     text-align: center;
   }
 
-  .cell-actions {
+  .cell-actions, .cell-actions-header {
     width: 90px;
     text-align: center;
     padding-right: 0px;
   }
+
+  
   .mat-button{
     padding: 0px !important;
   }
@@ -65,10 +66,22 @@
 
   td {
     background-color: $foreground !important;
+
+    button {
+      background-color: inherit;
+    }
   }
 
   mat-paginator {
     background-color: $table-header;
   }
 
+}
+
+
+.externalGroup {
+  td {
+    background-color: #fafafa !important;
+    color: $icon;
+  }
 }

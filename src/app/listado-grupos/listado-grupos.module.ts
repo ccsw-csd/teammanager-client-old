@@ -6,8 +6,8 @@ import { ListadoGruposDialogComponent } from './listado-grupos/listado-grupos-di
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
 import { ConfirmDeleteDialogComponent } from './listado-grupos/confirmDelete-dialog/confirmDelete-dialog.component';
-import { AlertDialogComponent } from './alert-dialog/alert-dialog.component';
-
+import { AlertDialogComponent } from '../core/alert-dialog/alert-dialog.component';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [ListadoGruposComponent, ListadoGruposDialogComponent, ConfirmDeleteDialogComponent, AlertDialogComponent],
@@ -16,6 +16,7 @@ import { AlertDialogComponent } from './alert-dialog/alert-dialog.component';
     CoreModule,
     MatAutocompleteModule,
     MatButtonModule,
+    MatSlideToggleModule,
   ]
 })
 export class ListadoGruposModule { }

@@ -51,55 +51,54 @@ export class ForecastDetailComponent implements OnInit {
   ];
 
   months: any[] = [
-    {name:"Enero", num: 0},
-    {name:"Febrero", num: 1},
-    {name:"Marzo", num: 2},
-    {name:"Abril", num: 3},
-    {name:"Mayo", num: 4},
-    {name:"Junio", num: 5},
-    {name:"Julio", num: 6},
-    {name:"Agosto", num: 7},
-    {name:"Septiembre", num: 8},
-    {name:"Octubre", num: 9},
-    {name:"Noviembre", num: 10},
-    {name:"Diciembre", num: 11}
+    {name:"January", num: 0},
+    {name:"February", num: 1},
+    {name:"March", num: 2},
+    {name:"April", num: 3},
+    {name:"May", num: 4},
+    {name:"June", num: 5},
+    {name:"July", num: 6},
+    {name:"August", num: 7},
+    {name:"September", num: 8},
+    {name:"October", num: 9},
+    {name:"November", num: 10},
+    {name:"December", num: 11}
   ];
 
 
   monthsHeaderExtraInfo: any[] = [
-    {name:"Info", num: 4},
-    {name:"Enero", num: 0},
-    {name:"Febrero", num: 1},
-    {name:"Marzo", num: 2},
-    {name:"Abril", num: 3},
-    {name:"Mayo", num: 4},
-    {name:"Junio", num: 5},
-    {name:"Julio", num: 6},
-    {name:"Agosto", num: 7},
-    {name:"Septiembre", num: 8},
-    {name:"Octubre", num: 9},
-    {name:"Noviembre", num: 10},
-    {name:"Diciembre", num: 11}
+    {name:"Detail", num: 4},
+    {name:"January", num: 0},
+    {name:"February", num: 1},
+    {name:"March", num: 2},
+    {name:"April", num: 3},
+    {name:"May", num: 4},
+    {name:"June", num: 5},
+    {name:"July", num: 6},
+    {name:"August", num: 7},
+    {name:"September", num: 8},
+    {name:"October", num: 9},
+    {name:"November", num: 10},
+    {name:"December", num: 11}
   ];
 
   monthsHeader: any[] = [
-    "Info"
+    "Detail"
   ];
 
   monthsHeaderCopy: any[] = [
-    "Enero",
-    "Febrero",
-    "Marzo",
-    "Abril",
-    "Mayo",
-    "Junio",
-    "Julio",
-    "Agosto",
-    "Septiembre",
-    "Octubre",
-    "Noviembre",
-    "Diciembre",
-    
+    "January",
+    "February",
+    "March", 
+    "April",
+    "May", 
+    "June", 
+    "July", 
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",    
   ];
 
   transcode: any = {};
@@ -204,6 +203,9 @@ export class ForecastDetailComponent implements OnInit {
         source = this.formatDatasource(data[i], source);
         sourceArray.push(source);
       }
+
+      sourceArray.sort((a,b) => { return a.name.value.localeCompare(b.name.value); });
+
       var sourceTotal = {
         name: {value: "Total", class: "total"},
         countLab: {value: countLaboralTotal, class: "total"},
@@ -213,6 +215,7 @@ export class ForecastDetailComponent implements OnInit {
       var emptyArray: any[] = [];
       sourceTotal = this.formatDatasource(emptyArray, sourceTotal);
       sourceArray.push(sourceTotal);
+
       this.dataSource.data = sourceArray;
       this.isloading = false;
     });
@@ -220,7 +223,7 @@ export class ForecastDetailComponent implements OnInit {
   }
 
   isSticky(object: any): boolean{
-    if(object == "Info" || object == "Nombre" || object == "Laborales"||object == "Ausencias"||object == "Festivos")
+    if(object == "Detail" || object == "Person" || object == "Working Days"||object == "Inactivities"||object == "Festives")
       return true;
     return false;  
   }
@@ -230,12 +233,12 @@ export class ForecastDetailComponent implements OnInit {
     this.transcode = {};
     this.monthsDays = [];
     this.columns = [];
-    this.monthsHeader = ['Info',];
+    this.monthsHeader = ['Detail',];
 
-    this.transcode["name"] = "Nombre";
-    this.transcode["countLab"] = "Laborales";
-    this.transcode["countF"] = "Festivos";
-    this.transcode["countA"] = "Ausencias";
+    this.transcode["name"] = "Person";
+    this.transcode["countLab"] = "Working Days";
+    this.transcode["countF"] = "Festives";
+    this.transcode["countA"] = "Inactivities";
 
     this.columns.push('name');
     this.columns.push('countLab');
@@ -303,9 +306,9 @@ export class ForecastDetailComponent implements OnInit {
     }
   }
   getHeaderClass(object: any): string{
-    if(object == "Nombre")
+    if(object == "Person")
       return "name";
-    if(object == "Laborales"||object == "Ausencias"||object == "Festivos")
+    if(object == "Working Days"||object == "Inactivities"||object == "Festives")
       return "count"; 
     return "day";
   }
