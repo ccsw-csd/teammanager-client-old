@@ -17,6 +17,9 @@ import { ForecastDetailComponent } from './forecast-list/forecast-detail/forecas
 import { DateAdapter, MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSortModule } from '@angular/material/sort';
+import { ForecastDetailExportDialogComponent } from './forecast-list/forecast-detail/forecast-detail-export-dialog/forecast-detail-export-dialog.component';
+import {MatRadioModule} from '@angular/material/radio';
+
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { CustomDateAdapter } from './core/date-adapter/custom-date-adapter';
 import { FestivesModule } from './festives/festives.module';
@@ -26,6 +29,7 @@ import { FestivesModule } from './festives/festives.module';
     AppComponent,
     ForecastListComponent,
     ForecastDetailComponent,
+    ForecastDetailExportDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -40,6 +44,7 @@ import { FestivesModule } from './festives/festives.module';
     MatNativeDateModule,
     MatProgressSpinnerModule,
     MatSortModule,
+    MatRadioModule,
     MatSlideToggleModule,
     CoreModule,
     LoginModule,
