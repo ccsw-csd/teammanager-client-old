@@ -158,6 +158,14 @@ export class ForecastDetailComponent implements OnInit {
   }
 
 
+  private convertDateToServerString(date : Date) : string {
+    
+    let locale = 'en-EN';
+    return date.toLocaleDateString(locale, {year:'numeric'})+"/"
+      +date.toLocaleDateString(locale, {month:'2-digit'})+"/"
+      +date.toLocaleDateString(locale, {day:'2-digit'});
+  }  
+
 
 
 
@@ -184,7 +192,7 @@ export class ForecastDetailComponent implements OnInit {
     var countLabor;
 
     this.isloading = true;
-    this.forecastService.getAbsences(Number(this.id), this.initDate, this.endDate).subscribe(data => {
+    this.forecastService.getAbsences(Number(this.id), this.convertDateToServerString(this.initDate), this.convertDateToServerString(this.endDate)).subscribe(data => {
       var sourceArray: any[] = [];
       this.formatMonths();
       for (var i in data){  

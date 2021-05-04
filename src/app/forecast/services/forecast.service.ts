@@ -10,7 +10,7 @@ export class ForecastService {
 
   constructor(private http: HttpClient) { }
 
-  getAbsences(groupId: Number, init: Date, end: Date): Observable<any> {
+  getAbsences(groupId: Number, init: string, end: string): Observable<any> {
     return this.http.post<any>(environment.server + '/forecast/', {groupId, init, end});
   }
 
