@@ -54,7 +54,7 @@ export class ForecastDetailExportDialogComponent implements OnInit {
     }
     else{
       this.isloading = true;
-        this.forecastService.exportForecast(this.data.groupId, this.data.init, this.data.end, this.type).subscribe(result => {
+        this.forecastService.exportForecast(this.data.groupId, this.convertDateToString(this.data.init), this.convertDateToString(this.data.end), this.type).subscribe(result => {
           this.downLoadFile(result, "application/ms-excel");
           this.isloading = false;
           this.dialogRef.close();
