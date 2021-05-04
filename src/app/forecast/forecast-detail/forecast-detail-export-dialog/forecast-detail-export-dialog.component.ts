@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { AlertDialogComponent } from 'src/app/core/alert-dialog/alert-dialog.component';
 import { ForecastService } from '../../services/forecast.service';
 
 @Component({
@@ -16,7 +17,11 @@ export class ForecastDetailExportDialogComponent implements OnInit {
 
   constructor(    public dialogRef: MatDialogRef<ForecastDetailExportDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private forecastService: ForecastService,) {this.type = 1; }
+    private forecastService: ForecastService,
+    public dialog: MatDialog,
+    ) {
+      this.type = 1; 
+    }
 
 
 
@@ -30,28 +35,40 @@ export class ForecastDetailExportDialogComponent implements OnInit {
     this.dialogRef.close();
   }
   export(): void{
-  if(this.type == 1){
-    if(this.Difference_In_Days < 250 ){
-      this.isloading = true;
-      this.forecastService.exportForecast(this.data.groupId, this.data.init, this.data.end, this.type).subscribe(result => {
-        this.downLoadFile(result, "application/ms-excel");
-        this.isloading = false;
+    if(this.type == 1){
+      if(this.Difference_In_Days < 250 ){
+        this.isloading = true;
+        this.forecastService.exportForecast(this.data.groupId, this.convertDateToString(this.data.init), this.convertDateToString(this.data.end), this.type).subscribe(result => {
+          this.downLoadFile(result, "application/ms-excel");
+          this.isloading = false;
+          this.dialogRef.close();
+        }); 
+      } else{
+        this.dialog.open(AlertDialogComponent, {width: '500px', height: '250px', data: {
+          titulo: 'Error', 
+          informacion: 'To export data with "All in One", the total days must be less than 250 days.'}
+        });
+
         this.dialogRef.close();
-      }); 
-    } else{
-        alert('Total days must be lower than 250');
-        this.dialogRef.close();
+      }
     }
-  }
-  else{
-    this.isloading = true;
-      this.forecastService.exportForecast(this.data.groupId, this.data.init, this.data.end, this.type).subscribe(result => {
-        this.downLoadFile(result, "application/ms-excel");
-        this.isloading = false;
-        this.dialogRef.close();
-      }); 
+    else{
+      this.isloading = true;
+        this.forecastService.exportForecast(this.data.groupId, this.data.init, this.data.end, this.type).subscribe(result => {
+          this.downLoadFile(result, "application/ms-excel");
+          this.isloading = false;
+          this.dialogRef.close();
+        }); 
+    }
+
   }
 
+  private convertDateToString(date : Date) : string {
+    
+    let locale = 'en-EN';
+    return +date.toLocaleDateString(locale, {year:'numeric'})+"-"
+      +date.toLocaleDateString(locale, {month:'2-digit'})+"-"
+      +date.toLocaleDateString(locale, {day:'2-digit'});
   }
 
   

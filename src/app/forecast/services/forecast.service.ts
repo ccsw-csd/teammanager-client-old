@@ -14,7 +14,7 @@ export class ForecastService {
     return this.http.post<any>(environment.server + '/forecast/', {groupId, init, end});
   }
 
-  exportForecast(groupId: Number, init: Date, end: Date, type: number): Observable<object> {
+  exportForecast(groupId: Number, init: string, end: string, type: number): Observable<object> {
     return this.http.post<object>(environment.server + '/forecast/export/', {groupId, init, end, type}, { responseType: 'blob' as 'json' });
   }
 }
