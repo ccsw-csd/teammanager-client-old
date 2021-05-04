@@ -161,8 +161,8 @@ export class ForecastDetailComponent implements OnInit {
   private convertDateToServerString(date : Date) : string {
     
     let locale = 'en-EN';
-    return date.toLocaleDateString(locale, {year:'numeric'})+"/"
-      +date.toLocaleDateString(locale, {month:'2-digit'})+"/"
+    return date.toLocaleDateString(locale, {year:'numeric'})+"-"
+      +date.toLocaleDateString(locale, {month:'2-digit'})+"-"
       +date.toLocaleDateString(locale, {day:'2-digit'});
   }  
 
