@@ -10,7 +10,7 @@
     <a *ngIf="authService.isGestor() == false" mat-list-item routerLinkActive="item-active" (click)="gruposAlert()">
       <span>My Groups</span>
     </a>
-    <a *ngIf="authService.isGestor()" mat-list-item routerLinkActive="item-active" routerLink="/forecast">
+    <a *ngIf="authService.isGestor() || authService.withPublicGroups()" mat-list-item routerLinkActive="item-active" routerLink="/forecast">
       <span>Forecast</span>
     </a>
     <a *ngIf="authService.isGestor()" mat-list-item routerLinkActive="item-active" routerLink="/festives">

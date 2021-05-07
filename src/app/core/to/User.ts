@@ -6,5 +6,6 @@ export interface User {
     displayName: string; 
     mail: string;
     withPON: boolean;   
+    withPublicGroups: boolean;
 }
   
