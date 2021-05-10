@@ -6,4 +6,6 @@ export class Group {
   members?: Person[];
   managers?: Person[];
   subgroups?: Group[];
+  publicGroup?: boolean;
+  externalId?: string;
 }

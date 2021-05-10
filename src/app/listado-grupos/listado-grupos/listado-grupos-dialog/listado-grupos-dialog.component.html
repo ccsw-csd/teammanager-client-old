@@ -1,19 +1,21 @@
 <div class="container">
   <div class="titulo">
     <h1>Edit Group</h1>
+    <div style="flex:1"></div>
+    <h3 *ngIf="this.externalId != null"><i>* Team member information is updated from LDAP and cannot be modified from here.</i></h3>
   </div>
 
   <div class="form-nombre">
     <mat-form-field>
       <input matInput placeholder="Group name" [(ngModel)]="this.titulo">
     </mat-form-field>
+    <mat-slide-toggle (change)="changePublic($event)" [checked]="this.publicGroup">Visible for members</mat-slide-toggle>
   </div>
 
-  <div class="zona-config">
-
+  <div class="zona-config" [ngClass]="{'disable-edit' : this.externalId != null}">
     <div class="zona-config-izq">
       <mat-form-field class="input-form">
-        <input matInput placeholder="Members: search person" aria-label="State" [matAutocomplete]="autocompleteMembers" [formControl]="searchMembersCtrl">
+        <input matInput placeholder="Members: search person" aria-label="State" [matAutocomplete]="autocompleteMembers" [formControl]="searchMembersCtrl" [readonly]="this.externalId != null">
         <mat-autocomplete #autocompleteMembers="matAutocomplete">
           <mat-option *ngIf="isLoading" class="is-loading">Loading...</mat-option>
           <ng-container *ngIf="!isLoading">
@@ -25,7 +27,7 @@
       </mat-form-field>
       <mat-list class="lista-doble">
         <mat-list-item *ngFor="let member of members">
-          <mat-icon [ngStyle]="{'color':'grey'}" (click)="deleteMember(this.member)">delete_forever</mat-icon>
+          <mat-icon *ngIf="this.externalId == null" [ngStyle]="{'color':'grey'}" (click)="deleteMember(this.member)">delete_forever</mat-icon>
           <span>{{member.name}} {{member.lastname}}</span>
         </mat-list-item>
       </mat-list>
@@ -34,7 +36,7 @@
     <div class="zona-config-der">
       
       <mat-form-field class="input-form">
-        <input matInput placeholder="Administrators: search person" aria-label="State" [matAutocomplete]="autocompleteManagers" [formControl]="searchManagersCtrl">
+        <input matInput placeholder="Administrators: search person" aria-label="State" [matAutocomplete]="autocompleteManagers" [formControl]="searchManagersCtrl" [readonly]="this.externalId != null">
         <mat-autocomplete #autocompleteManagers="matAutocomplete">
           <mat-option *ngIf="isLoading" class="is-loading">Loading...</mat-option>
           <ng-container *ngIf="!isLoading">
@@ -47,13 +49,13 @@
 
       <mat-list class="lista">
         <mat-list-item *ngFor="let manager of managers">
-          <mat-icon [ngStyle]="{'color':'grey'}" (click)="deleteManager(this.manager)">delete_forever</mat-icon>
+          <mat-icon *ngIf="this.externalId == null" [ngStyle]="{'color':'grey'}" (click)="deleteManager(this.manager)">delete_forever</mat-icon>
           <span>{{manager.name}} {{manager.lastname}}</span>
         </mat-list-item>
       </mat-list>
 
       <mat-form-field class="input-form">
-        <input matInput placeholder="Subgroups: search groups" aria-label="State" [matAutocomplete]="subgrupos" [formControl]="searchSubgroupsCtrl">
+        <input matInput placeholder="Subgroups: search groups" aria-label="State" [matAutocomplete]="subgrupos" [formControl]="searchSubgroupsCtrl" [readonly]="this.externalId != null">
         <mat-autocomplete #subgrupos="matAutocomplete">
           <mat-option *ngIf="isLoading" class="is-loading">Loading...</mat-option>
           <ng-container *ngIf="!isLoading">
@@ -66,7 +68,7 @@
 
       <mat-list class="lista">
         <mat-list-item *ngFor="let subgroup of subgroups" >
-          <mat-icon [ngStyle]="{'color':'grey'}" (click)="deleteSubgroup(this.subgroup)">delete_forever</mat-icon>
+          <mat-icon *ngIf="this.externalId == null" [ngStyle]="{'color':'grey'}" (click)="deleteSubgroup(this.subgroup)">delete_forever</mat-icon>
           <span>{{subgroup.name}}</span>
         </mat-list-item>
       </mat-list>
@@ -74,9 +76,8 @@
   </div>
 
   <div class="zona-botones">
-    <button *ngIf="data.readOnly == false" primary (click)="onSave()">Save</button>
-    <button *ngIf="data.readOnly == false" secondary (click)="cerrar()">Close</button>
-    <button *ngIf="data.readOnly == true" primary (click)="cerrar()">Close</button>
+    <button primary (click)="onSave()">Save</button>
+    <button secondary (click)="cerrar()">Close</button>
   </div>
 </div>
 
