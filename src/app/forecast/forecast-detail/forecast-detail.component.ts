@@ -26,6 +26,7 @@ export class ForecastDetailComponent implements OnInit {
 
   pageNumber = 0;
   pageSize = 20;
+  groupName = "";
   totalElements = 0;
   actualDate = new Date();
   isloading = false;
@@ -121,6 +122,7 @@ export class ForecastDetailComponent implements OnInit {
     this.route.queryParams
     .subscribe((params) => {
       this.id = params.id;
+      this.groupName = params.name;
     });
 
     this.getAbsences();
