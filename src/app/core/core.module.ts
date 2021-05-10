@@ -26,10 +26,11 @@ import {MatChipsModule} from '@angular/material/chips';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { MonthCalendarModule } from './month-calendar/month-calendar.module';
 import { MonthCalendarFestiveModule } from './month-calendar-festive/month-calendar-festive.module';
+import { ReleaseNotesComponent } from './layout/release-notes/release-notes.component';
 
 
 @NgModule({
-  declarations: [LayoutComponent, HeaderComponent, NavComponent],
+  declarations: [LayoutComponent, HeaderComponent, NavComponent, ReleaseNotesComponent],
   imports: [
     CommonModule,
     MatSnackBarModule,

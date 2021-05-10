@@ -1,0 +1,14 @@
+<div class="container">
+    <h1>New Release!</h1>    
+    <p>There is a new release of TeamManageravailable. These are the release notes:</p>
+    <div class="data">
+        <div class='itemHeader' *ngFor="let noteVersion of notes">Version {{noteVersion.text}}
+            <div class='itemBody' *ngFor="let note of noteVersion.notes" [innerHtml]="note.text"></div>
+        </div>
+    </div>
+    <p>If you need us to support you to resolve doubts or technical problems, send us an email to <a href="mailto:adcsd.internal.support@capgemini.com?subject=[TeamManager] Soporte / Consulta">adcsd.internal.support@capgemini.com</a>.</p>
+    <div class="buttons">        
+        <button primary class="button" (click)="close()">Close</button>
+    </div>    
+</div>
+

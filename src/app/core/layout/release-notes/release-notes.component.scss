@@ -1,0 +1,39 @@
+@import './../../../../assets/scss/master.scss';
+
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 552px;
+    height: 552px;
+    overflow: hidden;
+}
+
+a {
+    color: #707099;
+}
+
+.data {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.buttons {
+    margin-top: 1rem;
+    padding-bottom: 1rem;
+
+    .button{
+    float: right;
+    margin-right: 10px;
+    }
+
+}
+
+.itemHeader {
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+.itemBody {
+    padding-left: 15px;
+    font-weight: normal;
+}
