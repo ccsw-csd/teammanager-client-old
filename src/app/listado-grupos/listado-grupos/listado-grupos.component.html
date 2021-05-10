@@ -45,10 +45,7 @@
             Actions
           </th>
           <td class="cell-actions" mat-cell *matCellDef="let group" layout="row">
-            <button *ngIf="group.externalId != null" mat-button layout="column" class="cell-button" [matTooltip]="'View'" (click)="editGroup(group, true)">
-              <mat-icon>visibility</mat-icon> 
-            </button>
-            <button *ngIf="group.externalId == null" mat-button layout="column" class="cell-button" [matTooltip]="'Edit'" (click)="editGroup(group, false)">
+            <button mat-button layout="column" class="cell-button" [matTooltip]="'Edit'" (click)="editGroup(group)">
               <mat-icon>edit</mat-icon>
             </button>
             <button *ngIf="group.externalId == null" mat-button layout="column" class="cell-button" [matTooltip]="'Remove'" (click)="deleteGroup(group)">

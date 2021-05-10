@@ -96,10 +96,10 @@ export class ListadoGruposComponent implements OnInit {
   }
 
   // tslint:disable-next-line: typedef
-  editGroup(groupEdit: ListadoGrupos, readOnly : boolean){
+  editGroup(groupEdit: ListadoGrupos){
     if (groupEdit.id !== undefined) {
       this.listadoGruposService.getGroup(groupEdit.id).subscribe(data => {        
-        const dialogRef = this.dialog.open(ListadoGruposDialogComponent, {width: '90%',  data: {data:data, readOnly: readOnly}});
+        const dialogRef = this.dialog.open(ListadoGruposDialogComponent, {width: '90%',  data: {data:data}});
         dialogRef.afterClosed().subscribe(() => {
           this.loadPage();
         });

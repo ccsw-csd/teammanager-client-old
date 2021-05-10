@@ -9,6 +9,7 @@ import { Person } from '../../model/Person';
 import { ListadoGruposService } from '../../services/listado-grupos.service';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { AlertDialogComponent } from '../../../core/alert-dialog/alert-dialog.component';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-listado-grupos-dialog',
@@ -32,6 +33,8 @@ export class ListadoGruposDialogComponent implements OnInit {
   errorMsg?: string;
   newGroup: Group = new Group();
   isLoading = false;
+  externalId: string | null = null;
+  publicGroup: boolean = false;
 
   constructor(
     public dialogRef: MatDialogRef<ListadoGruposDialogComponent>,
@@ -54,6 +57,12 @@ export class ListadoGruposDialogComponent implements OnInit {
         this.subgroups = this.newGroup.subgroups; }
       if (this.newGroup.name !== undefined){
         this.titulo = this.newGroup.name;
+      }
+      if (this.newGroup.externalId !== undefined){
+        this.externalId = this.newGroup.externalId;
+      }
+      if (this.newGroup.publicGroup !== undefined){
+        this.publicGroup = this.newGroup.publicGroup;
       }
     }
     if (this.managers.length === 0){
@@ -127,47 +136,48 @@ export class ListadoGruposDialogComponent implements OnInit {
       }
     );
   }
-  // tslint:disable-next-line: typedef
+  
   addMember(member: Person){
     this.members.push(member);
 
   }
-  // tslint:disable-next-line: typedef
+  
   addManager(manager: Person){
     this.managers.push(manager);
 
   }
-  // tslint:disable-next-line: typedef
+  
   addSubgroup(group: Group){
     this.subgroups.push(group);
   }
 
-  // tslint:disable-next-line: typedef
+  
   deleteMember(member: Person){
     if (this.members.indexOf(member) !== -1){
       this.members.splice(this.members.indexOf(member), 1);
     }
   }
-  // tslint:disable-next-line: typedef
+
   deleteManager(manager: Person){
     if (this.managers.indexOf(manager) !== -1){
       this.managers.splice(this.managers.indexOf(manager), 1);
     }
    }
-  // tslint:disable-next-line: typedef
+
   deleteSubgroup(group: Group){
     if (this.subgroups.indexOf(group) !== -1){
       this.subgroups.splice(this.subgroups.indexOf(group), 1);
     }
   }
-  // tslint:disable-next-line: typedef
+
   onSave(){
     this.isLoading = true;
     this.newGroup.name = this.titulo;
     this.newGroup.managers = this.managers;
     this.newGroup.members = this.members;
     this.newGroup.subgroups = this.subgroups;
-    // tslint:disable-next-line: triple-equals
+    this.newGroup.publicGroup = this.publicGroup;
+
     if (this.newGroup.name != ''){
       if (this.newGroup.managers.length > 0){
         this.listadoGruposService.saveGroup(this.newGroup).subscribe(() => {
@@ -185,8 +195,13 @@ export class ListadoGruposDialogComponent implements OnInit {
       this.isLoading = false;
     }
   }
-  // tslint:disable-next-line: typedef
+  
   cerrar(){
     this.dialogRef.close();
   }
+
+  changePublic(event: MatSlideToggleChange) {
+    this.publicGroup = event.checked;
+  }
+
 }
