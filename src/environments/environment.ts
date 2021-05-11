@@ -5,7 +5,6 @@
 export const environment = {
   production: false,
   server: 'http://localhost:8080',
-  securityServer: 'http://devon.es.capgemini.com/sso',
 };
 
 /*

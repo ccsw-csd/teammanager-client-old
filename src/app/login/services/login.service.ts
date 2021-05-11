@@ -19,10 +19,13 @@ export class LoginService {
 
     this.authService.clearCredentials();
 
-    return this.http.post<ResponseCredentials>(
-      environment.securityServer + '/authenticate',
-      {username:username, password: password}
-    );
+    let urlSSO = 'http://devon.es.capgemini.com/sso';
+
+    if (environment.production) {
+      urlSSO = environment.server + '/../sso/authenticate';
+    }
+
+    return this.http.post<ResponseCredentials>(urlSSO, {username:username, password: password});
   }
 
   getUserInfo(): Observable<User> {
