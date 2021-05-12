@@ -22,7 +22,7 @@ export class LoginService {
     let urlSSO = 'http://devon.es.capgemini.com/sso';
 
     if (environment.production) {
-      urlSSO = './sso';
+      urlSSO = '../sso';
     }
 
     return this.http.post<ResponseCredentials>(urlSSO+'/authenticate', {username:username, password: password});
