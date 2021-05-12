@@ -198,8 +198,8 @@ export class ForecastDetailComponent implements OnInit {
       var sourceArray: any[] = [];
       this.formatMonths();
       for (var i in data){  
-        countA = this.countDays(data[i], "A");
-        countF = this.countDays(data[i], "F");
+        countA = this.countDays(data[i].absences, "A");
+        countF = this.countDays(data[i].absences, "F");
         countLabor = (this.countLaborDays(this.initDate, this.endDate) - (countA + countF));
         var source = {
           name: {value: i, class: "name"},
@@ -210,7 +210,7 @@ export class ForecastDetailComponent implements OnInit {
         countAusenciaTotal += countA;
         countFestivoTotal += countF;
         countLaboralTotal += countLabor;
-        source = this.formatDatasource(data[i], source);
+        source = this.formatDatasource(data[i].absences, source, data[i].visible);
         sourceArray.push(source);
       }
 
@@ -223,7 +223,7 @@ export class ForecastDetailComponent implements OnInit {
         countA: {value: countAusenciaTotal, class: "total"}
       }
       var emptyArray: any[] = [];
-      sourceTotal = this.formatDatasource(emptyArray, sourceTotal);
+      sourceTotal = this.formatDatasource(emptyArray, sourceTotal, true);
       sourceArray.push(sourceTotal);
 
       this.dataSource.data = sourceArray;
@@ -323,13 +323,15 @@ export class ForecastDetailComponent implements OnInit {
     return "day";
   }
 
-  formatDatasource(person: any, source: any): any{
+  formatDatasource(person: any, source: any, visible: boolean): any{
 
     for(var l = 0; l < this.monthsDays.length; l++)
     {
       for(var o = this.monthsDays[l].init; o <= this.monthsDays[l].end; o++){
-
-        source[this.monthsDays[l].year + "/" +this.monthsDays[l].month + "/" + o] = {value: "", class: this.typeOfDay(o,this.monthsDays[l].month, person)};
+        if(visible)
+          source[this.monthsDays[l].year + "/" +this.monthsDays[l].month + "/" + o] = {value: "", class: this.typeOfDay(o,this.monthsDays[l].month, person)};
+        else
+          source[this.monthsDays[l].year + "/" +this.monthsDays[l].month + "/" + o] = {value: "", class: "Blocked"};
       }
     }
     return source;
