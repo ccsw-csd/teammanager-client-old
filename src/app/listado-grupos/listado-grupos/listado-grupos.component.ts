@@ -63,7 +63,7 @@ export class ListadoGruposComponent implements OnInit {
       pageable.pageNumber = event.pageIndex;
     }
 
-    this.listadoGruposService.getGrupos(this.adminView, pageable).subscribe(data => {
+    this.listadoGruposService.getGruposManaged(this.adminView, pageable).subscribe(data => {
       if (data.content != null) {
         this.dataSource.data = data.content;
       }
