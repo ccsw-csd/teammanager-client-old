@@ -19,6 +19,9 @@ export class ListadoGruposService {
   getGrupos(viewAdmin: boolean, pageable: Pageable): Observable<ListadoGruposPage> {
     return this.http.post<ListadoGruposPage>(environment.server + '/grouplist/', {viewAdmin: viewAdmin, pageable: pageable});
   }
+  getGruposManaged(viewAdmin: boolean, pageable: Pageable): Observable<ListadoGruposPage> {
+    return this.http.post<ListadoGruposPage>(environment.server + '/grouplist/managed', {viewAdmin: viewAdmin, pageable: pageable});
+  }
   getGroup(id: number): Observable<Group>{
     return this.http.post<Group>(environment.server + '/grouplist/editgroup/', id);
   }
