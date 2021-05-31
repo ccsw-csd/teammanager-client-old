@@ -85,4 +85,25 @@
       color: $icon;
     }
   }
+
+  .row {
+    display: flex;
+    flex-direction: row;
+    margin-left: auto;
+    padding-top: 2px;
+    .icon{
+      margin-left: auto;
+      opacity: 0.5;
+    }
+    .icon:hover{
+        cursor: pointer;
+        opacity: 1;
+    }
+  }
+  .column {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    margin-right: 1rem;
+  }
   

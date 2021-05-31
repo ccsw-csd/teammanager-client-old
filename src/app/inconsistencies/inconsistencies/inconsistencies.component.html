@@ -1,57 +1,93 @@
 <div class="content">
     <div class="title-block">
-      <h1>My groups</h1>
-      <button primary >Create new group</button>
+      <h1>{{title}}</h1>
       <div style="flex:1"></div>
     </div>
     <div class="containerTableList">
+      <div class="row" *ngIf="base">    
+        <div class="column f-2">
+          <mat-form-field>
+            <mat-label>Name</mat-label>
+            <input matInput 
+            class="input" matInput maxlength="100"/>
+          </mat-form-field>
+        </div>
+        <div class="column f-2">
+          <p></p>
+          <mat-form-field style="width: 300px">
+            <mat-label>Select Center</mat-label>
+            <mat-select [(ngModel)]="selectedCenter">
+              <mat-option *ngFor="let center of centers" [value]="center">
+                {{center.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="column f-2" >
+          <button primary (click)="loadPage()" style="width: 100px">Filtrar</button>
+        </div>
+      </div>
       <div class="tableList">
         <table mat-table [dataSource]="dataSource" matSort>
           <ng-container matColumnDef="name">
             <th class="cell-left" mat-header-cell *matHeaderCellDef>
-              Group name
+              Name
             </th>
-            <td mat-cell *matCellDef="let group" class="cell-left">
+            <td mat-cell *matCellDef="let person" class="cell-left">
+              {{ person.name }}
             </td>
           </ng-container>
-          <ng-container matColumnDef="manager">
+          <ng-container matColumnDef="lastname">
             <th class="cell-left" mat-header-cell *matHeaderCellDef>
-              Administrators
+              Last Name
             </th>
-            <td mat-cell *matCellDef="let group" class="cell-left">
+            <td mat-cell *matCellDef="let person" class="cell-left">
+              {{ person.lastname }}
             </td>
           </ng-container>
-          <ng-container matColumnDef="members">
+          <ng-container matColumnDef="username">
             <th class="cell-center" mat-header-cell *matHeaderCellDef>
-              Members
+              Username
             </th>
-            <td mat-cell *matCellDef="let group" class="cell-center">
+            <td mat-cell *matCellDef="let person" class="cell-center">
+              {{ person.username }}
             </td>
           </ng-container>
-          <ng-container matColumnDef="subgroups">
+          <ng-container matColumnDef="email">
             <th class="cell-center" mat-header-cell *matHeaderCellDef>
-              Subgroups
+              Email
             </th>
-            <td mat-cell *matCellDef="let group" class="cell-center">
+            <td mat-cell *matCellDef="let person" class="cell-center">
+              {{ person.email }}
             </td>
           </ng-container>
-          <ng-container matColumnDef="buttons">
+          <ng-container matColumnDef="center">
             <th class="cell-actions" mat-header-cell *matHeaderCellDef>
-              Actions
+              Center
             </th>
-            <td class="cell-actions" mat-cell *matCellDef="let group" layout="row">
-              <button mat-button layout="column" class="cell-button" [matTooltip]="'Edit'">
-                <mat-icon>edit</mat-icon>
-              </button>
-              <button *ngIf="group.externalId == null" mat-button layout="column" class="cell-button" [matTooltip]="'Remove'">
-                <mat-icon>delete</mat-icon>
-              </button>
+            <td class="cell-actions" mat-cell *matCellDef="let person" layout="row">
+              <p *ngIf="centers[person.centerId -1]">{{ centers[person.centerId - 1].name }}</p>
             </td>
+            <ng-container *ngIf="base" matColumnDef="numberAbsences">
+              <th class="cell-left" mat-header-cell *matHeaderCellDef>
+                Number of Absences
+              </th>
+              <td mat-cell *matCellDef="let person" class="cell-left">
+                {{ person.numberAbsences }}
+              </td>
+            </ng-container>
           </ng-container>
           <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
         </table>
       </div>
+      <mat-paginator (page)="loadPage($event)" [pageSizeOptions]="[20, 50, 100]" [pageIndex]="pageNumber"
+      [pageSize]="pageSize" [length]="totalElements" showFirstLastButtons></mat-paginator>
     </div>
   </div>
+
+  <div class="loadWrapper" *ngIf="isloading">
+    <mat-spinner></mat-spinner>
+  </div>
+    
   

@@ -16,13 +16,13 @@
     <a *ngIf="authService.isGestor()" mat-list-item routerLinkActive="item-active" routerLink="/festives">
       <span>Festives</span>
     </a>
-    <a *ngIf="authService.isAdmin()" mat-list-item routerLinkActive="item-active" routerLink="/inconsistencies"  [matMenuTriggerFor]="menu">
+    <a *ngIf="authService.isAdmin()" mat-list-item  [matMenuTriggerFor]="menu">
       <span >Inconsistencies</span>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item>Person List</button>
-        <button mat-menu-item>Person not on DB</button>
-        <button mat-menu-item>Person without Center</button>
-        <button mat-menu-item>SAGA or Username duplicated</button>
+        <button mat-menu-item  routerLinkActive="item-active" routerLink="/inconsistencies" [queryParams]="{prop: 'basic'}">Person List</button>
+        <button mat-menu-item  routerLinkActive="item-active" routerLink="/inconsistencies" [queryParams]="{prop: 'notDb'}">Person not on DB</button>
+        <button mat-menu-item routerLinkActive="item-active" routerLink="/inconsistencies" [queryParams]="{prop: 'center'}">Person without Center</button>
+        <button mat-menu-item routerLinkActive="item-active" routerLink="/inconsistencies" [queryParams]="{prop: 'saga'}">SAGA or Username duplicated</button>
       </mat-menu>
     </a>
     <a mat-list-item href="mailto:adcsd.internal.support@capgemini.com?subject=[TeamManager] Consulta / Feedback">
