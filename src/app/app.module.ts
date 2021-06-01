@@ -23,13 +23,15 @@ import {MatRadioModule} from '@angular/material/radio';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { CustomDateAdapter } from './core/date-adapter/custom-date-adapter';
 import { FestivesModule } from './festives/festives.module';
+import { InconsistenciesComponent } from './inconsistencies/inconsistencies/inconsistencies.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ForecastListComponent,
     ForecastDetailComponent,
-    ForecastDetailExportDialogComponent
+    ForecastDetailExportDialogComponent,
+    InconsistenciesComponent
   ],
   imports: [
     BrowserModule,
