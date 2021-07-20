@@ -5,7 +5,7 @@ export class PersonAbsenceDto {
     person: PersonDto|undefined;
     year: number|undefined;
     month: number|undefined;
-    date: string|undefined;  
+    date!: string;  
     type: string|undefined; 
     constructor() {}
 }

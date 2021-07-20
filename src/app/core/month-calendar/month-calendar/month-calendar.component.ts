@@ -54,25 +54,28 @@ export class MonthCalendarComponent implements OnInit, OnChanges {
   ngOnInit(): void {
       this.getDaysFromDate(this.month, this.year);
   }
-
+    
   addNewAbsence(data: any) {
     let userInfo : User | null = this.authService.getUserInfo();
-
+ 
     if (userInfo?.withPON) {
       if(data.type != "A") return;
     }
-
     this.newAbsence.emit(data);
-    if(data.class == "A-absence"){
+    
+    if(data.class == "A-absence" || data.class == "O-absence"){
       data.class = "normal";
       data.type = "laboral";
     }
-
+ 
     else if(data.class == "normal"){
-      data.class = "A-absence";
-      data.type = "A";
+      if (data.type == "A") {
+        data.class = "A-absence";
+      }
+      else if (data.type == "O") {
+        data.class = "O-absence";
+      }
     }
-
   }
 
   getDaysFromDate(month: number, year: number) {
@@ -81,7 +84,7 @@ export class MonthCalendarComponent implements OnInit, OnChanges {
     const endDate = startDate.clone().endOf('month');
     this.dateSelect = startDate;
     //Dias de diferencia entre la fecha inicio y fecha fin
-    const diffDays = endDate.diff(startDate, 'days', true)
+    const diffDays = endDate.diff(startDate, 'days', true);
     const numberDays = Math.round(diffDays);
     const dayAbsenceObject: any[] = [];
     
