@@ -84,13 +84,14 @@ h1 {
 
   .mat-column-countLab, 
   .mat-column-countF, 
-  .mat-column-countA {
+  .mat-column-countA,
+  .mat-column-countO {
     width: 80px !important;
     min-width: 80px  !important;
     text-align: center;
   }
 
-  .mat-column-countA {
+  .mat-column-countO {
     border-right: 1px solid rgb(54, 184, 224);
   }
 
@@ -113,6 +114,10 @@ h1 {
 
   .Ausencia{
     background-color: #ffffaa!important;
+  }
+
+  .Otros{
+    background-color: #F7BD46!important;
   }
 
   .Weekend{

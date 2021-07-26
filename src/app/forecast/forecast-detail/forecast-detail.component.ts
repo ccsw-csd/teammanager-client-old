@@ -48,7 +48,8 @@ export class ForecastDetailComponent implements OnInit {
     'name',
     'countLab',
     'countF',
-    'countA'
+    'countA',
+    'countO'
   ];
 
   months: any[] = [
@@ -188,6 +189,8 @@ export class ForecastDetailComponent implements OnInit {
     }
     var countA;
     var countAusenciaTotal = 0;
+    var countO;
+    var countOtrosTotal = 0;
     var countFestivoTotal = 0;
     var countLaboralTotal = 0;
     var countF;
@@ -197,17 +200,20 @@ export class ForecastDetailComponent implements OnInit {
     this.forecastService.getAbsences(Number(this.id), this.convertDateToServerString(this.initDate), this.convertDateToServerString(this.endDate)).subscribe(data => {
       var sourceArray: any[] = [];
       this.formatMonths();
-      for (var i in data){  
+      for (var i in data){
         countA = this.countDays(data[i].absences, "A");
+        countO = this.countDays(data[i].absences, "O");
         countF = this.countDays(data[i].absences, "F");
-        countLabor = (this.countLaborDays(this.initDate, this.endDate) - (countA + countF));
+        countLabor = (this.countLaborDays(this.initDate, this.endDate) - (countA + countO + countF));
         var source = {
           name: {value: i, class: "name"},
           countLab: {value: countLabor, class: "count"},
           countF: {value: countF, class: "count"},
-          countA: {value: countA, class: "count"}
+          countA: {value: countA, class: "count"},
+          countO: {value: countO, class: "count"}
         }
         countAusenciaTotal += countA;
+        countOtrosTotal += countO;
         countFestivoTotal += countF;
         countLaboralTotal += countLabor;
         source = this.formatDatasource(data[i].absences, source, data[i].visible);
@@ -220,7 +226,8 @@ export class ForecastDetailComponent implements OnInit {
         name: {value: "Total", class: "total"},
         countLab: {value: countLaboralTotal, class: "total"},
         countF: {value: countFestivoTotal, class: "total"},
-        countA: {value: countAusenciaTotal, class: "total"}
+        countA: {value: countAusenciaTotal, class: "total"},
+        countO: {value: countOtrosTotal, class: "total"}
       }
       var emptyArray: any[] = [];
       sourceTotal = this.formatDatasource(emptyArray, sourceTotal, true);
@@ -233,7 +240,7 @@ export class ForecastDetailComponent implements OnInit {
   }
 
   isSticky(object: any): boolean{
-    if(object == "Detail" || object == "Person" || object == "Working Days"||object == "Inactivities"||object == "Festives")
+    if(object == "Detail" || object == "Person" || object == "Working Days" || object == "Vacations" || object == "Festives" || object == "Others")
       return true;
     return false;  
   }
@@ -248,12 +255,14 @@ export class ForecastDetailComponent implements OnInit {
     this.transcode["name"] = "Person";
     this.transcode["countLab"] = "Working Days";
     this.transcode["countF"] = "Festives";
-    this.transcode["countA"] = "Inactivities";
+    this.transcode["countA"] = "Vacations";
+    this.transcode["countO"] = "Others";
 
     this.columns.push('name');
     this.columns.push('countLab');
     this.columns.push('countF');
     this.columns.push('countA');
+    this.columns.push('countO');
 
     this.calculateMonths();
 
@@ -318,7 +327,7 @@ export class ForecastDetailComponent implements OnInit {
   getHeaderClass(object: any): string{
     if(object == "Person")
       return "name";
-    if(object == "Working Days"||object == "Inactivities"||object == "Festives")
+    if(object == "Working Days" || object == "Vacations" || object == "Festives" || object == "Others")
       return "count"; 
     return "day";
   }
@@ -344,6 +353,13 @@ export class ForecastDetailComponent implements OnInit {
       for (var i in data){
         if((data[i].type === "A"  || data[i].type === "P") && (this.isWeekend(data[i].date) == false))
           count++;
+      }
+    }
+    else if(type == "O"){
+      for (var i in data){
+        if((data[i].type === "O") && (this.isWeekend(data[i].date) == false)){
+          count++;
+        }
       }
     }
     else if(type === "F"){
@@ -399,9 +415,11 @@ export class ForecastDetailComponent implements OnInit {
       if((date.toISOString().substring(0, 10).localeCompare(absences[i].date)) == 0) {
         if(absences[i].type == "A" || absences[i].type == "P")
           isAbsence = true
-        else 
+        else if(absences[i].type == "O") 
+          return "day Otros";
+        else
           isFestive = true;
-      }  
+      }
     }
     
 
