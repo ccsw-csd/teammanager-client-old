@@ -25,6 +25,7 @@ export class ListadoGruposDialogComponent implements OnInit {
 
   groups: Group[] = [];
   persons: Person[] = [];
+  auxPersons: Person[] = [];
   subgroups: Group[] = [];
   managers: Person[] = [];
   members: Person[] = [];
@@ -89,7 +90,14 @@ export class ListadoGruposDialogComponent implements OnInit {
         )
       )
       .subscribe((data: any) => {
-          this.persons = data;
+        this.auxPersons = data;
+        for(let i = 0; i < this.auxPersons.length; i++){
+          let j = 0;
+          if(this.auxPersons[i].active) {
+            this.persons[j] = this.auxPersons[i];
+            j++;
+          }
+        }
       }
     );
 
@@ -110,8 +118,15 @@ export class ListadoGruposDialogComponent implements OnInit {
         )
       )
       .subscribe(data => {
-          this.persons = data;
-
+        this.auxPersons = data;
+        console.log(this.auxPersons);
+        for(let i = 0; i < this.auxPersons.length; i++){
+          let j = 0;
+          if(this.auxPersons[i].active) {
+            this.persons[j] = this.auxPersons[i];
+            j++;
+          }
+        }
       }
     );
 

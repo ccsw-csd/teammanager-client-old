@@ -8,7 +8,7 @@
                 </div>
                 <div style="display:flex; flex-direction: row;">
                     <div class="legend" style="background-color: #ffffaa;"></div>
-                    <div>Holidays</div>
+                    <div>Vacations</div>
                 </div>
             </div>
             <div style="display:flex; flex-direction: column; width: 125px">
@@ -30,7 +30,7 @@
             </div>
  
         </div>
-        <div style="flex:1;text-align: center;">
+        <div style="display:flex; flex-direction: row;text-align: center;">
             <mat-form-field style="width: 100px">
                 <mat-label>Selected Year</mat-label>
                 <mat-select [(ngModel)]=year (selectionChange)="getAbsences()">
@@ -39,16 +39,17 @@
                     <mat-option [value]="actualYear+1">{{actualYear+1}}</mat-option>
                 </mat-select>
             </mat-form-field>
+            <div style="flex:1;text-align: center; margin-left: 25px;">
+                <mat-form-field *ngIf="!updateDisabled" style="width: 100px">
+                    <mat-label>Selected inactivity</mat-label>
+                    <mat-select [(ngModel)]=inactivityType>
+                        <mat-option [value]="holiday" selected>Holiday</mat-option>
+                        <mat-option [value]="other">Other</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
         </div>
-        <div style="flex:1;text-align: center;">
-            <mat-form-field style="width: 100px">
-                <mat-label>Selected inactivity</mat-label>
-                <mat-select [(ngModel)]=inactivityType>
-                    <mat-option [value]="holiday" selected>Holiday</mat-option>
-                    <mat-option [value]="other">Other</mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
+        
         <div style="flex:1;text-align: right;align-self: center;">
             <button *ngIf="canSave==true" mat-button primary [disabled]="updateDisabled" (click)="saveAbsences()">Update</button>
             <span *ngIf="canSave==false"><i>* Inactivities are read from PON every 3 hours.</i></span>
