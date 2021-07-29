@@ -1,4 +1,4 @@
-import { Component, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, DebugElement, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import * as moment from 'moment';
 import { Moment } from 'moment';
 import { PersonAbsenceDto } from 'src/app/core/to/PersonAbsenceDto';
@@ -16,6 +16,7 @@ import { formatDate } from '@angular/common';
 export class PersonalCalendarComponent implements OnInit, OnChanges  {
   actualYear : number = new Date().getFullYear();
   year : number = this.actualYear;
+  newAbsences: Date[] = [];
   absences: PersonAbsenceDto[] = [];
   isloading = false;
   updateDisabled = true;
@@ -44,17 +45,9 @@ export class PersonalCalendarComponent implements OnInit, OnChanges  {
   saveAbsences(): void{
     this.isloading = true;
  
-    this.personalService.saveAbsencePersonal(this.year, this.dtos).subscribe(result => {
+    this.personalService.saveAbsencePersonal(this.year, this.newAbsences, this.dtos).subscribe(result => {
       this.getAbsences();
     });
-  }
- 
-  private convertDateToString(date : Date) : string {
-    
-    let locale = 'en-EN';
-    return date.toLocaleDateString(locale, {year:'numeric'})+"-"
-      +date.toLocaleDateString(locale, {month:'2-digit'})+"-"
-      +date.toLocaleDateString(locale, {day:'2-digit'});
   }
 
   addNewAbsence(data: any): void{
@@ -72,14 +65,18 @@ export class PersonalCalendarComponent implements OnInit, OnChanges  {
         let dto = new PersonAbsenceDto();
         dto.date = this.convertDateToString(data.date.toDate());
         dto.type = data.type;
+
+        this.newAbsences.push(data.date.toDate());
  
         this.dtos.push(dto);
         break;
       case "A":
+        this.newAbsences = this.newAbsences.filter(item => !this.isSameDate(item, data.date.toDate()))
         this.dtos = this.dtos.filter(item => !this.isSameDate(new Date(item.date), data.date.toDate()));
         data.type = "laboral";
         break;
       case "O":
+        this.newAbsences = this.newAbsences.filter(item => !this.isSameDate(item, data.date.toDate()))
         this.dtos = this.dtos.filter(item => !this.isSameDate(new Date(item.date), data.date.toDate()));
         data.type = "laboral";
         break;
@@ -99,21 +96,31 @@ export class PersonalCalendarComponent implements OnInit, OnChanges  {
       this.absences = data;
       this.isloading = false;
  
+      this.newAbsences = [];
+      this.dtos = [];
+      this.auxDtos = [];
+
       let dataCast : any = data;
  
       for (let index in dataCast) {
         let personAbsences: PersonAbsenceDto[] = dataCast[index];
   
-        this.auxDtos = personAbsences.filter(item => (item.type == 'A' || item.type == 'O') && item.date != undefined);       
-        
-        for (let i = 0; i < this.auxDtos.length; i++) {
+        this.auxDtos = this.auxDtos.concat(personAbsences.filter(item => (item.type == 'A' || item.type == 'O') && item.date != undefined));
+ 
+        this.newAbsences = this.newAbsences.concat(
+          personAbsences.filter(item => (item.type == 'A' || item.type == 'O') && item.date != undefined)
+                        .map(item => new Date(item.date != undefined ? item.date : ""))          
+        );
+
+        for (let i = 0; i < this.newAbsences.length; i++) {
           let dto = new PersonAbsenceDto();
-          dto.date = this.auxDtos[i].date;
-          dto.type = this.auxDtos[i].type;
+          dto.date = this.convertDateToString(this.newAbsences[i]);
+          if(this.auxDtos[i].date == this.convertDateToString(this.newAbsences[i]))
+            dto.type = this.auxDtos[i].type;
           
           if(this.dtos.findIndex((item) => item.date === dto.date) < 0) {
             this.dtos.push(dto);
-          }
+          } 
         }
       }
     });
@@ -122,5 +129,13 @@ export class PersonalCalendarComponent implements OnInit, OnChanges  {
   ngOnChanges(changes: SimpleChanges) {
     this.year = this.actualYear;
     this.getAbsences();
+  }
+
+  private convertDateToString(date : Date) : string {
+    
+    let locale = 'en-EN';
+    return date.toLocaleDateString(locale, {year:'numeric'})+"-"
+      +date.toLocaleDateString(locale, {month:'2-digit'})+"-"
+      +date.toLocaleDateString(locale, {day:'2-digit'});
   }
 }

@@ -25,6 +25,7 @@ export class ListadoGruposDialogComponent implements OnInit {
 
   groups: Group[] = [];
   persons: Person[] = [];
+  auxPersons: Person[] = [];
   subgroups: Group[] = [];
   managers: Person[] = [];
   members: Person[] = [];
@@ -89,7 +90,7 @@ export class ListadoGruposDialogComponent implements OnInit {
         )
       )
       .subscribe((data: any) => {
-          this.persons = data;
+        this.persons = data;
       }
     );
 
@@ -110,8 +111,7 @@ export class ListadoGruposDialogComponent implements OnInit {
         )
       )
       .subscribe(data => {
-          this.persons = data;
-
+        this.persons = data;
       }
     );
 
