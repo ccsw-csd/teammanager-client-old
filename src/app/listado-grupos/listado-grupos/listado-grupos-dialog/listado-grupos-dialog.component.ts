@@ -119,7 +119,6 @@ export class ListadoGruposDialogComponent implements OnInit {
       )
       .subscribe(data => {
         this.auxPersons = data;
-        console.log(this.auxPersons);
         for(let i = 0; i < this.auxPersons.length; i++){
           let j = 0;
           if(this.auxPersons[i].active) {
