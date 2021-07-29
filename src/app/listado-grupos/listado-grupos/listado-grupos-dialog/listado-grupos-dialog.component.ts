@@ -90,14 +90,7 @@ export class ListadoGruposDialogComponent implements OnInit {
         )
       )
       .subscribe((data: any) => {
-        this.auxPersons = data;
-        for(let i = 0; i < this.auxPersons.length; i++){
-          let j = 0;
-          if(this.auxPersons[i].active) {
-            this.persons[j] = this.auxPersons[i];
-            j++;
-          }
-        }
+        this.persons = data;
       }
     );
 
@@ -118,14 +111,7 @@ export class ListadoGruposDialogComponent implements OnInit {
         )
       )
       .subscribe(data => {
-        this.auxPersons = data;
-        for(let i = 0; i < this.auxPersons.length; i++){
-          let j = 0;
-          if(this.auxPersons[i].active) {
-            this.persons[j] = this.auxPersons[i];
-            j++;
-          }
-        }
+        this.persons = data;
       }
     );
 
