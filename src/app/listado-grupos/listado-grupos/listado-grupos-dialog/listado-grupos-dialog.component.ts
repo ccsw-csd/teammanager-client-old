@@ -73,6 +73,7 @@ export class ListadoGruposDialogComponent implements OnInit {
         this.listadoGruposService.getManagerUsername(this.usuario).subscribe(data => this.addManager(data));
       }
     }
+    
     this.searchManagersCtrl.valueChanges
       .pipe(
         debounceTime(100),
