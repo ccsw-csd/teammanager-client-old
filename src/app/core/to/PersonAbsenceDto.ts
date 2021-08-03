@@ -7,6 +7,7 @@ export class PersonAbsenceDto {
     month: number|undefined;
     date!: string;  
     type: string|undefined; 
+    absence_type: string|undefined;
     constructor() {}
 }
   

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnChanges, SimpleChanges, Output, EventEmitter  } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChanges, Output, EventEmitter, DebugElement  } from '@angular/core';
 import * as moment from 'moment';
 import { AuthService } from '../../services/auth.service';
 import { User } from '../../to/User';
@@ -63,18 +63,19 @@ export class MonthCalendarComponent implements OnInit, OnChanges {
     }
     this.newAbsence.emit(data);
     
-    if(data.class == "A-absence" || data.class == "O-absence"){
+    if(data.class == "VAC-absence" || data.class == "OTH-absence"){
       data.class = "normal";
       data.type = "laboral";
     }
  
     else if(data.class == "normal"){
-      if (data.type == "A") {
-        data.class = "A-absence";
+      if (data.absence_type == "VAC") {
+        data.class = "VAC-absence";
       }
-      else if (data.type == "O") {
-        data.class = "O-absence";
+      else if (data.absence_type == "OTH") {
+        data.class = "OTH-absence";
       }
+      data.type = "A";
     }
   }
 
@@ -102,14 +103,20 @@ export class MonthCalendarComponent implements OnInit, OnChanges {
       for(var i in dayAbsenceObject){
         if(dayAbsenceObject[i].date() == dayObject.date())
         {
+          let clase;
+          
+          if(this.absences[i].type == "A") clase = this.absences[i].absence_type + "-absence";
+          else clase = this.absences[i].type + "-absence";
+          
           return {
-            name: dayObject.format("dddd"),
-            value: a,
-            indexWeek: dayObject.isoWeekday(),
-            class: this.absences[i].type + "-absence",
-            type: this.absences[i].type,
-            date: dayAbsenceObject[i],
-            absence: this.absences[i]
+              name: dayObject.format("dddd"),
+              value: a,
+              indexWeek: dayObject.isoWeekday(),
+              class: clase,
+              absence_type: this.absences[i].absence_type,
+              type: this.absences[i].type,
+              date: dayAbsenceObject[i],
+              absence: this.absences[i]
           };
         }
       }
