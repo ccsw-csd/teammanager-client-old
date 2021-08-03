@@ -103,29 +103,21 @@ export class MonthCalendarComponent implements OnInit, OnChanges {
       for(var i in dayAbsenceObject){
         if(dayAbsenceObject[i].date() == dayObject.date())
         {
-          if(this.absences[i].type == "A"){
-            return {
+          let clase;
+          
+          if(this.absences[i].type == "A") clase = this.absences[i].absence_type + "-absence";
+          else clase = this.absences[i].type + "-absence";
+          
+          return {
               name: dayObject.format("dddd"),
               value: a,
               indexWeek: dayObject.isoWeekday(),
-              class: this.absences[i].absence_type + "-absence",
+              class: clase,
               absence_type: this.absences[i].absence_type,
               type: this.absences[i].type,
               date: dayAbsenceObject[i],
               absence: this.absences[i]
-            };
-          } else{
-            return {
-              name: dayObject.format("dddd"),
-              value: a,
-              indexWeek: dayObject.isoWeekday(),
-              class: this.absences[i].type + "-absence",
-              absence_type: this.absences[i].absence_type,
-              type: this.absences[i].type,
-              date: dayAbsenceObject[i],
-              absence: this.absences[i]
-            };
-          }
+          };
         }
       }
 
