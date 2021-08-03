@@ -40,7 +40,7 @@
                 </mat-select>
             </mat-form-field>
             <div style="flex:1;text-align: center; margin-left: 25px;">
-                <mat-form-field *ngIf="!updateDisabled" style="width: 100px">
+                <mat-form-field *ngIf="canSave==true" style="width: 100px">
                     <mat-label>Selected inactivity</mat-label>
                     <mat-select [(ngModel)]=inactivityType>
                         <mat-option [value]="holiday" selected>Holiday</mat-option>

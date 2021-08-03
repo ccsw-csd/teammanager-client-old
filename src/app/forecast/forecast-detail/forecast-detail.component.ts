@@ -201,8 +201,8 @@ export class ForecastDetailComponent implements OnInit {
       var sourceArray: any[] = [];
       this.formatMonths();
       for (var i in data){
-        countA = this.countDays(data[i].absences, "A");
-        countO = this.countDays(data[i].absences, "O");
+        countA = this.countDays(data[i].absences, "VAC");
+        countO = this.countDays(data[i].absences, "OTH");
         countF = this.countDays(data[i].absences, "F");
         countLabor = (this.countLaborDays(this.initDate, this.endDate) - (countA + countO + countF));
         var source = {
@@ -349,15 +349,15 @@ export class ForecastDetailComponent implements OnInit {
   countDays(data: any, type: String): number{
     let count = 0;
 
-    if(type === "A" || type === "P"){
+    if(type === "VAC" || type === "P"){
       for (var i in data){
-        if((data[i].type === "A"  || data[i].type === "P") && (this.isWeekend(data[i].date) == false))
+        if((data[i].absence_type === "VAC"  || data[i].type === "P") && (this.isWeekend(data[i].date) == false))
           count++;
       }
     }
-    else if(type == "O"){
+    else if(type == "OTH"){
       for (var i in data){
-        if((data[i].type === "O") && (this.isWeekend(data[i].date) == false)){
+        if((data[i].absence_type === "OTH") && (this.isWeekend(data[i].date) == false)){
           count++;
         }
       }
@@ -410,12 +410,11 @@ export class ForecastDetailComponent implements OnInit {
     date = new Date(2021, month-1, day+1);
     var isFestive = false;
     var isAbsence = false;
-
     for(var i = 0; i < absences.length; i++){
       if((date.toISOString().substring(0, 10).localeCompare(absences[i].date)) == 0) {
-        if(absences[i].type == "A" || absences[i].type == "P")
+        if(absences[i].absence_type == "VAC" || absences[i].type == "P")
           isAbsence = true
-        else if(absences[i].type == "O") 
+        else if(absences[i].absence_type == "OTH") 
           return "day Otros";
         else
           isFestive = true;

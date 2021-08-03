@@ -22,8 +22,8 @@ export class PersonalCalendarComponent implements OnInit, OnChanges  {
   updateDisabled = true;
   canSave : boolean = true;
   inactivityType : String = "";
-  holiday : String = "Holiday";
-  other: String = "Other";
+  holiday : String = "VAC";
+  other: String = "OTH";
   dtos: PersonAbsenceDto[] = [];
   auxDtos: PersonAbsenceDto[] = [];
   
@@ -56,26 +56,21 @@ export class PersonalCalendarComponent implements OnInit, OnChanges  {
     
     switch(data.type) {
       case "laboral":
-        if (this.inactivityType == "Holiday") {
-          data.type = "A";
+        if (this.inactivityType == "VAC") {
+          data.absence_type = this.holiday;
         }
-        else if (this.inactivityType == "Other") {
-          data.type = "O";
+        else if (this.inactivityType == "OTH") {
+          data.absence_type = this.other;
         }
+        data.type = "A";
         let dto = new PersonAbsenceDto();
         dto.date = this.convertDateToString(data.date.toDate());
-        dto.type = data.type;
+        dto.absence_type = data.absence_type;
 
         this.newAbsences.push(data.date.toDate());
- 
         this.dtos.push(dto);
         break;
       case "A":
-        this.newAbsences = this.newAbsences.filter(item => !this.isSameDate(item, data.date.toDate()))
-        this.dtos = this.dtos.filter(item => !this.isSameDate(new Date(item.date), data.date.toDate()));
-        data.type = "laboral";
-        break;
-      case "O":
         this.newAbsences = this.newAbsences.filter(item => !this.isSameDate(item, data.date.toDate()))
         this.dtos = this.dtos.filter(item => !this.isSameDate(new Date(item.date), data.date.toDate()));
         data.type = "laboral";
@@ -105,18 +100,17 @@ export class PersonalCalendarComponent implements OnInit, OnChanges  {
       for (let index in dataCast) {
         let personAbsences: PersonAbsenceDto[] = dataCast[index];
   
-        this.auxDtos = this.auxDtos.concat(personAbsences.filter(item => (item.type == 'A' || item.type == 'O') && item.date != undefined));
+        this.auxDtos = this.auxDtos.concat(personAbsences.filter(item => item.type == 'A' && item.date != undefined));
  
         this.newAbsences = this.newAbsences.concat(
-          personAbsences.filter(item => (item.type == 'A' || item.type == 'O') && item.date != undefined)
+          personAbsences.filter(item => item.type == 'A' && item.date != undefined)
                         .map(item => new Date(item.date != undefined ? item.date : ""))          
         );
 
         for (let i = 0; i < this.newAbsences.length; i++) {
           let dto = new PersonAbsenceDto();
           dto.date = this.convertDateToString(this.newAbsences[i]);
-          if(this.auxDtos[i].date == this.convertDateToString(this.newAbsences[i]))
-            dto.type = this.auxDtos[i].type;
+          dto.absence_type = this.auxDtos[i].absence_type;
           
           if(this.dtos.findIndex((item) => item.date === dto.date) < 0) {
             this.dtos.push(dto);
