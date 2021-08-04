@@ -105,7 +105,7 @@ export class MonthCalendarComponent implements OnInit, OnChanges {
         {
           let clase;
           
-          if(this.absences[i].type == "A") clase = this.absences[i].absence_type + "-absence";
+          if(this.absences[i].type == "A" || this.absences[i].type == "P") clase = this.absences[i].absence_type + "-absence";
           else clase = this.absences[i].type + "-absence";
           
           return {
