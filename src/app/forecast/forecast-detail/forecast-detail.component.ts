@@ -201,9 +201,9 @@ export class ForecastDetailComponent implements OnInit {
       var sourceArray: any[] = [];
       this.formatMonths();
       for (var i in data){
-        countA = this.countDays(data[i].absences, "VAC");
-        countO = this.countDays(data[i].absences, "OTH");
-        countF = this.countDays(data[i].absences, "F");
+        countA = this.countDays(data[i].absences, "A", "VAC");
+        countO = this.countDays(data[i].absences, "A", "OTH");
+        countF = this.countDays(data[i].absences, "F", "");
         countLabor = (this.countLaborDays(this.initDate, this.endDate) - (countA + countO + countF));
         var source = {
           name: {value: i, class: "name"},
@@ -346,19 +346,20 @@ export class ForecastDetailComponent implements OnInit {
     return source;
   }
 
-  countDays(data: any, type: String): number{
+  countDays(data: any, type: String, absenceType: String): number{
     let count = 0;
 
-    if(type === "VAC" || type === "P"){
-      for (var i in data){
-        if((data[i].absence_type === "VAC"  || data[i].type === "P") && (this.isWeekend(data[i].date) == false))
-          count++;
-      }
-    }
-    else if(type == "OTH"){
-      for (var i in data){
-        if((data[i].absence_type === "OTH") && (this.isWeekend(data[i].date) == false)){
-          count++;
+    if(type === "A" || type === "P"){
+      if(absenceType === "VAC") {
+        for (var i in data){
+          if((data[i].absence_type === "VAC") && (this.isWeekend(data[i].date) == false))
+            count++;
+        }
+      } else if(absenceType === "OTH"){
+        for (var i in data){
+          if((data[i].absence_type === "OTH") && (this.isWeekend(data[i].date) == false)){
+            count++;
+          }
         }
       }
     }
@@ -370,6 +371,7 @@ export class ForecastDetailComponent implements OnInit {
     }
     return count;
   }
+
   isWeekend(dateString: string): boolean{
     var date: Date = new Date(dateString);
     if((date.getDay() === 6) || (date.getDay() === 0))
@@ -410,12 +412,13 @@ export class ForecastDetailComponent implements OnInit {
     date = new Date(2021, month-1, day+1);
     var isFestive = false;
     var isAbsence = false;
+    var isOther = false;
     for(var i = 0; i < absences.length; i++){
       if((date.toISOString().substring(0, 10).localeCompare(absences[i].date)) == 0) {
-        if(absences[i].absence_type == "VAC" || absences[i].type == "P")
+        if(absences[i].absence_type == "VAC")
           isAbsence = true
         else if(absences[i].absence_type == "OTH") 
-          return "day Otros";
+          isOther = true;
         else
           isFestive = true;
       }
@@ -424,6 +427,7 @@ export class ForecastDetailComponent implements OnInit {
 
     if (isFestive) return "day Festivo";
     if (isAbsence) return "day Ausencia";
+    if (isOther) return "day Otros";
     return "day Laboral";
   }
 
