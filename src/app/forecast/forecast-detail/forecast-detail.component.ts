@@ -69,7 +69,7 @@ export class ForecastDetailComponent implements OnInit {
 
 
   monthsHeaderExtraInfo: any[] = [
-    {name:"Detail", num: 4},
+    {name:"Detail", num: 5},
     {name:"January", num: 0},
     {name:"February", num: 1},
     {name:"March", num: 2},
