@@ -178,6 +178,8 @@ export class ForecastDetailComponent implements OnInit {
 
   getAbsences(): void
   {
+
+
     if(this.selectedMonth != 12){
       var lastDays = this.getDaysInMonth(new Date().getFullYear(), this.selectedMonth+1);
       this.initDate = new Date(new Date().getFullYear(), this.selectedMonth);
@@ -187,6 +189,7 @@ export class ForecastDetailComponent implements OnInit {
       this.initDate = this.rangeInitDate;
       this.endDate = this.rangeEndDate;
     }
+
     var countA;
     var countAusenciaTotal = 0;
     var countO;
@@ -200,7 +203,7 @@ export class ForecastDetailComponent implements OnInit {
     this.forecastService.getAbsences(Number(this.id), this.convertDateToServerString(this.initDate), this.convertDateToServerString(this.endDate)).subscribe(data => {
       var sourceArray: any[] = [];
       this.formatMonths();
-      for (var i in data){
+      for (var i in data){        
         countA = this.countDays(data[i].absences, "A", "VAC");
         countO = this.countDays(data[i].absences, "A", "OTH");
         countF = this.countDays(data[i].absences, "F", "");
@@ -312,8 +315,9 @@ export class ForecastDetailComponent implements OnInit {
             if(i == this.endDate.getMonth()+1){
               this.monthsDays.push({year: this.endDate.getFullYear(), month: i, number: this.endDate.getDate(), init: 1, end:  this.endDate.getDate()}); 
             }
-            else
+            else {
               this.monthsDays.push({year: this.endDate.getFullYear(), month: i, number: new Date(this.endDate.getFullYear(), i, 0).getDate(), init: 1, end: new Date(this.endDate.getFullYear(), i, 0).getDate()});  
+            }
           }
         }
         else{
@@ -338,7 +342,7 @@ export class ForecastDetailComponent implements OnInit {
     {
       for(var o = this.monthsDays[l].init; o <= this.monthsDays[l].end; o++){
         if(visible)
-          source[this.monthsDays[l].year + "/" +this.monthsDays[l].month + "/" + o] = {value: "", class: this.typeOfDay(o,this.monthsDays[l].month, person)};
+          source[this.monthsDays[l].year + "/" +this.monthsDays[l].month + "/" + o] = {value: "", class: this.typeOfDay(o,this.monthsDays[l].month, this.monthsDays[l].year, person)};
         else
           source[this.monthsDays[l].year + "/" +this.monthsDays[l].month + "/" + o] = {value: "", class: "Blocked"};
       }
@@ -404,12 +408,12 @@ export class ForecastDetailComponent implements OnInit {
     return workingdays;
   }
 
-  typeOfDay(day: number, month: number, absences: any): string{
-    var date = new Date(2021, month-1, day);
+  typeOfDay(day: number, month: number, year: number, absences: any): string{
+    var date = new Date(year, month-1, day);
     if((date.getDay() === 6) || (date.getDay() === 0))
       return "day Weekend";
 
-    date = new Date(2021, month-1, day+1);
+    date = new Date(year, month-1, day+1);
     var isFestive = false;
     var isAbsence = false;
     var isOther = false;
