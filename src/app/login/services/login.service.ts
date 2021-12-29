@@ -19,7 +19,7 @@ export class LoginService {
 
     this.authService.clearCredentials();
 
-    let urlSSO = 'http://devon.es.capgemini.com/sso';
+    let urlSSO = 'http://ccsw.capgemini.com/sso';
 
     if (environment.production) {
       urlSSO = '../sso';

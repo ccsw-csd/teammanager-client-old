@@ -141,5 +141,34 @@ h1 {
   .Blocked{
     background-color: #eaeaea!important;
   }
+}
 
+.MonthArrow {
+  margin-top:8px;
+}
+
+.Arrow1 {
+  padding-right: 10px;
+  padding-left: 15px;
+}
+
+.Arrow2 {
+  padding-left: 3px;
+}
+
+.MonthArrow:disabled {
+  background-color: white;
+
+  mat-icon {
+    color:gray;
+    font-size: 27px;
+  }
+}
+
+.MonthArrow:enabled {
+  background-color: white;
+  mat-icon {
+    color:#12abdb;
+    font-size: 27px;
+  }
 }

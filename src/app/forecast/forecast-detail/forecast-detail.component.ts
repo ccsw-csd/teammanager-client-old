@@ -24,6 +24,8 @@ export class ForecastDetailComponent implements OnInit {
     public dialog: MatDialog,
     ) {this.form = this.formBuilder.group(this.formControl);}
 
+  firstMonth = true;
+  lastMonth = false;
   pageNumber = 0;
   pageSize = 20;
   groupName = "";
@@ -53,6 +55,21 @@ export class ForecastDetailComponent implements OnInit {
   ];
 
   months: any[] = [
+    {name:"January", num: 0, year: 0},
+    {name:"February", num: 1, year: 0},
+    {name:"March", num: 2, year: 0},
+    {name:"April", num: 3, year: 0},
+    {name:"May", num: 4, year: 0},
+    {name:"June", num: 5, year: 0},
+    {name:"July", num: 6, year: 0},
+    {name:"August", num: 7, year: 0},
+    {name:"September", num: 8, year: 0},
+    {name:"October", num: 9, year: 0},
+    {name:"November", num: 10, year: 0},
+    {name:"December", num: 11, year: 0}
+  ];
+
+  monthsInitial: any[] = [
     {name:"January", num: 0},
     {name:"February", num: 1},
     {name:"March", num: 2},
@@ -126,6 +143,16 @@ export class ForecastDetailComponent implements OnInit {
       this.groupName = params.name;
     });
 
+    var month = this.selectedMonth;
+    var month_year = this.actualDate.getFullYear();
+    for(var i = 0; i<12; i++) {
+      if(month == 12) {
+        month = 0;
+        month_year = month_year+1;}
+
+      this.months[i] = {name: this.monthsInitial[month].name, num: this.monthsInitial[month].num, year: month_year};
+      month++;}
+
     this.getAbsences();
   }
 
@@ -179,11 +206,28 @@ export class ForecastDetailComponent implements OnInit {
   getAbsences(): void
   {
 
+    if(this.selectedMonth == this.months[0].num)
+      this.firstMonth = true;
+    else
+      this.firstMonth = false;
+    
+    if (this.selectedMonth == this.months[11].num || this.selectedMonth > 11)
+      this.lastMonth = true;
+    else 
+      this.lastMonth = false;
+
+
+    var month_year = this.actualDate.getFullYear();
+
+    for(var i = 0; i< this.months.length; i++) {
+      if(this.months[i].num == this.selectedMonth)
+        month_year = this.months[i].year;
+    }
 
     if(this.selectedMonth != 12){
       var lastDays = this.getDaysInMonth(new Date().getFullYear(), this.selectedMonth+1);
-      this.initDate = new Date(new Date().getFullYear(), this.selectedMonth);
-      this.endDate = new Date(new Date().getFullYear(), this.selectedMonth, lastDays, 5);
+      this.initDate = new Date(month_year, this.selectedMonth);
+      this.endDate = new Date(month_year, this.selectedMonth, lastDays, 5);
     }
     else{
       this.initDate = this.rangeInitDate;
@@ -444,5 +488,25 @@ export class ForecastDetailComponent implements OnInit {
         dialogRef.afterClosed().subscribe(() => {
         });
    
+  }
+
+  nextMonth() {
+    this.selectedMonth++;
+    if(this.selectedMonth == 12)
+      this.selectedMonth = 0;
+    this.getAbsences();
+  }
+
+  previousMonth() {
+
+    if(this.selectedMonth > 11) {
+      this.selectedMonth = this.months[11].num;
+    }
+    else {
+    this.selectedMonth--;
+    if(this.selectedMonth == -1)
+      this.selectedMonth = 11;
+    }
+    this.getAbsences();
   }
 }

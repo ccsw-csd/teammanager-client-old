@@ -28,6 +28,9 @@
 
 
       <div style='flex:1'></div>
+      <button mat-icon-button class="MonthArrow Arrow1" (click)="previousMonth()" [disabled]="firstMonth">
+        <mat-icon>chevron_left</mat-icon>
+      </button>
       <!-- SELECTOR MONTH-->
       <mat-form-field class="filter-input">
         <mat-label>Selected Month/Date range</mat-label>
@@ -35,10 +38,15 @@
           <mat-option
           *ngFor="let option of months"
             [value]="option.num">
-            {{ option.name }}
+            {{ option.name + " " + option.year}}
           </mat-option>
         </mat-select>
       </mat-form-field>
+
+      <button mat-icon-button class="MonthArrow Arrow2" (click)="nextMonth()" [disabled]="lastMonth">
+        <mat-icon>chevron_right</mat-icon>
+      </button>
+
       <!-- Begin date -->
       <mat-form-field class="filter-input-range">
         <mat-date-range-input [rangePicker]="picker" [formGroup]="form">
