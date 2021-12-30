@@ -21,10 +21,6 @@ export class LoginService {
 
     let urlSSO = 'http://ccsw.capgemini.com/sso';
 
-    if (environment.production) {
-      urlSSO = '../sso';
-    }
-
     return this.http.post<ResponseCredentials>(urlSSO+'/authenticate', {username:username, password: password});
   }
 
