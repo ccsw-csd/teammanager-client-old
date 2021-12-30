@@ -167,7 +167,7 @@ export class ForecastDetailComponent implements OnInit {
             if(this.months.length > 12) this.months.pop();
 
             this.months.push(
-              {name: this.convertDateToString(this.rangeInitDate) + "  -  " + this.convertDateToString(this.rangeEndDate), num: 12}
+              {name: this.convertDateToString(this.rangeInitDate) + "  -  " + this.convertDateToString(this.rangeEndDate), num: 12, year:''}
             );
 
             this.selectedMonth = 12;
