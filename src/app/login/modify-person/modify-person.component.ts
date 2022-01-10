@@ -92,7 +92,7 @@ export class ModifyPersonComponent implements OnInit {
         this.dialogRef.close(true);
       }
       else{
-        this.snackService.showMessage('The SAGA code is duplicated in the BBDD. Please review it or contact the support email (adcsd.internal.support@capgemini.com).');
+        this.snackService.showMessage('The SAGA code is duplicated in the BBDD. Please review it or contact the support email (ccsw.support@capgemini.com).');
         this.dialogRef.close(false);
       }
       this.isloading = false;
