@@ -19,7 +19,7 @@ export class LoginService {
 
     this.authService.clearCredentials();
 
-    let urlSSO = 'http://ccsw.capgemini.com/sso';
+    let urlSSO = 'http://ccsw.c%61pgemini.com/sso';
 
     return this.http.post<ResponseCredentials>(urlSSO+'/authenticate', {username:username, password: password});
   }

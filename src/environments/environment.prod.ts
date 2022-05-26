@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  server: 'http://ccsw.capgemini.com/teammanager-data',
+  server: 'http://ccsw.c%61pgemini.com/teammanager-data',
 };

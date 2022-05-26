@@ -30,7 +30,7 @@ export class NavComponent implements OnInit {
 
     this.dialog.open(AlertDialogComponent, {width: '500px', height: '250px', data: {
       titulo: 'Forbidden', 
-      informacion: 'You do not have permissions to manage groups. Please contact the support email (ccsw.support@capgemini.com).'}
+      informacion: 'You do not have permissions to manage groups. Please contact the support email (ccsw.support@c%61pgemini.com).'}
     });
 
   }
