@@ -73,12 +73,18 @@ export class AuthService {
 
   isAdmin() : boolean {
     if (this.user == null || this.user.role == null) return false;
-    return this.user.role == 'ADMIN';
+    return this.hasRole('ADMIN');
   }
+
+  hasRole(role : string) : boolean  {
+    if (this.user == null) return false;
+    return this.user.role.indexOf(role) >= 0;
+  }
+
 
   isGestor() : boolean {
     if (this.user == null || this.user.role == null) return false;
-    return this.user.role == 'GESTOR' || this.user.role == 'ADMIN';
+    return this.hasRole('GESTOR') || this.hasRole('ADMIN');
   }
 
   withPublicGroups() : boolean {
