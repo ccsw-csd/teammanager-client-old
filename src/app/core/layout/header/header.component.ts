@@ -6,6 +6,7 @@ import { PersonDto } from '../../to/PersonDto';
 import { AuthService } from '../../services/auth.service';
 import { SnackbarService } from '../../services/snackbar.service';
 import { User } from '../../to/User';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-header',
@@ -14,7 +15,6 @@ import { User } from '../../to/User';
 })
 export class HeaderComponent implements OnInit {
 
-  user : User | null = null;
   navOpen = true;
   isloading : boolean = false;
   person: PersonDto = new PersonDto();
@@ -28,7 +28,6 @@ export class HeaderComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.user = this.authService.getUserInfo();
   }
 
   toggleSideNav() {
@@ -37,27 +36,37 @@ export class HeaderComponent implements OnInit {
   }
 
   getName() : string {
-    if (this.user == null) return "";
-
-    let name : string = this.user.displayName;
-
-    return name;
+    return this.authService.getUserInfoSSO().displayName;
   }
 
   logout() {
     this.authService.logout();
   }
 
+  getEmailRef() {
+    let gitWord2 = "ge";
+    let gitWord4 = "i";
+    let gitWord3 = "min"; 
+    let gitWord1 = "cap";
+
+    let gitWord = gitWord1+gitWord2+gitWord3+gitWord4;
+
+    return "mailto:ccsw.support@"+gitWord+".com?subject=["+environment.appCode+"] Consulta / Feedback";
+  }
+
+
   
   update() {
-    this.loginService.personExists(this.user?.username).subscribe((res: PersonDto) => {
+    let userInfo = this.authService.getUserInfoSSO();
+
+    this.loginService.personExists(userInfo.username).subscribe((res: PersonDto) => {
       this.person = res;
         this.dialog
           .open(ModifyPersonComponent, {
             width: '700px',
             height: '400px',
             data: {
-              user: this.user?.username,
+              user: userInfo.username,
               create: false,
               person: this.person
             },

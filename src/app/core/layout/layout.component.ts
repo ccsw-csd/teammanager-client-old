@@ -28,17 +28,29 @@ export class LayoutComponent implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.data.subscribe(response => { 
-      this.authService.putUserInfo(response.user); this.checkUserDetails();
+      this.authService.putUserInfo(response.user);
+
+      if (this.notExistsPerson()) {
+        this.authService.logout();
+        return;
+      }
+
+      this.authService.registerAccess().subscribe();
+      this.readReleaseNotes();
     }); 
 
+  }
+  
+  private readReleaseNotes() : void {
+    
     this.releaseNoteService.find().subscribe(res => {
       if (res != null && res.length > 0) {
         this.showReleaseNotes(res);
       }
-    })
+    })    
   }
 
-  showReleaseNotes(releaseNotes: ReleaseNoteDto[]) {
+  private showReleaseNotes(releaseNotes: ReleaseNoteDto[]) : void {
 
     this.dialog.open(ReleaseNotesComponent, {
       width: '600px',
@@ -49,13 +61,10 @@ export class LayoutComponent implements OnInit {
     });
   }
 
-  private checkUserDetails() : void {
+  private notExistsPerson() : boolean {
     let user = this.authService.getUserInfo();
 
-    if (user == null || user.username == null) {
-
-      //TODO no existe el usuario lanzar pantalla de edición
-    }
+    return user == null || user.withPerson == false;
   }
 
   public toggleMenu() : void {

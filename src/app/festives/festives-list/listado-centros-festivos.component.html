@@ -1,6 +1,6 @@
 <div class="content">
   <div class="title-block">
-    <h1>Festives by Center</h1>
+    <h1>Public Holidays by Center</h1>
   </div>
   
   <div class="containerTableList">
@@ -16,7 +16,7 @@
         </ng-container>
         <ng-container matColumnDef="festiveActualYear">
           <th class="cell-center" mat-header-cell *matHeaderCellDef>
-            Festives actual year
+            Public Holidays current year
           </th>
           <td mat-cell *matCellDef="let listadoCentrosFestivos" class="cell-center">
             {{listadoCentrosFestivos.festiveActualYear}}
@@ -24,7 +24,7 @@
         </ng-container>
         <ng-container matColumnDef="festiveNextYear">
           <th class="cell-center" mat-header-cell *matHeaderCellDef>
-            Festives next year
+            Public Holidays next year
           </th>
           <td mat-cell *matCellDef="let listadoCentrosFestivos" class="cell-center">
             {{listadoCentrosFestivos.festiveNextYear}}

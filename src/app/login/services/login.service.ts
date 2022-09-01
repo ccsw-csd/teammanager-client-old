@@ -15,14 +15,10 @@ export class LoginService {
   constructor(private http: HttpClient,
     private authService: AuthService,) {}
 
-  login(username: string, password: string): Observable<ResponseCredentials> {
-
-    this.authService.clearCredentials();
-
-    let urlSSO = 'http://ccsw.c%61pgemini.com/sso';
-
-    return this.http.post<ResponseCredentials>(urlSSO+'/authenticate', {username:username, password: password});
-  }
+    authenticate(username: string, password: string): Observable<ResponseCredentials> {
+      this.authService.clearCredentials();    
+      return this.http.post<ResponseCredentials>(environment.sso + '/authenticate', {username:username, password: password});
+    }
 
   getUserInfo(): Observable<User> {
     return this.http.get<User>(
@@ -38,8 +34,8 @@ export class LoginService {
     return this.http.put<boolean>(environment.server + '/person/', person);
   }
 
-  putCredentials(res: ResponseCredentials) {
-    this.authService.putTokenCredentials(res);
+  putSSOCredentials(res: ResponseCredentials) {
+    this.authService.putSSOCredentials(res);
   }
   
 }

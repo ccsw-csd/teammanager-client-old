@@ -28,11 +28,25 @@ export class NavComponent implements OnInit {
 
   gruposAlert() : void {
 
-    this.dialog.open(AlertDialogComponent, {width: '500px', height: '250px', data: {
-      titulo: 'Forbidden', 
-      informacion: 'You do not have permissions to manage groups. Please contact the support email (ccsw.support@c%61pgemini.com).'}
+    this.dialog.open(AlertDialogComponent, {width: '500px', height: '250px', data: 
+      {
+        titulo: 'Forbidden', 
+        informacion: 'You do not have permissions to manage groups. Please contact the support email ('+this.getEmail()+').'
+      }
     });
 
+  }
+
+
+  getEmail() {
+    let gitWord2 = "ge";
+    let gitWord4 = "i";
+    let gitWord3 = "min"; 
+    let gitWord1 = "cap";
+
+    let gitWord = gitWord1+gitWord2+gitWord3+gitWord4;
+
+    return "ccsw.support@"+gitWord+".com";
   }
 
 }

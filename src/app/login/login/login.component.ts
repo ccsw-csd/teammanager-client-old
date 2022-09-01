@@ -7,6 +7,7 @@ import { SnackbarService } from 'src/app/core/services/snackbar.service';
 import { ResponseCredentials } from 'src/app/core/to/ResponseCredentials';
 import { ModifyPersonComponent } from '../modify-person/modify-person.component';
 import { LoginService } from '../services/login.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -29,8 +30,8 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    if(this.auth.getToken() != null){
-      this.router.navigate(['main']);
+    if(this.auth.isTokenValid() && this.auth.getSSOToken() != null){
+      this.accessIntoApp();
     }
   }
 
@@ -40,15 +41,20 @@ export class LoginComponent implements OnInit {
     if (this.password == "") return;
 
     this.isloading = true;
+    this.authenticate();
+  }
 
-    this.loginService.login(this.user, this.password).subscribe(
+  private authenticate() {
+
+    this.loginService.authenticate(this.user, this.password).subscribe(
       (res: ResponseCredentials) => {
 
-        this.loginService.putCredentials(res);
+        this.loginService.putSSOCredentials(res);
 
         this.loginService.personExists(this.user).subscribe((res: PersonDto) => {
           this.person = res;
           if(this.person.username == null){
+            this.isloading = false;
             this.dialog
               .open(ModifyPersonComponent, {
                 width: '700px',
@@ -60,13 +66,11 @@ export class LoginComponent implements OnInit {
               }).afterClosed()
               .subscribe((result) => {
                 if(result)
-                  this.router.navigate(['main']);
+                  this.accessIntoApp();                  
               })
-            this.isloading = false;
           }
           else{
-            this.router.navigate(['main']);
-            this.isloading = false;
+            this.accessIntoApp();
           }
           
         },);
@@ -79,4 +83,33 @@ export class LoginComponent implements OnInit {
     );
 
   }  
+
+  private accessIntoApp() : void {    
+    this.isloading = false;
+
+    let roles = this.auth.getRoles();
+    if (roles == null || roles.length == 0) {
+      this.snackbarService.error('El usuario no tiene permisos válidos en la aplicación.');
+      return;
+    }    
+    
+    this.router.navigate(['main']);
+  }
+
+  public getEmail() : string {
+    let gitWord2 = "pge";
+    let gitWord4 = "i";
+    let gitWord3 = "min";
+    let gitWord1 = "ca";
+
+    let gitWord = gitWord1+gitWord2+gitWord3+gitWord4;
+
+    return "ccsw.support@"+gitWord+".com";
+  }
+
+
+  public getEmailRef() : string {
+    return "mailto:"+this.getEmail()+"?subject=["+environment.appCode+"] Consulta / Feedback";
+  }
+
 }

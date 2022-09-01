@@ -7,20 +7,20 @@
     <form [formGroup]="form" class="filters">
       <button secondary (click)= "exportForecast()">Export data</button>
       <div style='flex:1'></div>
-      <div style="display:flex; flex-direction: row; flex:1;padding-top:10px;padding-left: 30px;border:1px #bebebe solid;height: 40px;">
+      <div style="display:flex; flex-direction: row; padding-top:10px;padding-left: 10px;border:1px #bebebe solid;height: 40px;">
         <div style="display:flex; flex-direction: row;">
           <div class="legend" style="background-color: #aae3ff;"></div>
-          <div>Festive</div>
+          <div>Public Holidays</div>
         </div>
-        <div style="display:flex; flex-direction: row; margin-left:30px;">
+        <div style="display:flex; flex-direction: row; margin-left:20px;">
           <div class="legend" style="background-color: rgb(194, 194, 204);"></div>
           <div>Weekend</div>
         </div>
-        <div style="display:flex; flex-direction: row; margin-left:30px;">
+        <div style="display:flex; flex-direction: row; margin-left:20px;">
           <div class="legend" style="background-color: #ffffaa;"></div>
           <div>Vacation</div>
         </div>    
-        <div style="display:flex; flex-direction: row; margin-left:30px; margin-right:30px;">
+        <div style="display:flex; flex-direction: row; margin-left:20px; margin-right:10px;">
           <div class="legend" style="background-color: #F7BD46;"></div>
           <div>Other</div>
         </div>

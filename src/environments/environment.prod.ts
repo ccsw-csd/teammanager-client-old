@@ -1,4 +1,6 @@
 export const environment = {
   production: true,
-  server: 'http://ccsw.c%61pgemini.com/teammanager-data',
+  server: '../teammanager-data',
+  appCode: 'teamManager',
+  sso: '../sso'
 };

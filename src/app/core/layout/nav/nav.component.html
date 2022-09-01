@@ -14,7 +14,7 @@
       <span>Forecast</span>
     </a>
     <a *ngIf="authService.isGestor()" mat-list-item routerLinkActive="item-active" routerLink="/festives">
-      <span>Festives</span>
+      <span>Public Holidays</span>
     </a>
     <a *ngIf="authService.isAdmin()" mat-list-item>
       <span >Inconsistencies</span>
@@ -24,9 +24,6 @@
     <a class="submenu" *ngIf="authService.isAdmin()" mat-list-item routerLinkActive="item-active" routerLink="/inconsistencies" [queryParams]="{prop: 'center'}"><span>Person without Center</span></a>
     <a class="submenu" *ngIf="authService.isAdmin()" mat-list-item routerLinkActive="item-active" routerLink="/inconsistencies" [queryParams]="{prop: 'saga'}"><span>Person duplicated</span></a>
 
-    <a mat-list-item href="mailto:ccsw.support@c%61pgemini.com?subject=[TeamManager] Consulta / Feedback">
-      <span>Feedback</span>
-    </a>
   </mat-nav-list>
 </nav>
 <div class="space"></div>

@@ -1,103 +1,156 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { ResponseCredentials } from '../to/ResponseCredentials';
 import { User } from '../to/User';
+import { UserInfoSSO } from '../to/UserInfoSSO';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  credentials : ResponseCredentials | undefined;
-  token : string | null = null;
+  ssoCredentialsKey : string = 'ssoCredentials';
+  ssoToken : string = null;
+
+
+  userInfoSSO: UserInfoSSO | null = null;
   user: User | null = null;
 
   constructor(
     private jwtHelper: JwtHelperService,
     private router: Router,
+    private http: HttpClient,
   ) { }
 
 
-  putTokenCredentials(res: ResponseCredentials) : void {
-    localStorage.setItem('credentials', JSON.stringify(res));
+  // *************************** //
+  // **     AUTHENTICATION    ** //
+  // *************************** //
+
+
+  public putSSOCredentials(res: ResponseCredentials) : void {
+    this.ssoToken = res.token;
+    localStorage.setItem(this.ssoCredentialsKey, this.ssoToken);
   }
+
+  public getSSOToken(): string | null {
+
+    if (this.ssoToken == null) {
+      this.ssoToken = localStorage.getItem(this.ssoCredentialsKey);
+    }
+
+
+    return this.ssoToken;
+  }
+
+
+  // *************************** //
+  // **       LOGOUT          ** //
+  // *************************** //
+
+  public logout() {
+    this.clearCredentials();
+    this.router.navigateByUrl('login');
+  }
+
+
+  public clearCredentials() {
+    localStorage.removeItem(this.ssoCredentialsKey);
+
+    this.ssoToken = null;    
+    this.user = null;
+    this.userInfoSSO = null;
+  }  
+
+
+
+  // *************************** //
+  // **        UTILS          ** //
+  // *************************** //
+
+
+  isTokenValid() : boolean {
+    let token = this.getSSOToken();
+    if (token == null) return false;
+  
+    let expired = this.jwtHelper.isTokenExpired(token);
+    if (expired) return false;
+
+    let roles = this.getRoles();
+    if (roles == null || roles.length == 0) return false;
+
+
+    return true;
+  }
+  
+
+
+  public getUserInfoSSO() : UserInfoSSO {
+
+    if (this.userInfoSSO == null) {
+      let data = this.jwtHelper.decodeToken(this.getSSOToken());
+      if (data == null) return null;
+
+      this.userInfoSSO = {
+        displayName: data.displayName,
+        email: data.email,
+        firstName: data.firstName,
+        lastName: data.lastName,
+        officeName: data.officeName,
+        username: data.sub,
+        saga: data.saga,
+        grade: data.grade,
+        roles: data.roles
+      };
+
+    }
+
+    return this.userInfoSSO;
+
+  }
+
+  public getRoles(): String[] {
+    let userInfo = this.getUserInfoSSO();
+    return userInfo.roles[environment.appCode];
+  }
+
+  public registerAccess(): Observable<void> {
+    return this.http.get<void>(environment.sso + '/register-access/'+environment.appCode);
+  }  
+  
 
   putUserInfo(user: User) {
     this.user = user;
   }
 
-  getTokenCredentials() : ResponseCredentials | null {
-    
-    if (this.credentials == undefined) {
-      let json = localStorage.getItem('credentials');
-
-      if (json != null)
-        this.credentials = JSON.parse(json);
-    }
-
-    if (this.credentials == undefined) return null;
-    
-    return this.credentials;
-  }
-
-  getToken(): string | null {
-
-    if (this.token == null) {
-      let credentials = this.getTokenCredentials();
-      if (credentials != null) {
-        this.token = credentials.accessToken;
-      }
-    }
-
-    return this.token;
-  }
-
-  public logout() {
-    this.clearCredentials()
-    this.router.navigateByUrl('login');
-  }
-
-  clearCredentials() {
-    localStorage.removeItem('credentials');
-
-    this.credentials = undefined;    
-    this.token = null;
-    this.user = null;
-  }
 
   getUsername() : string | null {
-    if (this.user == null) return null;
-    return this.user.username;
+    let userInfo = this.getUserInfoSSO();
+    return userInfo.username;
   }
 
   isAdmin() : boolean {
-    if (this.user == null || this.user.role == null) return false;
-    return this.hasRole('ADMIN');
+    return this.user.role == 'ADMIN';
+  }
+
+  isGestor() : boolean {
+    return this.user.role == 'ADMIN' || this.user.role == 'GESTOR';
   }
 
   hasRole(role : string) : boolean  {
-    if (this.user == null) return false;
-    return this.user.role.indexOf(role) >= 0;
-  }
+    let roles = this.getRoles();
 
-
-  isGestor() : boolean {
-    if (this.user == null || this.user.role == null) return false;
-    return this.hasRole('GESTOR') || this.hasRole('ADMIN');
+    if (roles == null || roles.length == 0) return false;
+    return roles.indexOf(role) >= 0;
   }
 
   withPublicGroups() : boolean {
     if (this.user == null || this.user.role == null) return false;
     return this.user.withPublicGroups;
-  }
-
-
-  isTokenValid() : boolean {
-    let accessToken = this.getToken();
-    if (accessToken == null) return false;
-
-    return !this.jwtHelper.isTokenExpired(accessToken);
   }
 
   getUserInfo() : User | null {
