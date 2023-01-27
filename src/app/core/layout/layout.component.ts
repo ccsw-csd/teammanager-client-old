@@ -27,14 +27,17 @@ export class LayoutComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-    this.activatedRoute.data.subscribe(response => { 
-      this.authService.putUserInfo(response.user);
 
+    this.activatedRoute.data.subscribe(response => { 
+
+      this.authService.putUserInfo(response.user);
+      
       if (this.notExistsPerson()) {
         this.authService.logout();
         return;
       }
-
+      
+      this.authService.refreshToken(response.credentials);
       this.authService.registerAccess().subscribe();
       this.readReleaseNotes();
     }); 

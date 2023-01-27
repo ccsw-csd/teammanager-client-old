@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   server: 'http://localhost:8080',
   appCode: 'teamManager',
-  sso: 'http://frparccsw/sso'
+  sso: 'http://frparccsw/dev/sso'
 };
 
 /*

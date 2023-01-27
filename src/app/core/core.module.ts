@@ -27,6 +27,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import { MonthCalendarModule } from './month-calendar/month-calendar.module';
 import { MonthCalendarFestiveModule } from './month-calendar-festive/month-calendar-festive.module';
 import { ReleaseNotesComponent } from './layout/release-notes/release-notes.component';
+import { RefreshTokenResolverService } from './services/refresh-token-resolver.service';
 
 
 
@@ -64,6 +65,7 @@ import { ReleaseNotesComponent } from './layout/release-notes/release-notes.comp
     { provide: MAT_DIALOG_DATA, useValue: {}},
     JwtHelperService,
     UserResolverService,
+    RefreshTokenResolverService,
   ],
   exports: [
     MatSnackBarModule,

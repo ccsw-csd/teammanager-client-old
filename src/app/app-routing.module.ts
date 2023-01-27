@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LayoutComponent } from './core/layout/layout.component';
 import { AuthGuard } from './core/services/auth.guard';
+import { RefreshTokenResolverService } from './core/services/refresh-token-resolver.service';
 import { UserResolverService } from './core/services/user-resolver.service';
 import { ListadoCentrosFestivosComponent } from './festives/festives-list/listado-centros-festivos.component';
 import { ForecastDetailComponent } from './forecast/forecast-detail/forecast-detail.component';
@@ -20,7 +21,7 @@ const routes: Routes = [
     path: '',
     component: LayoutComponent,
     canActivate: [AuthGuard],
-    resolve: {user: UserResolverService},
+    resolve: {user: UserResolverService, credentials: RefreshTokenResolverService},
     children: [
       { path: 'calendar', component: PersonalCalendarComponent,},
       { path: 'groups', component: ListadoGruposComponent,},

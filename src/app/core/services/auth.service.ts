@@ -34,6 +34,7 @@ export class AuthService {
 
   public putSSOCredentials(res: ResponseCredentials) : void {
     this.ssoToken = res.token;
+    this.userInfoSSO = null;
     localStorage.setItem(this.ssoCredentialsKey, this.ssoToken);
   }
 
@@ -122,6 +123,9 @@ export class AuthService {
     return this.http.get<void>(environment.sso + '/register-access/'+environment.appCode);
   }  
   
+  public refreshToken(credentials : ResponseCredentials): void {
+    this.putSSOCredentials(credentials);
+  }   
 
   putUserInfo(user: User) {
     this.user = user;
@@ -134,11 +138,11 @@ export class AuthService {
   }
 
   isAdmin() : boolean {
-    return this.user.role == 'ADMIN';
+    return this.hasRole('ADMIN');
   }
 
   isGestor() : boolean {
-    return this.user.role == 'ADMIN' || this.user.role == 'GESTOR';
+    return this.hasRole('ADMIN') || this.hasRole('GESTOR');
   }
 
   hasRole(role : string) : boolean  {
